@@ -1,0 +1,167 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #eee6d3;
+      font-family: "Inter", sans-serif;
+      color: #12302e;
+    }
+    #cr-stage {
+      position: absolute;
+      inset: 0;
+      perspective: 1600px;
+    }
+    #cr-title {
+      position: absolute;
+      left: 0;
+      width: 1920px;
+      top: 110px;
+      text-align: center;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 110px;
+      letter-spacing: -0.02em;
+    }
+    #cr-title .w,
+    #cr-line .w {
+      display: inline-block;
+      margin: 0 0.12em;
+    }
+    #cr-title .red,
+    #cr-line .red {
+      color: #c8102e;
+    }
+    .cr-item {
+      position: absolute;
+      top: 540px;
+      width: 0;
+      height: 0;
+      transform-style: preserve-3d;
+    }
+    .cr-media {
+      position: absolute;
+      background: #12302e;
+      box-shadow: 0 30px 60px rgba(18, 48, 46, 0.3);
+      overflow: hidden;
+    }
+    .cr-media svg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .cr-label {
+      position: absolute;
+      left: -170px;
+      width: 340px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 1.15;
+    }
+    #cr-line {
+      position: absolute;
+      left: 0;
+      width: 1920px;
+      top: 905px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 54px;
+    }
+  </style>
+  <div id="root" data-composition-id="createurs" data-width="1920" data-height="1080">
+    <div id="cr-stage">
+      <div id="cr-title">Pas seulement le <span><span class="red">cinéma</span>.</span></div>
+
+      <div class="cr-item" id="cr-i1" style="left: 225px">
+        <div class="cr-media" style="left: -165px; top: -70px; width: 330px; height: 139px">
+          <svg viewBox="0 0 380 160"><rect x="0" y="0" width="380" height="18" fill="#0a1d1c"/><rect x="0" y="142" width="380" height="18" fill="#0a1d1c"/><g fill="#eee6d3" opacity=".55"><rect x="12" y="5" width="14" height="8"/><rect x="52" y="5" width="14" height="8"/><rect x="92" y="5" width="14" height="8"/><rect x="132" y="5" width="14" height="8"/><rect x="172" y="5" width="14" height="8"/><rect x="212" y="5" width="14" height="8"/><rect x="252" y="5" width="14" height="8"/><rect x="292" y="5" width="14" height="8"/><rect x="332" y="5" width="14" height="8"/><rect x="12" y="147" width="14" height="8"/><rect x="52" y="147" width="14" height="8"/><rect x="92" y="147" width="14" height="8"/><rect x="132" y="147" width="14" height="8"/><rect x="172" y="147" width="14" height="8"/><rect x="212" y="147" width="14" height="8"/><rect x="252" y="147" width="14" height="8"/><rect x="292" y="147" width="14" height="8"/><rect x="332" y="147" width="14" height="8"/></g><path class="cr-wave" fill="none" stroke="#c8102e" stroke-width="4"/></svg>
+        </div>
+        <div class="cr-label" style="top: 110px">Films et<br />courts-métrages</div>
+      </div>
+
+      <div class="cr-item" id="cr-i2" style="left: 625px">
+        <div class="cr-media" style="left: -180px; top: -101px; width: 360px; height: 203px">
+          <svg viewBox="0 0 360 203"><path class="cr-wave" fill="none" stroke="#c8102e" stroke-width="4"/><rect x="0" y="190" width="360" height="13" fill="#0a1d1c"/><rect x="0" y="190" width="150" height="13" fill="#c8102e"/><circle cx="150" cy="196" r="9" fill="#eee6d3"/></svg>
+        </div>
+        <div class="cr-label" style="top: 130px">Vidéos YouTube</div>
+      </div>
+
+      <div class="cr-item" id="cr-i3" style="left: 960px">
+        <div class="cr-media" style="left: -105px; top: -186px; width: 210px; height: 372px; border-radius: 26px; border: 8px solid #0a1d1c">
+          <svg viewBox="0 0 194 356"><path class="cr-wave" fill="none" stroke="#c8102e" stroke-width="4"/><rect x="176" y="40" width="6" height="276" fill="#0a1d1c"/><rect x="176" y="40" width="6" height="120" fill="#c8102e"/></svg>
+        </div>
+        <div class="cr-label" style="top: 210px">Shorts, Reels,<br />TikTok</div>
+      </div>
+
+      <div class="cr-item" id="cr-i4" style="left: 1300px">
+        <div class="cr-media" style="left: -125px; top: -125px; width: 250px; height: 250px; border-radius: 50%">
+          <svg viewBox="0 0 250 250"><rect x="105" y="58" width="40" height="78" rx="20" fill="#eee6d3"/><path d="M88 112 a37 37 0 0 0 74 0" fill="none" stroke="#eee6d3" stroke-width="7"/><rect x="121" y="149" width="8" height="26" fill="#eee6d3"/><g fill="#c8102e"><rect x="55" y="190" width="8" height="18"/><rect x="71" y="184" width="8" height="30"/><rect x="87" y="192" width="8" height="14"/><rect x="155" y="186" width="8" height="26"/><rect x="171" y="190" width="8" height="18"/><rect x="187" y="183" width="8" height="32"/></g></svg>
+        </div>
+        <div class="cr-label" style="top: 150px">Podcasts</div>
+      </div>
+
+      <div class="cr-item" id="cr-i5" style="left: 1670px">
+        <div class="cr-media" style="left: -180px; top: -101px; width: 360px; height: 203px">
+          <svg viewBox="0 0 360 203"><path class="cr-wave" fill="none" stroke="#c8102e" stroke-width="4"/><rect x="262" y="16" width="82" height="44" fill="none" stroke="#eee6d3" stroke-width="4"/><text x="303" y="49" text-anchor="middle" font-family="Archivo Black" font-size="30" fill="#eee6d3">IA</text></svg>
+        </div>
+        <div class="cr-label" style="top: 130px">Vidéos générées<br />par IA</div>
+      </div>
+
+      <div id="cr-line">Chaque créateur qui raconte sa culture mérite d’être <span><span class="red">compris</span>.</span></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      function split(el) {
+        const nodes = Array.from(el.childNodes);
+        el.innerHTML = "";
+        nodes.forEach((n) => {
+          if (n.nodeType === 3) {
+            n.textContent.split(/\s+/).filter(Boolean).forEach((t) => {
+              const s = document.createElement("span");
+              s.className = "w";
+              s.textContent = t;
+              el.appendChild(s);
+            });
+          } else {
+            n.classList.add("w");
+            el.appendChild(n);
+          }
+        });
+      }
+      split(document.getElementById("cr-title"));
+      split(document.getElementById("cr-line"));
+
+      const waves = Array.from(document.querySelectorAll("#cr-stage .cr-wave"));
+      const st = { phase: 0 };
+      function draw() {
+        waves.forEach((w, j) => {
+          const box = w.ownerSVGElement.viewBox.baseVal;
+          const W = box.width, H = box.height;
+          let p = "";
+          for (let x = 0; x <= W; x += 4) {
+            const y = H / 2 + (H * 0.22) * (Math.sin(x * 0.09 + st.phase + j) * 0.6 + Math.sin(x * 0.03 - st.phase * 0.6) * 0.4);
+            p += (x ? "L" : "M") + x + " " + y.toFixed(1);
+          }
+          w.setAttribute("d", p);
+        });
+      }
+      draw();
+
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(st, { phase: 0 }, { phase: 24, duration: 8, ease: "none", onUpdate: draw }, 0);
+      tl.fromTo("#cr-title .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, stagger: 0.08, ease: "power2.out" }, 0.25);
+      const rot = [18, 9, 0, -9, -18];
+      const zz = [-120, -40, 60, -40, -120];
+      [1, 2, 3, 4, 5].forEach((n, i) => {
+        tl.fromTo("#cr-i" + n, { rotationY: rot[i] + 90, z: -1400, opacity: 0 }, { rotationY: rot[i], z: zz[i], opacity: 1, duration: 0.9, ease: "expo.out" }, 0.9 + i * 0.3);
+      });
+      tl.fromTo("#cr-line .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, stagger: 0.08, ease: "power2.out" }, 3.3);
+      tl.to("#cr-stage", { scale: 2.6, opacity: 0, transformOrigin: "960px 540px", duration: 0.55, ease: "power3.in" }, 7.45);
+      window.__timelines["createurs"] = tl;
+    })();
+  </script>
+</template>

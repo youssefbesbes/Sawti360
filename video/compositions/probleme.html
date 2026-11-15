@@ -1,0 +1,155 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #eee6d3;
+      font-family: "Inter", sans-serif;
+      color: #12302e;
+    }
+    #pb-guil {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+    }
+    #pb-stage {
+      position: absolute;
+      inset: 0;
+      perspective: 1800px;
+    }
+    #pb-sentence {
+      position: absolute;
+      left: 140px;
+      top: 300px;
+      width: 820px;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 82px;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+    }
+    #pb-sentence .w {
+      display: inline-block;
+      margin-right: 0.22em;
+    }
+    #pb-sentence .red {
+      color: #c8102e;
+    }
+    #pb-page {
+      position: absolute;
+      left: 1060px;
+      top: 170px;
+      width: 720px;
+      height: 740px;
+      background: #e4d9c1;
+      padding: 56px 56px;
+      box-shadow: 0 30px 60px rgba(18, 48, 46, 0.28);
+      border-left: 10px solid #12302e;
+    }
+    #pb-page h3 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 40px;
+    }
+    .pb-row {
+      position: relative;
+      padding: 26px 0;
+      border-top: 2px solid rgba(18, 48, 46, 0.35);
+    }
+    .pb-row b {
+      display: block;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 44px;
+      letter-spacing: -0.01em;
+    }
+    .pb-row span {
+      display: block;
+      font-size: 32px;
+      margin-top: 6px;
+    }
+    .pb-strike {
+      position: absolute;
+      left: -10px;
+      top: 50%;
+      height: 7px;
+      width: 0;
+      background: #c8102e;
+      transform: rotate(-2deg);
+    }
+    #pb-stamp {
+      position: absolute;
+      left: 1270px;
+      top: 700px;
+      width: 470px;
+      padding: 18px 10px;
+      border: 8px double #c8102e;
+      color: #c8102e;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 58px;
+      text-align: center;
+      letter-spacing: 0.04em;
+      background: rgba(238, 230, 211, 0.6);
+    }
+  </style>
+  <div id="root" data-composition-id="probleme" data-width="1920" data-height="1080">
+    <svg id="pb-guil" viewBox="0 0 1920 1080"></svg>
+    <div id="pb-stage">
+      <div id="pb-sentence">Les créateurs qui parlent derja restent <span class="red">invisibles</span> hors de leur langue.</div>
+      <div id="pb-page" data-layout-allow-overlap>
+        <h3>Pour faire voyager un film aujourd’hui</h3>
+        <div class="pb-row" id="pb-r1"><b>Studio de doublage</b><span>hors budget</span><i class="pb-strike" id="pb-s1"></i></div>
+        <div class="pb-row" id="pb-r2"><b>IA générique</b><span>à qui appartient la voix ?</span><i class="pb-strike" id="pb-s2"></i></div>
+        <div class="pb-row" id="pb-r3"><b>Film inédit</b><span>envoyé sur un serveur inconnu</span><i class="pb-strike" id="pb-s3"></i></div>
+      </div>
+      <div id="pb-stamp" data-layout-allow-occlusion>VISA REFUSÉ</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const g = document.getElementById("pb-guil");
+      let d = "";
+      for (let k = 0; k < 24; k++) {
+        const R = 240 + k * 36;
+        let p = "";
+        for (let i = 0; i <= 360; i++) {
+          const th = (i / 360) * Math.PI * 2;
+          const r = R + 14 * Math.sin(11 * th + k * 0.4);
+          p += (i ? "L" : "M") + (260 + r * Math.cos(th)).toFixed(1) + " " + (980 + r * Math.sin(th) * 0.8).toFixed(1);
+        }
+        d += p;
+      }
+      g.innerHTML = '<path d="' + d + '" fill="none" stroke="#12302e" stroke-opacity="0.07" stroke-width="1.4"/>';
+
+      const el = document.getElementById("pb-sentence");
+      const nodes = Array.from(el.childNodes);
+      el.innerHTML = "";
+      nodes.forEach((n) => {
+        if (n.nodeType === 3) {
+          n.textContent.split(/\s+/).filter(Boolean).forEach((t) => {
+            const s = document.createElement("span");
+            s.className = "w";
+            s.textContent = t;
+            el.appendChild(s);
+          });
+        } else {
+          n.classList.add("w");
+          el.appendChild(n);
+        }
+      });
+
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#pb-sentence .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, stagger: 0.09, ease: "power2.out" }, 0.3);
+      tl.fromTo("#pb-page", { rotationY: -80, x: 200, opacity: 0 }, { rotationY: -10, x: 0, opacity: 1, duration: 1.0, ease: "expo.out" }, 2.0);
+      ["#pb-r1", "#pb-r2", "#pb-r3"].forEach((r, i) => {
+        tl.fromTo(r, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.5, ease: "expo.out" }, 2.8 + i * 1.25);
+        tl.fromTo("#pb-s" + (i + 1), { width: 0 }, { width: 600, duration: 0.35, ease: "power2.inOut" }, 3.45 + i * 1.25);
+      });
+      tl.fromTo("#pb-stamp", { scale: 1.7, rotation: -16, opacity: 0 }, { scale: 1, rotation: -8, opacity: 1, duration: 0.18, ease: "power4.out" }, 7.1);
+      tl.fromTo("#pb-page", { y: 0 }, { y: 6, duration: 0.08, ease: "power2.out", yoyo: true, repeat: 1 }, 7.18);
+      tl.to("#pb-stage", { scale: 1.05, transformOrigin: "1400px 600px", duration: 3.0, ease: "power1.inOut" }, 7.4);
+      tl.to("#pb-stage", { x: -1920, duration: 0.5, ease: "power3.in" }, 10.5);
+      window.__timelines["probleme"] = tl;
+    })();
+  </script>
+</template>

@@ -182,12 +182,12 @@
     }
   </style>
   <div id="root" data-composition-id="solution" data-width="1920" data-height="1080">
-    <div id="so-rv" class="clip" data-start="0" data-duration="3.6">
+    <div id="so-rv" class="clip" data-start="0" data-duration="3.0">
       <div id="so-stamp">SAWTI<span class="red">360</span></div>
       <div id="so-ar"><span class="ar">صوتي</span> · « ma voix »</div>
       <div id="so-tag">Le doublage de confiance</div>
     </div>
-    <div id="so-flow" class="clip" data-start="3.6" data-duration="16.4">
+    <div id="so-flow" class="clip" data-start="2.8" data-duration="14.2">
       <div id="so-h">Suivons une réplique.</div>
       <div class="so-row" id="so-r1" style="top: 190px">
         <div class="so-step"><span class="n">1</span><span class="t">Transcription</span><br /><span class="so-role so-ia">IA propose</span></div>
@@ -230,28 +230,28 @@
       draw();
       const tl = gsap.timeline({ paused: true });
       // brand reveal
-      tl.fromTo("#so-stamp", { scale: 1.8, rotation: -12, opacity: 0 }, { scale: 1, rotation: -3, opacity: 1, duration: 0.2, ease: "power4.out" }, 0.3);
-      tl.fromTo("#so-ar", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3 }, 1.0);
-      tl.fromTo("#so-tag", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3 }, 1.6);
-      tl.to("#so-rv", { opacity: 0, y: -60, duration: 0.3, ease: "power3.in" }, 3.3);
+      tl.fromTo("#so-stamp", { scale: 1.8, rotation: -12, opacity: 0 }, { scale: 1, rotation: -3, opacity: 1, duration: 0.2, ease: "power4.out" }, 0.25);
+      tl.fromTo("#so-ar", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3 }, 0.8);
+      tl.fromTo("#so-tag", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3 }, 1.3);
+      tl.to("#so-rv", { opacity: 0, y: -60, duration: 0.3, ease: "power3.in" }, 2.7);
 
       // the flow
-      tl.fromTo("#so-h", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25 }, 3.7);
-      const rows = [["#so-r1", 4.2], ["#so-r2", 6.0], ["#so-r3", 7.9], ["#so-r4", 9.9], ["#so-r5", 12.4]];
+      tl.fromTo("#so-h", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25 }, 2.85);
+      const rows = [["#so-r1", 3.52], ["#so-r2", 5.01], ["#so-r3", 6.59], ["#so-r4", 8.25], ["#so-r5", 10.32]];
       rows.forEach(([r, a]) => tl.fromTo(r, { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.45, ease: "expo.out" }, a));
       // typing: the text is revealed left to right
-      [["#so-t1", 4.5, 1.1], ["#so-t2", 6.3, 1.0], ["#so-t4", 10.6, 0.9]].forEach(([t, a, d]) => {
+      [["#so-t1", 3.76, 1.1], ["#so-t2", 5.26, 1.0], ["#so-t4", 8.83, 0.9]].forEach(([t, a, d]) => {
         tl.fromTo(t, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: d, ease: "steps(30)" }, a);
       });
-      tl.fromTo("#so-alert", { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2, ease: "power4.out" }, 8.3);
+      tl.fromTo("#so-alert", { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2, ease: "power4.out" }, 6.92);
       const L = Math.PI * 2 * 50;
-      tl.fromTo("#so-e", { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 0.4, ease: "power2.inOut" }, 8.6);
-      tl.fromTo("#so-ok", { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.3 }, 11.6);
-      tl.fromTo(st, { amp: 0 }, { amp: 42, duration: 0.5, ease: "expo.out", onUpdate: draw }, 12.8);
-      tl.fromTo(st, { phase: 0 }, { phase: 26, duration: 7, ease: "none", onUpdate: draw }, 12.8);
-      tl.fromTo("#so-lab", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 13.4);
-      tl.fromTo("#so-end", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3 }, 15.2);
-      tl.to("#so-flow", { x: -1920, duration: 0.45, ease: "power3.in" }, 19.55);
+      tl.fromTo("#so-e", { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 0.4, ease: "power2.inOut" }, 7.17);
+      tl.fromTo("#so-ok", { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.3 }, 9.66);
+      tl.fromTo(st, { amp: 0 }, { amp: 42, duration: 0.5, ease: "expo.out", onUpdate: draw }, 10.65);
+      tl.fromTo(st, { phase: 0 }, { phase: 22, duration: 6.2, ease: "none", onUpdate: draw }, 10.65);
+      tl.fromTo("#so-lab", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 11.15);
+      tl.fromTo("#so-end", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3 }, 12.64);
+      tl.to("#so-flow", { x: -1920, duration: 0.45, ease: "power3.in" }, 16.5);
       window.__timelines["solution"] = tl;
     })();
   </script>

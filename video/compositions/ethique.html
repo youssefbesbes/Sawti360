@@ -1,0 +1,107 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #eee6d3;
+      font-family: "Inter", sans-serif;
+      color: #12302e;
+    }
+    #et-title {
+      position: absolute;
+      left: 0;
+      width: 1920px;
+      top: 80px;
+      text-align: center;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 100px;
+      letter-spacing: -0.02em;
+    }
+    #et-title .red {
+      color: #c8102e;
+    }
+    #et-view {
+      position: absolute;
+      left: 0;
+      top: 230px;
+      width: 1920px;
+      height: 620px;
+      perspective: 2200px;
+      perspective-origin: 960px 260px;
+    }
+    #et-prism {
+      position: absolute;
+      left: 640px;
+      top: 40px;
+      width: 640px;
+      height: 470px;
+      transform-style: preserve-3d;
+    }
+    .et-face {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 640px;
+      height: 470px;
+      background: #e4d9c1;
+      border-top: 12px solid #12302e;
+      padding: 40px 40px;
+      box-shadow: 0 0 0 2px rgba(18, 48, 46, 0.2) inset;
+    }
+    .et-face .k {
+      font-family: "Archivo Black", sans-serif;
+      font-size: 30px;
+      color: #c8102e;
+    }
+    .et-face .n {
+      font-family: "Archivo Black", sans-serif;
+      font-size: 64px;
+      line-height: 1.05;
+      margin-top: 18px;
+      letter-spacing: -0.01em;
+    }
+    .et-face .l {
+      font-size: 40px;
+      line-height: 1.3;
+      margin-top: 22px;
+    }
+    #et-foot {
+      position: absolute;
+      left: 0;
+      width: 1920px;
+      top: 900px;
+      text-align: center;
+      font-size: 40px;
+      font-weight: 700;
+    }
+  </style>
+  <div id="root" data-composition-id="ethique" data-width="1920" data-height="1080">
+    <div id="et-title">Une éthique à <span class="red">360°</span></div>
+    <div id="et-view">
+      <div id="et-prism">
+        <div class="et-face" data-layout-allow-overlap data-layout-allow-occlusion style="transform: rotateY(0deg) translateZ(554px)"><div class="k">1 / 6</div><div class="n">Les créateurs</div><div class="l">Le créateur valide chaque texte.</div></div>
+        <div class="et-face" data-layout-allow-overlap data-layout-allow-occlusion style="transform: rotateY(60deg) translateZ(554px)"><div class="k">2 / 6</div><div class="n">Les droits</div><div class="l">Consentement, usages fixés, révocation.</div></div>
+        <div class="et-face" data-layout-allow-overlap data-layout-allow-occlusion style="transform: rotateY(120deg) translateZ(554px)"><div class="k">3 / 6</div><div class="n">Les données</div><div class="l">Le film reste en local, dans un coffre chiffré.</div></div>
+        <div class="et-face" data-layout-allow-overlap data-layout-allow-occlusion style="transform: rotateY(180deg) translateZ(554px)"><div class="k">4 / 6</div><div class="n">Cultures et langues</div><div class="l">Un score publié par langue, derja comprise.</div></div>
+        <div class="et-face" data-layout-allow-overlap data-layout-allow-occlusion style="transform: rotateY(240deg) translateZ(554px)"><div class="k">5 / 6</div><div class="n">La transparence</div><div class="l">Un label IA sur chaque voix générée.</div></div>
+        <div class="et-face" data-layout-allow-overlap data-layout-allow-occlusion style="transform: rotateY(300deg) translateZ(554px)"><div class="k">6 / 6</div><div class="n">La planète</div><div class="l">L’énergie mesurée à chaque tâche.</div></div>
+      </div>
+    </div>
+    <div id="et-foot">34/34 tests · 18/18 scénarios d’attaque conformes · nos limites sont écrites</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#et-title", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power2.out" }, 0.1);
+      tl.fromTo("#et-prism", { rotationY: 40, z: -1100, opacity: 0 }, { rotationY: 0, z: -554, opacity: 1, duration: 0.9, ease: "expo.out" }, 0.2);
+      for (let i = 1; i < 6; i++) {
+        tl.to("#et-prism", { rotationY: -60 * i, duration: 0.42, ease: "power2.inOut" }, 0.7 + i * 0.85);
+      }
+      tl.fromTo("#et-foot", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 4.5);
+      tl.to("#et-prism", { rotationY: -360, duration: 0.55, ease: "power2.inOut" }, 5.6);
+      tl.to(["#et-view", "#et-title", "#et-foot"], { opacity: 0, duration: 0.25, ease: "power2.in" }, 6.7);
+      window.__timelines["ethique"] = tl;
+    })();
+  </script>
+</template>

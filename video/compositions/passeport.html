@@ -1,0 +1,135 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #eee6d3;
+      font-family: "Inter", sans-serif;
+      color: #12302e;
+    }
+    #pp-guil {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+    }
+    #pp-t {
+      position: absolute;
+      left: 115px;
+      top: 70px;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 72px;
+      letter-spacing: -0.02em;
+    }
+    #pp-t .w {
+      display: inline-block;
+      margin-right: 0.22em;
+    }
+    #pp-t .red {
+      color: #c8102e;
+    }
+    #pp-win {
+      position: absolute;
+      left: 115px;
+      top: 200px;
+      width: 1690px;
+      height: 653px;
+      background: #070b24;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(18, 48, 46, 0.35), 0 0 0 2px rgba(18, 48, 46, 0.25);
+    }
+    #pp-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1690px;
+      height: 52px;
+      background: #d9cdb2;
+      color: #12302e;
+      font-size: 28px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      padding-left: 24px;
+    }
+    #pp-shot {
+      position: absolute;
+      left: 0;
+      top: 52px;
+      width: 1690px;
+      height: 601px;
+    }
+    #pp-cover {
+      position: absolute;
+      left: 0;
+      top: 157px;
+      width: 1690px;
+      height: 496px;
+      background: #070b24;
+    }
+    #pp-cursor {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 64px;
+      height: 77px;
+    }
+    #pp-foot {
+      position: absolute;
+      left: 115px;
+      top: 910px;
+      width: 1690px;
+      font-size: 42px;
+      font-weight: 700;
+    }
+  </style>
+  <div id="root" data-composition-id="passeport" data-width="1920" data-height="1080">
+    <svg id="pp-guil" viewBox="0 0 1920 1080"></svg>
+    <div id="pp-t"><span class="w">Le</span><span class="w">Passeport</span><span class="w">360°</span><span class="w">accompagne</span><span class="w red">chaque</span><span class="w">export.</span></div>
+    <div id="pp-win">
+      <div id="pp-bar">Console Sawti 360 · Passeport 360°</div>
+      <img id="pp-shot" src="assets/img/c_passeport.png" alt="Console : Passeport 360° signé et vérifié" />
+      <div id="pp-cover"></div>
+      <svg id="pp-cursor" viewBox="0 0 58 70"><path d="M4 3 L4 56 L17 44 L27 66 L37 61 L27 40 L45 40 Z" fill="#ffffff" stroke="#111" stroke-width="3.5" stroke-linejoin="round" /></svg>
+    </div>
+    <svg id="pp-ink" viewBox="0 0 1920 1080" style="position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible">
+      <ellipse id="pp-c1" cx="1248" cy="469" rx="530" ry="128" fill="none" stroke="#c8102e" stroke-width="7" transform="rotate(-2 1248 469)" />
+      <ellipse id="pp-c2" cx="393" cy="556" rx="232" ry="226" fill="none" stroke="#c8102e" stroke-width="7" transform="rotate(3 393 556)" />
+    </svg>
+    <div id="pp-foot">Festivals, plateformes, publics : chacun peut vérifier, sans avoir à nous croire.</div>
+  </div>
+  <script>
+    (function () {
+      const g = document.getElementById("pp-guil");
+      let d = "";
+      for (let k = 0; k < 24; k++) {
+        const R = 260 + k * 36;
+        let p = "";
+        for (let i = 0; i <= 360; i++) {
+          const th = (i / 360) * Math.PI * 2;
+          const r = R + 15 * Math.sin(8 * th + k * 0.5);
+          p += (i ? "L" : "M") + (1600 + r * Math.cos(th)).toFixed(1) + " " + (200 + r * Math.sin(th) * 0.8).toFixed(1);
+        }
+        d += p;
+      }
+      g.innerHTML = '<path d="' + d + '" fill="none" stroke="#12302e" stroke-opacity="0.07" stroke-width="1.4"/>';
+
+      const BTN = { x: 286, y: 102 };
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#pp-win", { y: 700 }, { y: 0, duration: 0.7, ease: "expo.out" }, 0);
+      tl.fromTo("#pp-t .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, stagger: 0.08, ease: "power2.out" }, 0.25);
+      tl.fromTo("#pp-cursor", { x: 1100, y: 640 }, { x: BTN.x, y: BTN.y, duration: 0.8, ease: "power3.inOut" }, 0.9);
+      tl.to("#pp-cursor", { scale: 0.85, duration: 0.08, yoyo: true, repeat: 1, transformOrigin: "4px 3px" }, 1.75);
+      tl.fromTo("#pp-cover", { clipPath: "inset(0% 0 0 0)" }, { clipPath: "inset(100% 0 0 0)", duration: 0.55, ease: "power2.inOut" }, 1.9);
+      tl.to("#pp-cursor", { x: 1300, y: 700, duration: 0.6, ease: "power3.in" }, 2.6);
+      tl.fromTo("#pp-foot", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power2.out" }, 3.2);
+      [["#pp-c1", 530, 128, 4.3], ["#pp-c2", 232, 226, 5.6]].forEach(([c, rx, ry, at]) => {
+        const L = Math.PI * (3 * (rx + ry) - Math.sqrt((3 * rx + ry) * (rx + 3 * ry)));
+        tl.fromTo(c, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 0.55, ease: "power2.inOut" }, at);
+      });
+      window.__timelines["passeport"] = tl;
+    })();
+  </script>
+</template>
