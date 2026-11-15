@@ -132,7 +132,7 @@
       height: 52px;
       background: #d9cdb2;
       color: #12302e;
-      font-size: 22px;
+      font-size: 28px;
       font-weight: 700;
       display: flex;
       align-items: center;
@@ -201,7 +201,7 @@
       </div>
     </div>
 
-    <div id="pc-fid" class="clip" data-start="9.6" data-duration="3.6">
+    <div id="pc-fid" data-layout-allow-occlusion class="clip" data-start="9.6" data-duration="3.6">
       <div id="pc-fid-h">6 · Vérification de fidélité</div>
       <div id="pc-fid-s">L’IA signale l’écart. <span class="red">L’humain tranche.</span></div>
       <div id="pc-win">
@@ -215,7 +215,7 @@
       </svg>
     </div>
 
-    <div id="pc-out" class="clip" data-start="13.1" data-duration="2.9"><div id="pc-outtxt"><span class="w">L’IA</span><span class="w">propose.</span><span class="w">L’humain</span><span class="w red">décide.</span></div></div>
+    <div id="pc-out" data-layout-allow-occlusion class="clip" data-start="13.1" data-duration="2.9"><div id="pc-outtxt"><span class="w">L’IA</span><span class="w">propose.</span><span class="w">L’humain</span><span class="w red">décide.</span></div></div>
   </div>
   <script>
     (function () {
@@ -252,6 +252,7 @@
       });
       tl.fromTo("#pc-out", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 0.5, ease: "power2.inOut" }, 13.1);
       tl.fromTo("#pc-outtxt .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, stagger: 0.12, ease: "power2.out" }, 13.2);
+      tl.set(["#pc-view", "#pc-head", "#pc-legend"], { opacity: 0 }, 13.65);
       window.__timelines["parcours"] = tl;
     })();
   </script>

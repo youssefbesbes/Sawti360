@@ -115,7 +115,7 @@
       height: 52px;
       background: #d9cdb2;
       color: #12302e;
-      font-size: 22px;
+      font-size: 28px;
       font-weight: 700;
       display: flex;
       align-items: center;
@@ -182,24 +182,24 @@
         <div class="row"><span>Usage autorisé</span><b>doublage_film</b></div>
         <div class="row"><span>Projet</span><b>film_karim_court_metrage_01</b></div>
         <div class="row"><span>Langue</span><b>fr</b></div>
-        <div class="row"><span>Licence</span><b>VL-2026-0001</b><i id="cs-lic-strike"></i><span id="cs-lic-note">révoquée par le titulaire</span></div>
+        <div class="row"><span>Licence</span><b>VL-2026-0001</b><i id="cs-lic-strike"></i><span id="cs-lic-note" data-layout-allow-overlap>révoquée par le titulaire</span></div>
         <div class="sig">Signé · Ed25519</div>
       </div>
 
-      <svg class="cs-stamp" id="cs-s1" viewBox="0 0 420 130" style="left: 170px; top: 610px">
+      <svg class="cs-stamp" data-layout-allow-occlusion data-layout-allow-overlap id="cs-s1" viewBox="0 0 420 130" style="left: 170px; top: 610px">
         <g filter="url(#cs-ink)" fill="none" stroke="#c8102e"><rect x="6" y="6" width="408" height="118" stroke-width="7" /><rect x="18" y="18" width="384" height="94" stroke-width="3" /><text x="210" y="88" text-anchor="middle" font-family="Archivo Black" font-size="62" fill="#c8102e" stroke="none">REFUSÉ</text></g>
       </svg>
-      <svg class="cs-stamp" id="cs-s2" viewBox="0 0 420 130" style="left: 380px; top: 470px">
+      <svg class="cs-stamp" data-layout-allow-occlusion data-layout-allow-overlap id="cs-s2" viewBox="0 0 420 130" style="left: 380px; top: 470px">
         <g filter="url(#cs-ink)" fill="none" stroke="#1e6b47"><rect x="6" y="6" width="408" height="118" stroke-width="7" /><rect x="18" y="18" width="384" height="94" stroke-width="3" /><text x="210" y="88" text-anchor="middle" font-family="Archivo Black" font-size="62" fill="#1e6b47" stroke="none">ACCORDÉ</text></g>
       </svg>
-      <svg class="cs-stamp" id="cs-s3" viewBox="0 0 420 130" style="left: 260px; top: 740px">
+      <svg class="cs-stamp" data-layout-allow-occlusion data-layout-allow-overlap id="cs-s3" viewBox="0 0 420 130" style="left: 260px; top: 740px">
         <g filter="url(#cs-ink)" fill="none" stroke="#c8102e"><rect x="6" y="6" width="408" height="118" stroke-width="7" /><rect x="18" y="18" width="384" height="94" stroke-width="3" /><text x="210" y="88" text-anchor="middle" font-family="Archivo Black" font-size="62" fill="#c8102e" stroke="none">RÉVOQUÉ</text></g>
       </svg>
 
       <div id="cs-ttl">Chaque voix a son passeport.</div>
-      <div id="cs-sub">Le titulaire fixe les usages, les projets et la durée. Il peut révoquer à tout moment.</div>
+      <div id="cs-sub">Le titulaire fixe les usages. Il peut révoquer.</div>
 
-      <div id="cs-win">
+      <div id="cs-win" data-layout-allow-occlusion>
         <div id="cs-bar">Console Sawti 360 · Demande de génération</div>
         <img id="cs-i1" class="clip cs-shot" data-start="3.9" data-duration="4.5" src="assets/img/c_refus.png" alt="Console : génération refusée" />
         <img id="cs-i2" class="clip cs-shot" data-start="8.4" data-duration="3.2" src="assets/img/c_accord.png" alt="Console : génération autorisée" />
@@ -209,7 +209,7 @@
       </div>
     </div>
 
-    <div id="cs-end" class="clip" data-start="15.2" data-duration="3.8"><div id="cs-endtxt"><span class="w">Sans</span><span class="w">consentement,</span><br /><span class="w red">rien</span><span class="w">n’est</span><span class="w">généré.</span></div></div>
+    <div id="cs-end" data-layout-allow-occlusion class="clip" data-start="15.2" data-duration="3.8"><div id="cs-endtxt"><span class="w">Sans</span><span class="w">consentement,</span><br /><span class="w red">rien</span><span class="w">n’est</span><span class="w">généré.</span></div></div>
   </div>
   <script>
     (function () {
@@ -281,6 +281,7 @@
       });
       tl.fromTo("#cs-end", { clipPath: "inset(0 0 0 100%)" }, { clipPath: "inset(0 0 0 0%)", duration: 0.5, ease: "power2.inOut" }, 15.2);
       tl.fromTo("#cs-endtxt .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, stagger: 0.1, ease: "power2.out" }, 15.6);
+      tl.set("#cs-pp", { opacity: 0 }, 15.75);
       window.__timelines["consent"] = tl;
     })();
   </script>

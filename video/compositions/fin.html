@@ -8,25 +8,43 @@
       font-family: "Inter", sans-serif;
       color: #12302e;
     }
-    #fn-wave {
+    #fn-cv {
       position: absolute;
       left: 0;
       top: 0;
       width: 1920px;
       height: 1080px;
     }
+    #fn-head {
+      position: absolute;
+      left: 0;
+      width: 1920px;
+      top: 70px;
+      text-align: center;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 96px;
+      letter-spacing: -0.02em;
+    }
+    #fn-head .w,
+    #fn-top .w {
+      display: inline-block;
+      margin: 0 0.13em;
+    }
+    #fn-head .red {
+      color: #c8102e;
+    }
+    #fn-end {
+      position: absolute;
+      inset: 0;
+    }
     #fn-top {
       position: absolute;
       left: 0;
       width: 1920px;
-      top: 150px;
+      top: 170px;
       text-align: center;
       font-weight: 700;
       font-size: 58px;
-    }
-    #fn-top .w {
-      display: inline-block;
-      margin: 0 0.15em;
     }
     #fn-stamp {
       position: absolute;
@@ -69,32 +87,53 @@
     }
   </style>
   <div id="root" data-composition-id="fin" data-width="1920" data-height="1080">
-    <svg id="fn-wave" viewBox="0 0 1920 1080"><path id="fn-path" fill="none" stroke="#c8102e" stroke-width="6" stroke-linecap="round" opacity="0.25"></path></svg>
-    <div id="fn-top"><span class="w">L’IA</span><span class="w">propose</span><span class="w">·</span><span class="w">L’humain</span><span class="w">décide</span></div>
-    <div id="fn-stamp">SAWTI<span class="red">360</span></div>
-    <div id="fn-claim">La confiance accompagne chaque export.</div>
-    <div id="fn-team">Équipe Houma Skhouna · Hackathon IA Éthique 360 · JEI × OIF<br />github.com/youssefbesbes/Sawti360</div>
+    <canvas id="fn-cv" width="1920" height="1080"></canvas>
+    <div id="fn-head" class="clip" data-start="0" data-duration="3.9"><span class="w">Avec</span><span class="w">son</span><span class="w">passeport,</span><span class="w">la</span><span class="w">voix</span><span class="w red">voyage.</span></div>
+    <div id="fn-end" class="clip" data-start="3.7" data-duration="4.3">
+      <div id="fn-top"><span class="w">L’IA</span><span class="w">propose</span><span class="w">·</span><span class="w">L’humain</span><span class="w">décide</span></div>
+      <div id="fn-stamp">SAWTI<span class="red">360</span></div>
+      <div id="fn-claim">La confiance accompagne chaque export.</div>
+      <div id="fn-team">Équipe Houma Skhouna · Hackathon IA Éthique 360 · JEI × OIF<br />github.com/youssefbesbes/Sawti360</div>
+    </div>
   </div>
   <script>
     (function () {
-      const path = document.getElementById("fn-path");
-      const st = { phase: 0 };
+      const TUNIS = [10.18, 36.8];
+      const CITIES = [
+        ["Paris", [2.35, 48.86]],
+        ["Bruxelles", [4.35, 50.85]],
+        ["Dakar", [-17.44, 14.69]],
+        ["Abidjan", [-4.01, 5.36]],
+        ["Kinshasa", [15.27, -4.44]],
+        ["Beyrouth", [35.5, 33.89]],
+        ["Montréal", [-73.57, 45.5]],
+      ];
+      const render = window.SawtiGlobe(document.getElementById("fn-cv"));
+      const st = { lon0: 20, lat0: 22, R: 430, cx: 960, cy: 640, alpha: 1 };
+      CITIES.forEach((c, i) => (st["p" + i] = 0));
       function draw() {
-        let p = "";
-        for (let x = -10; x <= 1930; x += 6) {
-          const env = 0.55 + 0.45 * Math.sin(x * 0.0042 + st.phase * 0.35);
-          const y = 410 + 100 * env * (Math.sin(x * 0.034 + st.phase) * 0.62 + Math.sin(x * 0.0115 - st.phase * 0.7) * 0.38);
-          p += (x < 0 ? "M" : "L") + x + " " + y.toFixed(1);
-        }
-        path.setAttribute("d", p);
+        render({
+          lon0: st.lon0, lat0: st.lat0, R: st.R, cx: st.cx, cy: st.cy, alpha: st.alpha,
+          home: TUNIS,
+          arcs: CITIES.map((c, i) => ({ from: TUNIS, to: c[1], p: st["p" + i], label: c[0] })),
+          pulses: CITIES.map((c, i) => ({ at: c[1], t: Math.max(0, Math.min(1, (st["p" + i] - 1) * 4)) })),
+        });
       }
       draw();
-      const tl = gsap.timeline({ paused: true });
-      tl.fromTo(st, { phase: 0 }, { phase: 14, duration: 7, ease: "none", onUpdate: draw }, 0);
-      tl.fromTo("#fn-top .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, stagger: 0.09, ease: "power2.out" }, 0.2);
-      tl.fromTo("#fn-stamp", { scale: 1.8, rotation: -12, opacity: 0 }, { scale: 1, rotation: -3, opacity: 1, duration: 0.2, ease: "power4.out" }, 1.3);
-      tl.fromTo("#fn-claim", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power2.out" }, 2.0);
-      tl.fromTo("#fn-team", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, 2.8);
+      const tl = gsap.timeline({ paused: true, onUpdate: draw });
+      tl.fromTo(st, { lon0: 22 }, { lon0: -16, duration: 8, ease: "none", onUpdate: draw }, 0);
+      tl.fromTo(st, { R: 380 }, { R: 440, duration: 3.6, ease: "power2.out" }, 0);
+      CITIES.forEach((c, i) => {
+        // p runs past 1 so the landing pulse and label can play after arrival
+        tl.fromTo(st, { ["p" + i]: 0 }, { ["p" + i]: 1.25, duration: 1.15, ease: "power2.out" }, 0.35 + i * 0.27);
+      });
+      tl.fromTo("#fn-head .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, stagger: 0.08, ease: "power2.out" }, 0.2);
+      tl.to("#fn-head .w", { opacity: 0, filter: "blur(6px)", duration: 0.18, stagger: 0.02, ease: "power2.in" }, 3.55);
+      tl.to(st, { alpha: 0.16, R: 620, cy: 560, duration: 0.8, ease: "power2.inOut" }, 3.6);
+      tl.fromTo("#fn-top .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, stagger: 0.09, ease: "power2.out" }, 3.9);
+      tl.fromTo("#fn-stamp", { scale: 1.8, rotation: -12, opacity: 0 }, { scale: 1, rotation: -3, opacity: 1, duration: 0.2, ease: "power4.out" }, 4.4);
+      tl.fromTo("#fn-claim", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power2.out" }, 4.65);
+      tl.fromTo("#fn-team", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, 4.95);
       window.__timelines["fin"] = tl;
     })();
   </script>

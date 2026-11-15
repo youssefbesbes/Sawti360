@@ -2,3 +2,4 @@ node_modules/
 .hyperframes/
 renders/
 *.mp4
+assets/video/

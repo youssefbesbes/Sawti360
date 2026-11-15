@@ -80,12 +80,12 @@
     <div id="et-title">Une éthique à <span class="red">360°</span></div>
     <div id="et-view">
       <div id="et-prism">
-        <div class="et-face" style="transform: rotateY(0deg) translateZ(554px)"><div class="k">1 / 6</div><div class="n">Les créateurs</div><div class="l">Le créateur valide chaque texte.</div></div>
-        <div class="et-face" style="transform: rotateY(60deg) translateZ(554px)"><div class="k">2 / 6</div><div class="n">Les droits</div><div class="l">Consentement, usages fixés, révocation.</div></div>
-        <div class="et-face" style="transform: rotateY(120deg) translateZ(554px)"><div class="k">3 / 6</div><div class="n">Les données</div><div class="l">Le film reste en local, dans un coffre chiffré.</div></div>
-        <div class="et-face" style="transform: rotateY(180deg) translateZ(554px)"><div class="k">4 / 6</div><div class="n">Cultures et langues</div><div class="l">Un score publié par langue, derja comprise.</div></div>
-        <div class="et-face" style="transform: rotateY(240deg) translateZ(554px)"><div class="k">5 / 6</div><div class="n">La transparence</div><div class="l">Un label IA sur chaque voix générée.</div></div>
-        <div class="et-face" style="transform: rotateY(300deg) translateZ(554px)"><div class="k">6 / 6</div><div class="n">La planète</div><div class="l">L’énergie mesurée à chaque tâche.</div></div>
+        <div class="et-face" data-layout-allow-overlap data-layout-allow-occlusion style="transform: rotateY(0deg) translateZ(554px)"><div class="k">1 / 6</div><div class="n">Les créateurs</div><div class="l">Le créateur valide chaque texte.</div></div>
+        <div class="et-face" data-layout-allow-overlap data-layout-allow-occlusion style="transform: rotateY(60deg) translateZ(554px)"><div class="k">2 / 6</div><div class="n">Les droits</div><div class="l">Consentement, usages fixés, révocation.</div></div>
+        <div class="et-face" data-layout-allow-overlap data-layout-allow-occlusion style="transform: rotateY(120deg) translateZ(554px)"><div class="k">3 / 6</div><div class="n">Les données</div><div class="l">Le film reste en local, dans un coffre chiffré.</div></div>
+        <div class="et-face" data-layout-allow-overlap data-layout-allow-occlusion style="transform: rotateY(180deg) translateZ(554px)"><div class="k">4 / 6</div><div class="n">Cultures et langues</div><div class="l">Un score publié par langue, derja comprise.</div></div>
+        <div class="et-face" data-layout-allow-overlap data-layout-allow-occlusion style="transform: rotateY(240deg) translateZ(554px)"><div class="k">5 / 6</div><div class="n">La transparence</div><div class="l">Un label IA sur chaque voix générée.</div></div>
+        <div class="et-face" data-layout-allow-overlap data-layout-allow-occlusion style="transform: rotateY(300deg) translateZ(554px)"><div class="k">6 / 6</div><div class="n">La planète</div><div class="l">L’énergie mesurée à chaque tâche.</div></div>
       </div>
     </div>
     <div id="et-foot">34/34 tests · 18/18 scénarios d’attaque conformes · nos limites sont écrites</div>
@@ -96,11 +96,11 @@
       tl.fromTo("#et-title", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power2.out" }, 0.1);
       tl.fromTo("#et-prism", { rotationY: 40, z: -1100, opacity: 0 }, { rotationY: 0, z: -554, opacity: 1, duration: 0.9, ease: "expo.out" }, 0.2);
       for (let i = 1; i < 6; i++) {
-        tl.to("#et-prism", { rotationY: -60 * i, duration: 0.45, ease: "power2.inOut" }, 0.9 + i * 1.05);
+        tl.to("#et-prism", { rotationY: -60 * i, duration: 0.42, ease: "power2.inOut" }, 0.8 + i * 0.98);
       }
-      tl.fromTo("#et-foot", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 6.6);
-      tl.to("#et-prism", { rotationY: -360, duration: 0.7, ease: "power2.inOut" }, 7.2);
-      tl.to(["#et-view", "#et-title", "#et-foot"], { opacity: 0, duration: 0.25, ease: "power2.in" }, 8.7);
+      tl.fromTo("#et-foot", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 5.1);
+      tl.to("#et-prism", { rotationY: -360, duration: 0.6, ease: "power2.inOut" }, 6.5);
+      tl.to(["#et-view", "#et-title", "#et-foot"], { opacity: 0, duration: 0.25, ease: "power2.in" }, 7.7);
       window.__timelines["ethique"] = tl;
     })();
   </script>

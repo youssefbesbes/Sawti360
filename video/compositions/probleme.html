@@ -96,13 +96,13 @@
     <svg id="pb-guil" viewBox="0 0 1920 1080"></svg>
     <div id="pb-stage">
       <div id="pb-sentence">Les créateurs qui parlent derja restent <span class="red">invisibles</span> hors de leur langue.</div>
-      <div id="pb-page">
+      <div id="pb-page" data-layout-allow-overlap>
         <h3>Pour faire voyager un film aujourd’hui</h3>
         <div class="pb-row" id="pb-r1"><b>Studio de doublage</b><span>hors budget</span><i class="pb-strike" id="pb-s1"></i></div>
         <div class="pb-row" id="pb-r2"><b>IA générique</b><span>à qui appartient la voix ?</span><i class="pb-strike" id="pb-s2"></i></div>
         <div class="pb-row" id="pb-r3"><b>Film inédit</b><span>envoyé sur un serveur inconnu</span><i class="pb-strike" id="pb-s3"></i></div>
       </div>
-      <div id="pb-stamp">VISA REFUSÉ</div>
+      <div id="pb-stamp" data-layout-allow-occlusion>VISA REFUSÉ</div>
     </div>
   </div>
   <script>
@@ -147,6 +147,7 @@
       });
       tl.fromTo("#pb-stamp", { scale: 1.7, rotation: -16, opacity: 0 }, { scale: 1, rotation: -8, opacity: 1, duration: 0.18, ease: "power4.out" }, 7.1);
       tl.fromTo("#pb-page", { y: 0 }, { y: 6, duration: 0.08, ease: "power2.out", yoyo: true, repeat: 1 }, 7.18);
+      tl.to("#pb-stage", { scale: 1.05, transformOrigin: "1400px 600px", duration: 3.0, ease: "power1.inOut" }, 7.4);
       tl.to("#pb-stage", { x: -1920, duration: 0.5, ease: "power3.in" }, 10.5);
       window.__timelines["probleme"] = tl;
     })();
