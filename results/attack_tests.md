@@ -1,6 +1,6 @@
 # Tests d’attaque — résultats générés automatiquement
 
-Généré par `pytest` le 2026-11-15T09:42:08+00:00. Ne pas éditer à la main.
+Généré par `pytest` le 2026-11-15T18:51:00+00:00. Ne pas éditer à la main.
 
 | Scénario | Attendu | Observé | Test |
 |---|---|---|---|

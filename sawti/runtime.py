@@ -10,7 +10,8 @@ ROOT = Path(__file__).resolve().parent.parent
 DB_DIR = ROOT / "data" / "private"
 EXPORT_DIR = ROOT / "exports"
 DEMO_PROJECT = "film_karim_court_metrage_01"
-USES = ["doublage_film", "bande_annonce", "publicite", "contenu_politique", "contenu_intime"]
+# Usages a voice holder can allow. "doublage_video_en_ligne" covers YouTube, Shorts, Reels and podcasts.
+USES = ["doublage_film", "doublage_video_en_ligne", "bande_annonce", "publicite", "contenu_politique", "contenu_intime"]
 LANGS = ["fr", "ar", "en"]
 
 

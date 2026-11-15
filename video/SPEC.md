@@ -17,7 +17,7 @@ MOTION:  arrivée expo.out 0.6–0.9 s ; caméra power2.inOut 0.8–1.2 s ; sort
          titres : mot à mot, blur 6 px → 0, 0.067 s d'écart, sans translation.
 SHOTS:   (version 3 : fusion choisie par l'équipe)
   0–7     ouverture : « Ahla bik ! » rebondit contre la vitre (barrière de la langue).
-  7–31    témoignage de M. K. Dahmouni, citations en grand.
+  7–31    témoignage de M. K. Dahmouni (sa vidéo seule, avec ses propres sous-titres).
   31–42   problème : phrase + page de passeport, trois obstacles barrés, VISA REFUSÉ.
   42–50   « Pas seulement le cinéma » : films, YouTube, Shorts, podcasts, vidéos IA.
   50–60   globe des langues : derja → + français (aujourd'hui) → + arabe, anglais, espagnol (demain).

@@ -1,6 +1,6 @@
 # Storylines — vidéo de première soumission (1 à 2 min, français)
 
-Choix de l'équipe : **A**.
+Choix de l'équipe : **A**, puis une version fusionnée choisie scène par scène (voir `SPEC.md`, « version 3 ») : ouverture « Ahla bik ! », globe des langues et réplique de bout en bout, avec le problème, les créateurs, le consentement, le Passeport 360°, l'éthique et le globe final de la version A.
 
 ## A · Une voix qui voyage (retenue)
 Device : un objet qui traverse les mondes (une onde de voix). Form : chaîne d'objets en 2.5D.

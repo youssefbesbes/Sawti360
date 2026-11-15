@@ -17,7 +17,7 @@ def main(reset: bool = True) -> None:
     evidence = sha256_hex("formulaire de consentement de démonstration — [à obtenir : formulaire signé réel]")
     common = dict(consent_evidence_sha256=evidence, demo=True, projects=[runtime.DEMO_PROJECT])
     demo = [
-        dict(voice_id="voice_amine", holder_name="Amine B. (démo)", allowed_uses=["doublage_film", "bande_annonce"],
+        dict(voice_id="voice_amine", holder_name="Amine B. (démo)", allowed_uses=["doublage_film", "doublage_video_en_ligne", "bande_annonce"],
              valid_from="2026-11-01", valid_until="2027-05-15", **common),
         dict(voice_id="voice_sarra", holder_name="Sarra K. (démo)", valid_from="2026-11-01", valid_until="2027-05-15", **common),
         dict(voice_id="voice_ancienne", holder_name="Comédien C. (démo)", valid_from="2025-01-01", valid_until="2025-12-31",

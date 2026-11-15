@@ -58,7 +58,7 @@ Ordre des contrôles dans `authorize` : personnalité bloquée → voix enregist
 
 | Donnée | Où elle vit | Protection |
 |---|---|---|
-| Film inédit, pistes audio | `data/private/` (ignoré par git) | coffre local chiffré (Fernet), accès par rôle, aucun envoi réseau |
+| Film ou vidéo inédits, pistes audio | `data/private/` (ignoré par git) | coffre local chiffré (Fernet), accès par rôle, aucun envoi réseau |
 | Empreintes vocales (biométrie) | coffre local | chiffrées, supprimables à la révocation |
 | Passeports de voix | `data/private/sawti.db` | signature Ed25519 de chaque licence |
 | Journal d’audit | `data/private/audit.db` | chaîne de hachage SHA-256 |

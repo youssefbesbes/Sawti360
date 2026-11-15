@@ -1,6 +1,6 @@
 # Sawti 360 — Le doublage de confiance
 
-Sawti 360 double un film de la derja vers le français, sous le contrôle du cinéaste. Chaque voix utilisée a un Passeport de voix signé par son titulaire, chaque décision est journalisée, et le film exporté part avec un Passeport 360° que n'importe qui peut vérifier.
+Sawti 360 double une œuvre de la derja vers le français, sous le contrôle de son créateur : un film, mais aussi une vidéo YouTube, un Short, un podcast ou une vidéo générée par IA. Chaque voix utilisée a un Passeport de voix signé par son titulaire, chaque décision est journalisée, et l'œuvre exportée part avec un Passeport 360° que n'importe qui peut vérifier.
 
 « L’IA propose · L’humain décide · La confiance accompagne chaque export. »
 
@@ -14,27 +14,54 @@ Les captures viennent de la console du dépôt, lancée avec des données de dé
 
 ## Le problème
 
-Formulation (à ajuster au gabarit officiel du cahier) : un cinéaste tunisien indépendant veut que son film tourné en derja soit vu par le public francophone. Le doublage en studio dépasse son budget. Les outils de doublage par IA existants ne lui disent pas à qui appartient la voix générée, ne lui laissent pas le dernier mot sur le texte, et lui demandent d'envoyer un film inédit sur un serveur qu'il ne contrôle pas.
+En une phrase, selon le gabarit du cahier : les créateurs tunisiens qui produisent en derja (cinéastes indépendants, vidéastes, podcasteurs) restent invisibles hors de leur langue quand ils veulent toucher le public francophone, parce que le doublage en studio est hors budget et que les outils d'IA ne prouvent pas à qui appartient la voix ; leurs œuvres ne voyagent pas.
 
-> « Un film incompris reste invisible ; les sous-titres aident un peu ; le doublage fait voyager un film. »
-> Mohamed Karim Dahmouni, cinéaste, entretien du 14 novembre 2026 (accord écrit d'image et de voix : à obtenir)
+Le cas observé sur le terrain : un cinéaste tunisien indépendant veut que son film tourné en derja soit vu par le public francophone. Le doublage en studio dépasse son budget. Les outils de doublage par IA existants ne lui disent pas à qui appartient la voix générée, ne lui laissent pas le dernier mot sur le texte, et lui demandent d'envoyer un film inédit sur un serveur qu'il ne contrôle pas.
+
+> « Un film que le public ne comprend pas reste invisible, même s'il est extraordinaire. Les miens sont en dialecte tunisien, ils s'arrêtent à la barrière de la langue. Les sous-titres aident un peu, mais seul le doublage permet à un film de voyager. »
+> Mohamed Karim Dahmouni, cinéaste, entretien du 14 novembre 2026 et vidéo de témoignage (accord écrit d'image et de voix : à obtenir)
+
+**Au-delà du cinéma.** Le même blocage touche les créateurs en ligne : une vidéo YouTube, un Short, un podcast ou une vidéo générée par IA en derja reste dans le public qui comprend la derja. Le parcours et la couche de confiance sont les mêmes ; seul l'usage déclaré dans le Passeport de voix change (`doublage_video_en_ligne`). C'est une hypothèse que nous n'avons pas encore vérifiée sur le terrain : l'entretien avec un vidéaste est `[à recueillir]`.
 
 Nous sommes partis de cet entretien, puis nous avons vérifié ce qui existe avant de formuler le problème : observer, écouter, vérifier, formuler. Le journal des entretiens est dans [docs/ENTRETIENS.md](docs/ENTRETIENS.md). Un seul entretien est fait à ce jour, les autres sont marqués `[à recueillir]`.
 
 ## La solution
 
-Le parcours de doublage a huit étapes : import local, séparation des pistes, transcription, validation par le cinéaste, traduction avec glossaire, vérification de fidélité, adaptation réplique par réplique, voix.
+Le parcours de doublage a huit étapes : import local, séparation des pistes, transcription, validation par le créateur, traduction avec glossaire, vérification de fidélité, adaptation réplique par réplique, voix.
 
 Autour de ce parcours, une couche de confiance fait cinq choses : elle vérifie la licence de chaque voix avant toute génération, elle garde le film sur la machine, elle étiquette ce que l'IA a produit, elle journalise chaque décision dans une chaîne de hachage, et elle mesure l'énergie consommée.
 
 À l'export, le Passeport 360° rassemble tout cela dans un fichier signé.
 
+Le titulaire d'une voix choisit pour quels usages il l'autorise : `doublage_film`, `doublage_video_en_ligne` (YouTube, Shorts, Reels, podcasts) ou `bande_annonce`. La publicité, le contenu politique et le contenu intime sont traités comme sensibles par les garde-fous.
+
+Langues : aujourd'hui, de la derja vers le français. Ensuite, sur la feuille de route : l'arabe, l'anglais, l'espagnol et l'amazigh. Ces langues ne sont pas implémentées.
+
 | Ce que fait l'IA | Ce qu'elle ne décide pas |
 |---|---|
-| Elle propose une transcription | Le cinéaste valide le texte qui fait foi |
+| Elle propose une transcription | Le créateur (cinéaste ou vidéaste) valide le texte qui fait foi |
 | Elle propose une traduction et signale les écarts de chiffres, de noms, de négations | L'adaptateur accepte, réécrit ou rejette chaque réplique |
 | Elle génère une voix si le moteur de règles l'autorise | Le titulaire fixe les usages, les projets et la durée, et peut révoquer |
 | Elle mesure sa consommation | Le référent éthique valide le passeport avant l'export |
+
+## Vidéo de présentation
+
+La vidéo de la première soumission (1 min 59, en français) est construite en code avec [HyperFrames](https://github.com/heygen-com/hyperframes) (Apache-2.0) ; sa source est dans [video/](video/). Elle suit le fil du cahier : problème observé, solution, place de l'IA, démarche éthique.
+
+| Temps | Scène |
+|---|---|
+| 0:00 | « Ahla bik ! » rebondit contre une vitre : la barrière de la langue |
+| 0:07 | Témoignage de Mohamed Karim Dahmouni |
+| 0:31 | Le problème et les obstacles d'aujourd'hui (studio, IA générique, film envoyé en ligne) |
+| 0:42 | Pas seulement le cinéma : films, YouTube, Shorts, podcasts, vidéos générées par IA |
+| 0:50 | Globe des langues : derja, puis français (aujourd'hui), puis arabe, anglais, espagnol (demain) |
+| 1:00 | Une réplique réelle de la démo, de bout en bout : l'IA repère « 15 → 50 », le créateur corrige |
+| 1:17 | Consentement sur la vraie console : refus, accord, refus après révocation |
+| 1:36 | Passeport 360° signé et vérifié (vraie capture, vrai QR) |
+| 1:44 | Les six angles éthiques, 34/34 tests, 18/18 scénarios d'attaque |
+| 1:51 | La voix rejoint l'espace francophone ; L'IA propose · L'humain décide |
+
+Toutes les interfaces montrées sont des captures de la console. Le globe colore les pays où la langue est officielle ou d'usage courant ; il n'affiche aucun chiffre d'audience. La voix off se prépare avec [video/ELEVENLABS_A_COLLER.md](video/ELEVENLABS_A_COLLER.md) ; si elle est générée par IA, le générique le dira. Le témoignage n'est pas versionné tant que l'accord écrit n'est pas signé.
 
 ## Lancer la démo
 
@@ -152,7 +179,7 @@ Le détail est dans [docs/ETHIQUE.md](docs/ETHIQUE.md). En résumé, pour chacun
 
 **Les données.** Le risque est la fuite d'un film inédit ou d'une empreinte vocale. Tout est traité en local, dans un coffre chiffré avec des rôles. Limite : la clé du coffre est un simple fichier.
 
-**Cultures et langues.** Le risque est une IA qui comprend mal la derja. Nous publions un score par langue, même mauvais, et le cinéaste valide la transcription. Limite : notre jeu de test est petit et le score en derja n'est pas encore mesuré.
+**Cultures et langues.** Le risque est une IA qui comprend mal la derja. Nous publions un score par langue, même mauvais, et le créateur valide la transcription. Limite : notre jeu de test est petit et le score en derja n'est pas encore mesuré.
 
 **Transparence.** Le risque est que le public ignore ce que l'IA a fait. Le film porte un label, un manifeste de provenance et un générique des voix. Limite : un label se retire d'une copie, et notre manifeste n'est pas certifié C2PA.
 
@@ -168,9 +195,9 @@ Ce dépôt s'aligne sur les textes cités. Il n'a reçu aucune certification, et
 
 **Jeunesse et entrepreneuriat.** Le Passeport de voix prévoit une rémunération par usage pour le comédien. Le montant et le modèle économique restent `[à définir]`.
 
-**Inclusion et égalité.** L'outil vise les jeunes créateurs et les petites structures, qui n'ont pas accès à un studio de doublage. L'export prévoit des sous-titres français, utiles aux personnes sourdes ou malentendantes. Ils ne sont pas encore implémentés.
+**Inclusion et égalité.** L'outil vise les jeunes créateurs (cinéastes indépendants, vidéastes, podcasteurs) et les petites structures, qui n'ont pas accès à un studio de doublage. L'export prévoit des sous-titres français, utiles aux personnes sourdes ou malentendantes. Ils ne sont pas encore implémentés.
 
-**Un numérique au service de l'humain.** Le consentement, les droits du titulaire et la liberté du cinéaste passent avant la génération : le moteur de règles refuse par défaut.
+**Un numérique au service de l'humain.** Le consentement, les droits du titulaire et la liberté du créateur passent avant la génération : le moteur de règles refuse par défaut.
 
 ## Données et modèles
 
@@ -193,13 +220,15 @@ La liste des modèles et des jeux de données, avec leur licence, est dans [docs
 - 21 novembre : demi-finale, parcours complet sur un extrait d'une à deux minutes, avec l'accord écrit du cinéaste.
 - 24 novembre : dépôt final, avec équipe rouge, Shield et filigrane.
 - 25 novembre : finale, prototype utilisable hors ligne.
+- Après la finale : créateurs en ligne (YouTube, Shorts, podcasts), puis d'autres langues (arabe, anglais, espagnol, amazigh).
 
 ## Ce qu'il nous reste à fournir
 
 - Un enregistrement de deux minutes en derja et sa transcription (`data/bench/derja_01.wav` et `.txt`), pour mesurer le WER.
 - Les formulaires de consentement signés, dans `data/consents/`.
 - L'accord écrit de Mohamed Karim Dahmouni, et la vérification des prix et sélections cités dans la vidéo.
-- Les entretiens suivants.
+- Les entretiens suivants, dont au moins un vidéaste ou podcasteur pour vérifier l'élargissement aux créateurs en ligne.
+- La voix off de la vidéo (texte et réglages : `video/ELEVENLABS_A_COLLER.md`).
 - Les prénoms dans le tableau de l'équipe, et la vraie liste de blocage.
 
 ## Propriété intellectuelle

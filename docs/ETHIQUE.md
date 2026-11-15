@@ -6,9 +6,9 @@ Chaque angle du cahier des charges : **risque → notre réponse → limite rés
 
 | Angle | Risque | Notre réponse (où dans le code) | Limite résiduelle |
 |---|---|---|---|
-| **1 · Les créateurs** | Une voix de comédien clonée sans accord, un cinéaste dépossédé de ses choix | Passeport de voix signé : usages, projets, langues, durée, rémunération, interdiction d’entraînement (`licenses.py`) ; refus par défaut (`rules.py`) ; validation humaine exigée avant génération | La licence est signée par la clé de la plateforme en V1, pas encore par le titulaire ; rémunération `[à définir]` |
+| **1 · Les créateurs** | Une voix de comédien ou de créateur en ligne clonée sans accord, un cinéaste ou un vidéaste dépossédé de ses choix | Passeport de voix signé : usages, projets, langues, durée, rémunération, interdiction d’entraînement (`licenses.py`) ; refus par défaut (`rules.py`) ; validation humaine exigée avant génération | La licence est signée par la clé de la plateforme en V1, pas encore par le titulaire ; rémunération `[à définir]` |
 | **2 · Les droits** | Réutilisation d’une voix hors contrat, voix de personnalités | Révocation immédiate ; usages interdits explicites ; liste de blocage (`guardrails.py`) ; bouton « Signaler un abus » | **La révocation n’efface pas un audio déjà diffusé** ; la liste de blocage est déclarative |
-| **3 · Les données** | Fuite d’un film inédit ou d’une empreinte vocale | Traitement 100 % local, coffre chiffré, rôles, empreintes supprimables (`vault.py`) ; seule l’empreinte SHA-256 du consentement est stockée | Gestion de clés minimale (fichier local) ; pas d’audit de sécurité externe |
+| **3 · Les données** | Fuite d’un film ou d’une vidéo inédits, ou d’une empreinte vocale | Traitement 100 % local, coffre chiffré, rôles, empreintes supprimables (`vault.py`) ; seule l’empreinte SHA-256 du consentement est stockée | Gestion de clés minimale (fichier local) ; pas d’audit de sécurité externe |
 | **4 · Cultures et langues** | Une IA qui comprend mal la derja et aplatit les références culturelles | Score de qualité **par langue** publié même s’il est mauvais (`bench.py`, `run_wer.py`) ; glossaire culturel et validation par le cinéaste | Sawti-Bench très petit ; WER derja `[à mesurer]` ; accents régionaux non couverts |
 | **5 · Transparence** | Le public ne sait pas ce que l’IA a fait | Label visible, manifeste de provenance, générique des voix (`label.py`) ; journal d’audit vérifiable ; Passeport 360° signé + QR | Manifeste inspiré de C2PA, **sans conformité C2PA** ; un label peut être retiré d’une copie |
 | **6 · La planète** | Modèles lourds utilisés sans compter | Énergie mesurée par tâche (`energy.py`, CodeCarbon), affichée et inscrite au passeport ; choix du plus petit modèle suffisant | CodeCarbon **estime** (CPU/RAM, mix du pays) ; mesures V1 non représentatives d’une vraie synthèse |
@@ -34,3 +34,10 @@ Chaque angle du cahier des charges : **risque → notre réponse → limite rés
 ## Rôle du référent éthique
 
 `[prénom]` — tient ce document, traite les signalements d’abus du journal (`SIGNALEMENT_ABUS`), valide chaque Passeport 360° avant export, vérifie les consentements de `data/consents/`.
+
+## La vidéo de présentation applique les mêmes règles
+
+- Le témoignage de Mohamed Karim Dahmouni n'est utilisé qu'avec son accord écrit d'image et de voix (`[à obtenir]` avant toute diffusion publique) ; le fichier n'est pas versionné dans le dépôt.
+- Si la voix off est générée par IA (ElevenLabs), elle utilise une voix sous licence ou la voix clonée d'un membre de l'équipe avec son accord écrit, et le générique l'indique.
+- Les écrans montrés sont des captures réelles de la console ; aucun chiffre d'audience n'est affiché sur le globe des langues.
+- Pour les vidéos générées par IA publiées par des créateurs en ligne, la règle est la même : une voix sans Passeport de voix n'est pas générée.

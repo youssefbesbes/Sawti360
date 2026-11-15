@@ -96,11 +96,12 @@ if not store.list():
 # ---------------------------------------------------------------- pages
 if page == "Accueil":
     st.markdown('<p class="brand">Sawti 360</p><p class="tag">Le doublage de confiance</p>', unsafe_allow_html=True)
-    st.subheader("Chaque voix a un passeport. Chaque film garde son identité.")
-    st.write("Un cinéaste tunisien fait doubler son film **de la derja vers le français** sous contrôle humain. "
+    st.subheader("Chaque voix a un passeport. Chaque œuvre garde son identité.")
+    st.write("Un cinéaste, un vidéaste ou un podcasteur tunisien fait doubler son œuvre **de la derja vers le français** "
+             "sous contrôle humain : un film, une vidéo YouTube, un Short, un podcast. "
              "À chaque étape, une **couche de confiance** vérifie le consentement des voix, mesure la qualité par langue, "
              "étiquette ce que l’IA a fait, journalise chaque décision et affiche l’énergie consommée. "
-             "À l’export, le film part avec un **Passeport 360°** signé et vérifiable par QR.")
+             "À l’export, l’œuvre part avec un **Passeport 360°** signé et vérifiable par QR.")
     c1, c2 = st.columns(2)
     with c1:
         st.markdown("#### Ce qui fonctionne dans cette V1")
@@ -210,7 +211,7 @@ elif page == "Passeports de voix":
         with st.form("new_lic"):
             name = st.text_input("Titulaire de la voix")
             voice = st.text_input("Identifiant de voix", placeholder="voice_prenom")
-            uses = st.multiselect("Usages autorisés", runtime.USES[:2], default=["doublage_film"])
+            uses = st.multiselect("Usages autorisés", runtime.USES[:3], default=["doublage_film"])
             proj = st.text_input("Projet", runtime.DEMO_PROJECT)
             langs = st.multiselect("Langues", runtime.LANGS, default=["fr"])
             d1, d2 = st.columns(2)

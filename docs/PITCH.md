@@ -2,21 +2,21 @@
 
 Présentation Canva : https://canva.link/lu6nsgxbyjwdj6h
 
-Une idée par diapositive, un gros titre, une phrase d’accroche en bas. Aucun chiffre inventé.
+Le pitch suit le même fil que la vidéo de présentation (`video/`), pour que le jury retrouve les mêmes images. Une idée par diapositive, un gros titre, une phrase d’accroche en bas. Aucun chiffre inventé.
 
 | # | Titre | Contenu | Accroche |
 |---|---|---|---|
-| 1 | SAWTI 360 | Le doublage de confiance — de la derja vers le français | Chaque voix a un passeport, chaque film garde son identité |
-| 2 | Un film qu’on ne comprend pas ne voyage pas | Citation de Mohamed Karim Dahmouni (14 nov. 2026) | Des films en derja restent invisibles hors de leur langue |
-| 3 | Consentement ? Transparence ? | À qui appartient la voix ? Qui l’a autorisée ? | Et si chaque film pouvait voyager sans perdre son identité ? |
-| 4 | Ce qui existe aujourd’hui | Studio : hors de portée · IA générique : sans preuve de consentement, film envoyé en ligne | Tout le monde entend la voix. Personne ne voit l’autorisation |
-| 5 | Comment ça marche | 7 étapes : import local → pistes → transcription → validation → traduction + glossaire → vérificateur → voix et mixage | L’IA propose. L’humain décide |
-| 6 | La couche de confiance | Passeport de voix · licence vérifiée avant génération · label IA + journal · traitement local · qualité par langue, énergie | Une voix expirée ou non consentie est refusée. Rien n’est caché |
-| 7 | Notre prototype | Refus → accord → refus après révocation (captures `docs/captures/`) | Sans consentement, rien n’est généré |
-| 8 | Passeport 360° | Identité du film, voix et licences, label et provenance, validation et audit, sécurité et énergie, signature + QR | Festivals, producteurs et financeurs vérifient, sans avoir à nous croire |
-| 9 | Éthique à 360° | Créateurs · droits · données · cultures et langues · transparence · planète | Nos limites sont écrites |
-| 10 | En cohérence avec la Francophonie | Diversité culturelle et linguistique · jeunesse et entrepreneuriat · inclusion et égalité · un numérique au service de l’humain | Un film tunisien qui voyage en français, sans perdre sa voix |
-| 11 | Ce que nous mesurons | 34/34 tests · 18/18 scénarios d’attaque · WER derja `[à mesurer]` · fidélité `[à mesurer]` · modèle économique `[à définir]` | Un mauvais score publié vaut mieux qu’un bon score inventé |
-| 12 | Merci | Prochaine étape : parcours complet sur 1–2 min d’extrait, avec accord écrit | L’IA propose · L’humain décide · La confiance accompagne chaque export |
+| 1 | SAWTI 360 | Le doublage de confiance — de la derja vers le français | صوتي · « ma voix » |
+| 2 | Le message ne passe pas | « Ahla bik ! » contre une vitre : une créatrice en derja, un public francophone | Une voix tunisienne. Un public francophone. Une barrière. |
+| 3 | Sur le terrain | Témoignage de Mohamed Karim Dahmouni (mots exacts, voir `docs/ENTRETIENS.md`) | « Seul le doublage permet à un film de voyager. » |
+| 4 | Le problème, en une phrase | Gabarit du cahier ; obstacles d’aujourd’hui : studio hors budget, IA générique sans preuve de consentement, film inédit envoyé en ligne | Des œuvres en derja restent invisibles hors de leur langue |
+| 5 | Pas seulement le cinéma | Films, YouTube, Shorts, podcasts, vidéos générées par IA ; usage `doublage_video_en_ligne` dans le Passeport de voix | Chaque créateur qui raconte sa culture mérite d’être compris |
+| 6 | Jusqu’où va une voix | Globe : derja (Tunisie) → français (aujourd’hui) → arabe, anglais, espagnol (demain, feuille de route) ; pays où la langue est officielle ou d’usage courant, sans chiffre d’audience | Même voix. Bien plus loin. |
+| 7 | Une réplique, de bout en bout | « Nlaqawk fil café, rendez-vous à 15 h. » → transcription → traduction → l’IA repère 15 → 50 → le créateur corrige → voix | L’IA propose. L’humain décide. |
+| 8 | Sans consentement, rien n’est généré | Vraie console : voix inconnue refusée, voix consentie accordée avec label, licence révoquée refusée (`docs/captures/`) | Chaque voix a son passeport |
+| 9 | Passeport 360° | Signature + QR, vérifiable hors ligne ; ce qu’il contient | Festivals, plateformes, publics : chacun vérifie, sans avoir à nous croire |
+| 10 | Éthique à 360° | Créateurs · droits · données · cultures et langues · transparence · planète ; nos limites | Nos limites sont écrites |
+| 11 | Ce que nous mesurons, en cohérence avec la Francophonie | 34/34 tests · 18/18 scénarios d’attaque · WER derja `[à mesurer]` · diversité linguistique, jeunesse, inclusion · modèle économique `[à définir]` | Un mauvais score publié vaut mieux qu’un bon score inventé |
+| 12 | Merci | Prochaine étape : parcours complet sur 1–2 min d’extrait, avec accord écrit ; entretiens avec des vidéastes | L’IA propose · L’humain décide · La confiance accompagne chaque export |
 
-À compléter par l’équipe avant le pitch : nom de l’équipe, captures de la diapositive 7, modèle économique et structure de coûts (à chiffrer et à sourcer), sources de chaque fait cité.
+À compléter par l’équipe avant le pitch : prénoms de l’équipe, modèle économique et structure de coûts (à chiffrer et à sourcer), source de chaque fait cité, accord écrit de M. K. Dahmouni, entretien avec au moins un créateur en ligne.
