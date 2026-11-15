@@ -1,0 +1,101 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #eee6d3;
+      font-family: "Inter", sans-serif;
+      color: #12302e;
+    }
+    #fn-wave {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+    }
+    #fn-top {
+      position: absolute;
+      left: 0;
+      width: 1920px;
+      top: 150px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 58px;
+    }
+    #fn-top .w {
+      display: inline-block;
+      margin: 0 0.15em;
+    }
+    #fn-stamp {
+      position: absolute;
+      left: 560px;
+      top: 300px;
+      width: 800px;
+      height: 220px;
+      border: 12px double #12302e;
+      background: #eee6d3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 150px;
+      line-height: 1;
+    }
+    #fn-stamp .red {
+      color: #c8102e;
+      margin-left: 0.25em;
+    }
+    #fn-claim {
+      position: absolute;
+      left: 0;
+      width: 1920px;
+      top: 590px;
+      text-align: center;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 64px;
+      letter-spacing: -0.02em;
+    }
+    #fn-team {
+      position: absolute;
+      left: 0;
+      width: 1920px;
+      top: 790px;
+      text-align: center;
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+  </style>
+  <div id="root" data-composition-id="fin" data-width="1920" data-height="1080">
+    <svg id="fn-wave" viewBox="0 0 1920 1080"><path id="fn-path" fill="none" stroke="#c8102e" stroke-width="6" stroke-linecap="round" opacity="0.25"></path></svg>
+    <div id="fn-top"><span class="w">L’IA</span><span class="w">propose</span><span class="w">·</span><span class="w">L’humain</span><span class="w">décide</span></div>
+    <div id="fn-stamp">SAWTI<span class="red">360</span></div>
+    <div id="fn-claim">La confiance accompagne chaque export.</div>
+    <div id="fn-team">Équipe Houma Skhouna · Hackathon IA Éthique 360 · JEI × OIF<br />github.com/youssefbesbes/Sawti360</div>
+  </div>
+  <script>
+    (function () {
+      const path = document.getElementById("fn-path");
+      const st = { phase: 0 };
+      function draw() {
+        let p = "";
+        for (let x = -10; x <= 1930; x += 6) {
+          const env = 0.55 + 0.45 * Math.sin(x * 0.0042 + st.phase * 0.35);
+          const y = 410 + 100 * env * (Math.sin(x * 0.034 + st.phase) * 0.62 + Math.sin(x * 0.0115 - st.phase * 0.7) * 0.38);
+          p += (x < 0 ? "M" : "L") + x + " " + y.toFixed(1);
+        }
+        path.setAttribute("d", p);
+      }
+      draw();
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(st, { phase: 0 }, { phase: 14, duration: 7, ease: "none", onUpdate: draw }, 0);
+      tl.fromTo("#fn-top .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, stagger: 0.09, ease: "power2.out" }, 0.2);
+      tl.fromTo("#fn-stamp", { scale: 1.8, rotation: -12, opacity: 0 }, { scale: 1, rotation: -3, opacity: 1, duration: 0.2, ease: "power4.out" }, 1.3);
+      tl.fromTo("#fn-claim", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power2.out" }, 2.0);
+      tl.fromTo("#fn-team", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, 2.8);
+      window.__timelines["fin"] = tl;
+    })();
+  </script>
+</template>

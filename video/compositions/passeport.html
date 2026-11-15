@@ -1,0 +1,145 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #0f1330;
+      font-family: "Inter", sans-serif;
+      color: #e6e8f2;
+    }
+    #pp-h {
+      position: absolute;
+      left: 200px;
+      top: 100px;
+      font-size: 64px;
+      font-weight: 700;
+    }
+    #pp-sub {
+      position: absolute;
+      left: 200px;
+      top: 190px;
+      font-size: 30px;
+      color: #9aa3b8;
+      width: 1500px;
+    }
+    #pp-qrbox {
+      position: absolute;
+      left: 200px;
+      top: 300px;
+      width: 480px;
+      height: 480px;
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    #pp-qr {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 480px;
+      height: 480px;
+      image-rendering: pixelated;
+    }
+    #pp-scan {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 480px;
+      height: 10px;
+      background: #22b8cf;
+      opacity: 0.85;
+    }
+    #pp-cap {
+      position: absolute;
+      left: 200px;
+      top: 805px;
+      width: 480px;
+      text-align: center;
+      font-size: 26px;
+      color: #9aa3b8;
+    }
+    #pp-ok {
+      position: absolute;
+      left: 800px;
+      top: 300px;
+      width: 920px;
+      border: 3px solid #3ddc97;
+      background: #10283a;
+      border-radius: 14px;
+      padding: 34px 40px;
+    }
+    #pp-ok .h {
+      font-size: 58px;
+      font-weight: 700;
+      color: #3ddc97;
+    }
+    #pp-ok .b {
+      font-size: 36px;
+      margin-top: 16px;
+    }
+    #pp-list {
+      position: absolute;
+      left: 800px;
+      top: 560px;
+      width: 920px;
+      font-size: 32px;
+      line-height: 1.45;
+    }
+    #pp-band {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+      background: #eee6d3;
+      color: #12302e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+    #pp-band .t {
+      font-family: "Archivo Black", sans-serif;
+      font-size: 96px;
+      letter-spacing: -0.02em;
+      text-align: center;
+      line-height: 1.1;
+    }
+    #pp-band .t .red {
+      color: #c8102e;
+    }
+    #pp-band .s {
+      font-size: 46px;
+      font-weight: 700;
+    }
+  </style>
+  <div id="root" data-composition-id="passeport" data-width="1920" data-height="1080">
+    <div id="pp-h">Passeport 360°</div>
+    <div id="pp-sub">Dossier vérifiable qui accompagne chaque export.</div>
+    <div id="pp-qrbox"><img id="pp-qr" src="assets/img/qr.png" alt="QR de vérification" /><div id="pp-scan"></div></div>
+    <div id="pp-cap">QR de vérification (empreinte du passeport)</div>
+    <div id="pp-ok"><div class="h">✓ Vérifié</div><div class="b">Signature et chaîne d’audit vérifiées.</div></div>
+    <div id="pp-list">Le passeport contient : l’identité du film, les licences et le consentement des voix, les scores de qualité par langue, le label de transparence, le manifeste de provenance, le journal d’audit, les modèles utilisés, l’énergie consommée et les émissions.</div>
+    <div id="pp-band" class="clip" data-start="4.6" data-duration="3.4">
+      <div class="t">Le Passeport 360°<br />accompagne <span class="red">chaque</span> export.</div>
+      <div class="s">Festivals, plateformes, publics : chacun peut vérifier.</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(["#pp-h", "#pp-sub"], { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, stagger: 0.1 }, 0.1);
+      tl.fromTo("#pp-qrbox", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6, ease: "expo.out" }, 0.3);
+      tl.fromTo("#pp-cap", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.6);
+      tl.fromTo("#pp-scan", { y: 0, opacity: 0 }, { y: 470, opacity: 0.85, duration: 1.2, ease: "power1.inOut" }, 0.8);
+      tl.to("#pp-scan", { opacity: 0, duration: 0.15 }, 2.0);
+      tl.fromTo("#pp-ok", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: "expo.out" }, 2.05);
+      tl.fromTo("#pp-list", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 2.6);
+      tl.fromTo("#pp-band", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 0.5, ease: "power2.inOut" }, 4.6);
+      tl.fromTo("#pp-band .t, #pp-band .s", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, stagger: 0.25 }, 5.0);
+      window.__timelines["passeport"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,160 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #eee6d3;
+      font-family: "Inter", sans-serif;
+      color: #12302e;
+    }
+    #hook-cam {
+      position: absolute;
+      inset: 0;
+    }
+    #hook-guil {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+    }
+    #hook-wave {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+    }
+    .hook-line {
+      position: absolute;
+      left: 0;
+      width: 1920px;
+      top: 200px;
+      text-align: center;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 124px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .hook-line .w {
+      display: inline-block;
+      margin: 0 0.12em;
+    }
+    .hook-line .red {
+      color: #c8102e;
+    }
+    #hook-border {
+      position: absolute;
+      left: 1300px;
+      top: 470px;
+      width: 0;
+      height: 470px;
+      border-left: 6px dashed #12302e;
+    }
+    #hook-border-label {
+      position: absolute;
+      left: 1330px;
+      top: 880px;
+      font-family: "Inter", sans-serif;
+      font-weight: 700;
+      font-size: 34px;
+      color: #12302e;
+    }
+  </style>
+  <div id="root" data-composition-id="hook" data-width="1920" data-height="1080">
+    <div id="hook-cam">
+      <svg id="hook-guil" viewBox="0 0 1920 1080"></svg>
+      <svg id="hook-wave" viewBox="0 0 1920 1080">
+        <defs>
+          <clipPath id="hook-clip"><rect id="hook-cliprect" x="0" y="0" width="0" height="1080"></rect></clipPath>
+        </defs>
+        <path id="hook-path" clip-path="url(#hook-clip)" fill="none" stroke="#c8102e" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+      <div id="hook-border"></div>
+      <div id="hook-border-label">Frontière de la langue</div>
+    </div>
+    <div id="hook-l1" class="clip hook-line" data-start="0.3" data-duration="2.5">Une voix.</div>
+    <div id="hook-l2" class="clip hook-line" data-start="2.9" data-duration="2.6">Une langue : la <span><span class="red">derja</span>.</span></div>
+    <div id="hook-l3" class="clip hook-line" data-start="5.7" data-duration="3.3">Hors de sa langue, elle s’arrête.</div>
+  </div>
+  <script>
+    (function () {
+      // passport guilloche: deterministic rosette lines
+      const g = document.getElementById("hook-guil");
+      let d = "";
+      for (let k = 0; k < 26; k++) {
+        const R = 260 + k * 34;
+        let p = "";
+        for (let i = 0; i <= 360; i++) {
+          const th = (i / 360) * Math.PI * 2;
+          const r = R + 16 * Math.sin(9 * th + k * 0.5);
+          const x = 1500 + r * Math.cos(th);
+          const y = 300 + r * Math.sin(th) * 0.82;
+          p += (i ? "L" : "M") + x.toFixed(1) + " " + y.toFixed(1);
+        }
+        d += p;
+      }
+      g.innerHTML = '<path d="' + d + '" fill="none" stroke="#12302e" stroke-opacity="0.07" stroke-width="1.4"/>';
+
+      // split words
+      document.querySelectorAll("#root .hook-line").forEach((el) => {
+        const nodes = Array.from(el.childNodes);
+        el.innerHTML = "";
+        nodes.forEach((n) => {
+          if (n.nodeType === 3) {
+            n.textContent.split(/\s+/).filter(Boolean).forEach((t) => {
+              const s = document.createElement("span");
+              s.className = "w";
+              s.textContent = t;
+              el.appendChild(s);
+            });
+          } else {
+            n.classList.add("w");
+            el.appendChild(n);
+          }
+        });
+      });
+
+      const path = document.getElementById("hook-path");
+      const st = { phase: 0, amp: 0, flat: 0 };
+      const BORDER = 1300;
+      function draw() {
+        let p = "";
+        for (let x = -10; x <= 1930; x += 6) {
+          const env = 0.55 + 0.45 * Math.sin(x * 0.0042 + st.phase * 0.35);
+          let y = Math.sin(x * 0.034 + st.phase) * 0.62 + Math.sin(x * 0.0115 - st.phase * 0.7) * 0.38;
+          let k = 1;
+          if (x > BORDER) k = 1 - st.flat * Math.min(1, (x - BORDER) / 90);
+          y = 640 + st.amp * env * y * k;
+          p += (x < 0 ? "M" : "L") + x + " " + y.toFixed(1);
+        }
+        path.setAttribute("d", p);
+      }
+      draw();
+
+      const tl = gsap.timeline({ paused: true, onUpdate: draw });
+      tl.fromTo(st, { phase: 0 }, { phase: 22, duration: 9, ease: "none", onUpdate: draw }, 0);
+      tl.fromTo(st, { amp: 0 }, { amp: 120, duration: 1.4, ease: "expo.out" }, 0.05);
+      tl.fromTo("#hook-cliprect", { attr: { width: 0 } }, { attr: { width: 1920 }, duration: 1.8, ease: "power2.inOut" }, 0);
+
+      function wordsIn(sel, at) {
+        tl.fromTo(sel + " .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, stagger: 0.07, ease: "power2.out" }, at);
+      }
+      function wordsOut(sel, at) {
+        tl.to(sel + " .w", { opacity: 0, filter: "blur(6px)", duration: 0.18, stagger: 0.03, ease: "power2.in" }, at);
+      }
+      wordsIn("#hook-l1", 0.4);
+      wordsOut("#hook-l1", 2.55);
+      wordsIn("#hook-l2", 3.0);
+      wordsOut("#hook-l2", 5.2);
+
+      tl.fromTo("#hook-border", { height: 0 }, { height: 470, duration: 0.6, ease: "expo.out" }, 4.7);
+      tl.fromTo("#hook-border-label", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5, ease: "expo.out" }, 5.0);
+      tl.fromTo(st, { flat: 0 }, { flat: 1, duration: 1.1, ease: "power2.inOut" }, 5.3);
+      wordsIn("#hook-l3", 5.8);
+
+      tl.fromTo("#hook-cam", { scale: 1 }, { scale: 1.35, transformOrigin: "1300px 640px", duration: 0.5, ease: "power3.in" }, 8.5);
+      window.__timelines["hook"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,155 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #12302e;
+      font-family: "Inter", sans-serif;
+      color: #eee6d3;
+    }
+    #terrain-guil {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+    }
+    #terrain-stage {
+      position: absolute;
+      inset: 0;
+      perspective: 1800px;
+    }
+    #terrain-frame {
+      position: absolute;
+      left: 640px;
+      top: 120px;
+      width: 1180px;
+      height: 664px;
+      background: #eee6d3;
+      padding: 14px;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
+      transform-style: preserve-3d;
+    }
+    #terrain-screen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #0d2422;
+      overflow: hidden;
+    }
+    #terrain-ph {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      color: #eee6d3;
+      font-size: 38px;
+      font-weight: 700;
+      text-align: center;
+    }
+    #terrain-ph small {
+      font-size: 26px;
+      font-weight: 400;
+      opacity: 0.75;
+    }
+    #terrain-card {
+      position: absolute;
+      left: 110px;
+      top: 250px;
+      width: 470px;
+      padding: 40px 40px 44px;
+      background: #eee6d3;
+      color: #12302e;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+    }
+    #terrain-card .k {
+      font-weight: 700;
+      font-size: 30px;
+      color: #c8102e;
+    }
+    #terrain-card .n {
+      font-family: "Archivo Black", sans-serif;
+      font-size: 50px;
+      line-height: 1.05;
+      margin-top: 22px;
+      letter-spacing: -0.01em;
+    }
+    #terrain-card .r {
+      font-size: 32px;
+      margin-top: 14px;
+    }
+    #terrain-card .d {
+      font-size: 28px;
+      margin-top: 30px;
+      padding-top: 22px;
+      border-top: 3px solid #12302e;
+    }
+    .terrain-cap {
+      position: absolute;
+      left: 0;
+      width: 1920px;
+      top: 860px;
+      padding: 0 160px;
+      text-align: center;
+      font-size: 46px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: #eee6d3;
+    }
+    .terrain-cap .hl {
+      color: #ff8a8a;
+    }
+  </style>
+  <div id="root" data-composition-id="terrain" data-width="1920" data-height="1080">
+    <svg id="terrain-guil" viewBox="0 0 1920 1080"></svg>
+    <div id="terrain-stage">
+      <div id="terrain-frame">
+        <div id="terrain-screen">
+          <div id="terrain-ph">Témoignage de Mohamed Karim Dahmouni<small>emplacement de la vidéo (fichier à intégrer)</small></div>
+        </div>
+      </div>
+      <div id="terrain-card">
+        <div class="k">Sur le terrain</div>
+        <div class="n">Mohamed Karim Dahmouni</div>
+        <div class="r">cinéaste tunisien</div>
+        <div class="d">Entretien du 14 novembre 2026</div>
+      </div>
+    </div>
+    <div id="terrain-cap1" class="clip terrain-cap" data-start="1.5" data-duration="6.5">« Un film incompris reste invisible. »</div>
+    <div id="terrain-cap2" class="clip terrain-cap" data-start="8.2" data-duration="5.6">« Les sous-titres aident un peu… »</div>
+    <div id="terrain-cap3" class="clip terrain-cap" data-start="14" data-duration="7.8">« …le doublage fait <span class="hl">voyager</span> un film. »</div>
+  </div>
+  <script>
+    (function () {
+      const g = document.getElementById("terrain-guil");
+      let d = "";
+      for (let k = 0; k < 22; k++) {
+        const R = 300 + k * 38;
+        let p = "";
+        for (let i = 0; i <= 360; i++) {
+          const th = (i / 360) * Math.PI * 2;
+          const r = R + 18 * Math.sin(7 * th + k * 0.6);
+          p += (i ? "L" : "M") + (300 + r * Math.cos(th)).toFixed(1) + " " + (900 + r * Math.sin(th) * 0.8).toFixed(1);
+        }
+        d += p;
+      }
+      g.innerHTML = '<path d="' + d + '" fill="none" stroke="#eee6d3" stroke-opacity="0.06" stroke-width="1.4"/>';
+
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#terrain-frame", { rotationY: -28, rotationX: 6, z: -400, opacity: 0 }, { rotationY: -9, rotationX: 2, z: 0, opacity: 1, duration: 1.2, ease: "expo.out" }, 0);
+      tl.to("#terrain-frame", { rotationY: -4, rotationX: 1, duration: 20, ease: "none" }, 1.2);
+      tl.fromTo("#terrain-card", { rotationY: 60, x: -120, opacity: 0 }, { rotationY: 12, x: 0, opacity: 1, duration: 1.0, ease: "expo.out" }, 0.45);
+      ["#terrain-cap1", "#terrain-cap2", "#terrain-cap3"].forEach((s, i) => {
+        const st = [1.5, 8.2, 14][i];
+        const du = [6.5, 5.6, 7.8][i];
+        tl.fromTo(s, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, st);
+        tl.to(s, { opacity: 0, duration: 0.15, ease: "power2.in" }, st + du - 0.2);
+      });
+      tl.to("#terrain-stage", { scale: 1.15, opacity: 0, transformOrigin: "1230px 450px", duration: 0.4, ease: "power3.in" }, 21.6);
+      window.__timelines["terrain"] = tl;
+    })();
+  </script>
+</template>

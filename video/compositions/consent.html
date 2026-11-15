@@ -1,0 +1,299 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #eee6d3;
+      font-family: "Inter", sans-serif;
+      color: #12302e;
+    }
+    #cs-pp {
+      position: absolute;
+      inset: 0;
+      perspective: 1800px;
+    }
+    #cs-card {
+      position: absolute;
+      left: 150px;
+      top: 190px;
+      width: 760px;
+      height: 700px;
+      background: #e4d9c1;
+      box-shadow: 0 34px 70px rgba(18, 48, 46, 0.3);
+      backface-visibility: hidden;
+    }
+    #cs-card .hd {
+      background: #12302e;
+      color: #eee6d3;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 48px;
+      letter-spacing: 0.02em;
+      padding: 34px 44px;
+    }
+    #cs-card .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 44px;
+      border-bottom: 2px solid rgba(18, 48, 46, 0.25);
+      font-size: 30px;
+    }
+    #cs-card .row b {
+      font-weight: 700;
+    }
+    #cs-card .sig {
+      position: absolute;
+      right: 44px;
+      bottom: 30px;
+      font-weight: 700;
+      font-size: 28px;
+      color: #c8102e;
+    }
+    #cs-ttl {
+      position: absolute;
+      left: 1010px;
+      top: 330px;
+      width: 790px;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 88px;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+    #cs-sub {
+      position: absolute;
+      left: 1010px;
+      top: 590px;
+      width: 760px;
+      font-size: 38px;
+      line-height: 1.35;
+    }
+    /* product world */
+    #cs-ui {
+      position: absolute;
+      inset: 0;
+      background: #0f1330;
+      color: #e6e8f2;
+      padding: 100px 200px;
+    }
+    #cs-ui h2 {
+      font-size: 64px;
+      font-weight: 700;
+    }
+    #cs-ui .sub {
+      font-size: 30px;
+      color: #9aa3b8;
+      margin-top: 12px;
+    }
+    .cs-grid {
+      display: flex;
+      gap: 40px;
+      margin-top: 50px;
+    }
+    .cs-f {
+      flex: 1;
+    }
+    .cs-f .l {
+      font-size: 30px;
+    }
+    .cs-f .v {
+      position: relative;
+      margin-top: 12px;
+      height: 82px;
+      background: #1a1f45;
+      border-radius: 10px;
+      font-size: 36px;
+      padding: 20px 26px;
+    }
+    .cs-vv {
+      position: absolute;
+      left: 26px;
+      top: 20px;
+    }
+    .cs-panel {
+      color: #e6e8f2;
+      position: absolute;
+      left: 200px;
+      top: 470px;
+      width: 1150px;
+      border: 3px solid;
+      border-radius: 14px;
+      padding: 34px 40px;
+    }
+    .cs-panel.no {
+      border-color: #ff6b81;
+      background: #2a1630;
+    }
+    .cs-panel.ok {
+      border-color: #3ddc97;
+      background: #10283a;
+    }
+    .cs-panel .h {
+      font-size: 52px;
+      font-weight: 700;
+    }
+    .cs-panel.no .h {
+      color: #ff6b81;
+    }
+    .cs-panel.ok .h {
+      color: #3ddc97;
+    }
+    .cs-panel .b {
+      font-size: 38px;
+      margin-top: 20px;
+    }
+    .cs-panel .c {
+      font-size: 30px;
+      margin-top: 14px;
+      color: #9aa3b8;
+    }
+    .cs-panel code {
+      font-family: "JetBrains Mono", monospace;
+      color: #22b8cf;
+      font-size: 26px;
+    }
+    .cs-label {
+      position: absolute;
+      left: 200px;
+      top: 830px;
+      font-size: 34px;
+      font-weight: 700;
+      color: #e6e8f2;
+    }
+    .cs-stamp {
+      position: absolute;
+      left: 1400px;
+      top: 520px;
+      width: 360px;
+      padding: 16px 0;
+      text-align: center;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 60px;
+      border: 8px double;
+    }
+    .cs-stamp.no {
+      color: #ff6b81;
+      border-color: #ff6b81;
+    }
+    .cs-stamp.ok {
+      color: #3ddc97;
+      border-color: #3ddc97;
+    }
+    #cs-revoke {
+      position: absolute;
+      left: 200px;
+      top: 30px;
+      font-size: 32px;
+      font-weight: 700;
+      color: #0f1330;
+      background: #eee6d3;
+      padding: 12px 22px;
+    }
+    #cs-end {
+      position: absolute;
+      inset: 0;
+      background: #eee6d3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 116px;
+      letter-spacing: -0.02em;
+      color: #12302e;
+    }
+    #cs-end .w {
+      display: inline-block;
+      margin: 0 0.12em;
+    }
+    #cs-end .red {
+      color: #c8102e;
+    }
+  </style>
+  <div id="root" data-composition-id="consent" data-width="1920" data-height="1080">
+    <div id="cs-pp">
+      <div id="cs-card">
+        <div class="hd">PASSEPORT DE VOIX</div>
+        <div class="row"><span>Titulaire</span><b>Amine (démo)</b></div>
+        <div class="row"><span>Usage autorisé</span><b>doublage_film</b></div>
+        <div class="row"><span>Projet</span><b>film_karim_court_metrage_01</b></div>
+        <div class="row"><span>Langue</span><b>fr</b></div>
+        <div class="row"><span>Licence</span><b>VL-2026-0001</b></div>
+        <div class="sig">Signé · Ed25519</div>
+      </div>
+      <div id="cs-ttl">Chaque voix a son passeport.</div>
+      <div id="cs-sub">Le titulaire fixe les usages, les projets et la durée. Il peut révoquer à tout moment.</div>
+    </div>
+
+    <div id="cs-ui" class="clip" data-start="4.2" data-duration="11">
+      <h2>Demande de génération</h2>
+      <div class="sub">Moteur de règles : autorisation vérifiée avant toute génération. Refus par défaut.</div>
+      <div class="cs-grid">
+        <div class="cs-f">
+          <div class="l">Voix</div>
+          <div class="v">
+            <span class="cs-vv" id="cs-v1">voice_inconnue (non enregistrée)</span>
+            <span class="cs-vv" id="cs-v2">voice_amine</span>
+          </div>
+        </div>
+        <div class="cs-f">
+          <div class="l">Projet</div>
+          <div class="v">film_karim_court_metrage_01</div>
+        </div>
+      </div>
+    </div>
+    <div id="cs-revoke" class="clip" data-start="11.4" data-duration="3.8">Amine révoque sa licence</div>
+
+    <div id="cs-p1" class="clip cs-panel no" data-start="5.0" data-duration="2.9">
+      <div class="h">ⓧ Génération refusée</div>
+      <div class="b">Voix non enregistrée : aucun Passeport de voix, consentement absent.</div>
+      <div class="c">Code <code>VOIX_NON_ENREGISTREE</code> · aucun audio produit · refus journalisé</div>
+    </div>
+    <div id="cs-s1" class="clip cs-stamp no" data-start="5.5" data-duration="2.4">REFUSÉ</div>
+
+    <div id="cs-p2" class="clip cs-panel ok" data-start="8.4" data-duration="3.0">
+      <div class="h">✓ Génération autorisée</div>
+      <div class="b">Génération autorisée : licence valide et consentement vérifié.</div>
+      <div class="c">Licence VL-2026-0001 · décision journalisée</div>
+    </div>
+    <div id="cs-s2" class="clip cs-stamp ok" data-start="8.9" data-duration="2.5">ACCORDÉ</div>
+    <div id="cs-l2" class="clip cs-label" data-start="9.4" data-duration="2.0">Label visible : « Voix générée par IA · consentie · validée par Adaptateur (démo) »</div>
+
+    <div id="cs-p3" class="clip cs-panel no" data-start="12.1" data-duration="3.1">
+      <div class="h">ⓧ Génération refusée</div>
+      <div class="b">Licence révoquée par le titulaire : génération refusée.</div>
+      <div class="c">Code <code>LICENCE_REVOQUEE</code> · aucun audio produit · refus journalisé</div>
+    </div>
+    <div id="cs-s3" class="clip cs-stamp no" data-start="12.6" data-duration="2.6">RÉVOQUÉ</div>
+
+    <div id="cs-end" class="clip" data-start="15.2" data-duration="3.8"><div id="cs-endtxt"><span class="w">Sans</span><span class="w">consentement,</span><br /><span class="w red">rien</span><span class="w">n’est</span><span class="w">généré.</span></div></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#cs-card", { rotationY: -100, x: -200, opacity: 0 }, { rotationY: 10, x: 0, opacity: 1, duration: 1.1, ease: "expo.out" }, 0.1);
+      tl.fromTo("#cs-ttl", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power2.out" }, 0.8);
+      tl.fromTo("#cs-sub", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, 1.3);
+      tl.to("#cs-pp", { x: -300, opacity: 0, duration: 0.35, ease: "power3.in" }, 3.9);
+
+      tl.fromTo("#cs-ui", { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" }, 4.2);
+      tl.fromTo("#cs-v1", { opacity: 1 }, { opacity: 0, duration: 0.2 }, 7.9);
+      tl.fromTo("#cs-v2", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 8.0);
+      tl.fromTo("#cs-revoke", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, 11.4);
+
+      [["#cs-p1", 5.0, 7.9], ["#cs-p2", 8.4, 11.4], ["#cs-p3", 12.1, 15.2]].forEach(([s, a, b]) => {
+        tl.fromTo(s, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: "expo.out" }, a);
+        tl.to(s, { opacity: 0, duration: 0.18, ease: "power2.in" }, b - 0.2);
+      });
+      [["#cs-s1", 5.5, 7.9], ["#cs-s2", 8.9, 11.4], ["#cs-s3", 12.6, 15.2]].forEach(([s, a, b]) => {
+        tl.fromTo(s, { scale: 1.7, rotation: -16, opacity: 0 }, { scale: 1, rotation: -8, opacity: 1, duration: 0.18, ease: "power4.out" }, a);
+        tl.to(s, { opacity: 0, duration: 0.15 }, b - 0.2);
+      });
+      tl.fromTo("#cs-l2", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 9.4);
+      tl.to("#cs-l2", { opacity: 0, duration: 0.15 }, 11.2);
+
+      tl.fromTo("#cs-end", { clipPath: "inset(0 0 0 100%)" }, { clipPath: "inset(0 0 0 0%)", duration: 0.5, ease: "power2.inOut" }, 15.2);
+      tl.fromTo("#cs-endtxt .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, stagger: 0.1, ease: "power2.out" }, 15.6);
+      window.__timelines["consent"] = tl;
+    })();
+  </script>
+</template>
