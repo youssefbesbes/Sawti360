@@ -4,7 +4,7 @@ Sawti 360 double un film de la derja vers le français, sous le contrôle du cin
 
 « L’IA propose · L’humain décide · La confiance accompagne chaque export. »
 
-Projet présenté au hackathon IA Éthique 360, 5e édition (JEI INSAT × OIF). Premier dépôt : 15 novembre 2026.
+Projet de l'équipe Houma Skhouna, présenté au hackathon IA Éthique 360, 5e édition, organisé par la Junior Entreprise INSAT (JEI, mandat 2026/2027) avec l'OIF. Premier dépôt : 15 novembre 2026.
 
 ![Voix non enregistrée : génération refusée](docs/captures/03_refus.png)
 
