@@ -1,4 +1,4 @@
-# Voix off — Sawti 360 (vidéo de 1 min 58)
+# Voix off — Sawti 360 (vidéo de 1 min 59)
 
 Une voix humaine, la vôtre : c'est cohérent avec le projet (aucune voix générée sans consentement).
 Rythme calme, environ 2,3 mots par seconde. Rien pendant le témoignage (0:07 → 0:31).
@@ -7,13 +7,14 @@ Rythme calme, environ 2,3 mots par seconde. Rien pendant le témoignage (0:07 �
 |---|---|---|---|
 | A | Ouverture | 0:00.5 → 0:06.5 | Une créatrice tunisienne parle en derja. De l'autre côté, un public francophone… qui ne comprend pas. |
 | — | Témoignage | 0:07 → 0:31 | *(Mohamed Karim Dahmouni, ne rien dire)* |
-| B | Trois portes | 0:31.5 → 0:41.5 | Pour faire voyager une œuvre, il y a le studio : trop cher. Les sous-titres : on lit, on ne ressent pas. Et l'IA générique : à qui appartient la voix ? |
-| C | Créateurs | 0:42.3 → 0:50.5 | Films, YouTube, Shorts, podcasts : c'est le même problème. Et la même solution : la même voix, dans une nouvelle langue. |
-| D | Globe | 0:51.3 → 1:00.5 | En derja, une vidéo reste en Tunisie. En français, elle rejoint tout l'espace francophone. Et demain, bien plus loin. |
-| E | Solution | 1:01.2 → 1:20.5 | Voici Sawti 360, le doublage de confiance. Suivons une réplique. L'IA transcrit, puis traduit. Elle repère une erreur : quinze heures, devenu cinquante. Le créateur corrige. Et la voix française est générée, avec son label. |
-| F | Guichet | 1:21.3 → 1:36.5 | Avant chaque génération, Sawti contrôle le passeport de la voix. Pas de passeport : rien. Passeport valide : la voix passe. Licence révoquée : refusé. |
-| G | Livret | 1:37.3 → 1:48.5 | Chaque export porte un Passeport 360° : créateurs, droits, données, langues, transparence, planète. Et chacun peut le vérifier. |
-| H | Fin | 1:49.3 → 1:57.5 | Avec son passeport, la voix passe. Sawti 360 : l'IA propose, l'humain décide. |
+| B | Problème | 0:31.5 → 0:41.5 | Nous l'avons entendu sur le terrain. Le studio coûte trop cher, et l'IA générique ne dit pas à qui appartient la voix. |
+| C | Créateurs | 0:42.3 → 0:49.5 | Et ce n'est pas que le cinéma : vidéastes, Shorts, podcasts, vidéos générées par IA. |
+| D | Globe | 0:50.3 → 0:59.5 | En derja, une vidéo reste en Tunisie. En français, elle rejoint l'espace francophone. Et demain, bien plus loin. |
+| E | Solution | 1:00.3 → 1:16.5 | Voici Sawti 360. Suivons une réplique : l'IA transcrit, puis traduit. Elle repère une erreur, quinze heures devenu cinquante. Le créateur corrige, et la voix française est générée. |
+| F | Consentement | 1:17.3 → 1:35.5 | Chaque voix a son passeport, fixé par son titulaire. Voix inconnue : refus. Voix consentie : accord, avec un label visible. Licence révoquée : refus. Pas d'accord, pas de voix. |
+| G | Passeport 360° | 1:36.3 → 1:43.5 | À l'export, un Passeport 360° signé, que chacun peut vérifier. |
+| H | Éthique | 1:44.3 → 1:50.5 | Six angles éthiques, mesurés. Et nos limites, écrites. |
+| I | Fin | 1:51.3 → 1:58.5 | Avec son passeport, la voix voyage. Sawti 360 : l'IA propose, l'humain décide. |
 
 ## Enregistrer (10 minutes)
 
