@@ -103,6 +103,6 @@ Avec son passeport… la voix voyage.
 Saouti trois-cent-soixante : <break time="0.3s" /> l'I.A. propose, l'humain décide.
 ```
 
-## Step 4. Send the 16 files back
+## Step 4. Send the 15 files back
 
 Drop them in the Claude chat (or attach them to the GitHub release `media-v1`). They'll be placed in the video at the right second.

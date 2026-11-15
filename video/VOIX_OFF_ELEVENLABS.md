@@ -40,7 +40,7 @@ Keep the voice that says **"Saouti"** and **"I.A."** most naturally and sounds t
 
 | Setting | Value | Why |
 |---|---|---|
-| Model | Eleven Multilingual v2 | consistency across 16 clips |
+| Model | Eleven Multilingual v2 | consistency across 15 clips |
 | Stability | **55 %** | lower = more emotion but more random; higher = flat |
 | Similarity | **75 %** | close to the chosen voice without artefacts |
 | Style exaggeration | **10 %** | a little warmth; higher becomes theatrical |
@@ -70,7 +70,7 @@ If the voice still mispronounces "Saouti", try `Sa-outi` or `Saoutî` and keep t
 
 ---
 
-## 4. The clips to generate (16 short files)
+## 4. The clips to generate (15 short files)
 
 Generate **one clip per row**. Each has a hard **max length**: the clip must end before the next picture. After generating, check the length shown in the player. If it's too long, regenerate at speed 1.05–1.10; if it's still too long, use the shorter "plan B" text.
 
@@ -112,7 +112,7 @@ If a clip sounds wrong, it is usually the punctuation. Add a comma or `…` wher
 
 ## 5. Check before sending (2 min)
 
-- [ ] Same voice, same model, same settings for all 16 clips
+- [ ] Same voice, same model, same settings for all 15 clips
 - [ ] Every clip is **shorter** than its max length
 - [ ] "Saouti", "I.A." and "derja" sound right in every clip
 - [ ] No breath, click or artefact at the start or end (regenerate if so)
@@ -123,7 +123,7 @@ If a clip sounds wrong, it is usually the punctuation. Add a comma or `…` wher
 
 ## 6. Send them back
 
-- **Easiest:** drop all 16 files into the Claude Code chat.
+- **Easiest:** drop all 15 files into the Claude Code chat.
 - **Or:** GitHub → Releases → `media-v1` → Edit → drag the files into "Attach binaries" → Update release.
 
 Each clip is then placed at its start time, levelled to −16 LUFS, the sound effects lowered under the voice, the credit line added on the end card ("Voix off : synthèse vocale ElevenLabs, voix [nom], licence [plan]"), and the video re-rendered (~15 min).

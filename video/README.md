@@ -21,7 +21,7 @@ Vidéo de 1 min 59, 1920×1080, 30 i/s, en français, faite avec [HyperFrames](h
 
 ## Voix off
 
-- `ELEVENLABS_A_COLLER.md` : ce qu'on colle dans ElevenLabs (prompt de voix, réglages, 16 textes minutés).
+- `ELEVENLABS_A_COLLER.md` : ce qu'on colle dans ElevenLabs (prompt de voix, réglages, 15 textes minutés).
 - `VOIX_OFF_ELEVENLABS.md` : le guide complet (choix de voix, prononciation, plan, éthique, envoi des fichiers).
 
 ## Rendre la vidéo
