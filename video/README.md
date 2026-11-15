@@ -5,7 +5,7 @@ Vidéo de 1 min 58, 1920×1080, en français, faite avec [HyperFrames](https://g
 - `index.html` : la timeline (10 scènes + effets sonores).
 - `compositions/` : une scène par fichier.
 - `lib/globe.js` : le globe 3D en points (données Natural Earth via `world-atlas`).
-- `SPEC.md`, `STORYLINES.md` : intentions de réalisation. `VOIX_OFF.md` : texte et timing de la voix off.
+- `SPEC.md`, `STORYLINES.md` : intentions de réalisation. `VOIX_OFF_ELEVENLABS.md` : guide complet de la voix off (ElevenLabs), texte et timing clip par clip.
 - Effets sonores : bibliothèque HyperFrames (licence Pixabay, voir `assets/audio/CREDITS.md`).
 
 Le témoignage n'est pas versionné (droit à l'image en attente d'accord écrit). Pour rendre la vidéo :

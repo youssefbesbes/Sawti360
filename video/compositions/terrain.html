@@ -21,10 +21,10 @@
     }
     #terrain-frame {
       position: absolute;
-      left: 580px;
-      top: 70px;
-      width: 1250px;
-      height: 703px;
+      left: 560px;
+      top: 165px;
+      width: 1290px;
+      height: 726px;
       background: #eee6d3;
       padding: 14px;
       box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
@@ -65,8 +65,8 @@
     }
     #terrain-card {
       position: absolute;
-      left: 90px;
-      top: 200px;
+      left: 80px;
+      top: 300px;
       width: 450px;
       padding: 40px 40px 44px;
       background: #eee6d3;
@@ -95,22 +95,6 @@
       padding-top: 22px;
       border-top: 3px solid #12302e;
     }
-    .terrain-cap {
-      position: absolute;
-      left: 0;
-      width: 1920px;
-      top: 838px;
-      padding: 0 120px;
-      text-align: center;
-      font-family: "Archivo Black", sans-serif;
-      font-size: 58px;
-      letter-spacing: -0.01em;
-      line-height: 1.25;
-      color: #eee6d3;
-    }
-    .terrain-cap .hl {
-      color: #ff8a8a;
-    }
   </style>
   <div id="root" data-composition-id="terrain" data-width="1920" data-height="1080">
     <svg id="terrain-guil" viewBox="0 0 1920 1080"></svg>
@@ -128,9 +112,6 @@
         <div class="d">Entretien du 14 novembre 2026</div>
       </div>
     </div>
-    <div id="terrain-q1" class="clip terrain-cap" data-start="10.6" data-duration="3.4">« …reste <span class="hl">invisible</span>, même s’il est extraordinaire. »</div>
-    <div id="terrain-q2" class="clip terrain-cap" data-start="16.6" data-duration="3.0">« Ils s’arrêtent à la <span class="hl">barrière</span> de la langue. »</div>
-    <div id="terrain-q3" class="clip terrain-cap" data-start="21.4" data-duration="2.6">« Seul le doublage permet à un film de <span class="hl">voyager</span>. »</div>
   </div>
   <script>
     (function () {
@@ -152,10 +133,6 @@
       tl.fromTo("#terrain-frame", { rotationY: -28, rotationX: 6, z: -400, opacity: 0 }, { rotationY: -9, rotationX: 2, z: 0, opacity: 1, duration: 1.2, ease: "expo.out" }, 0);
       tl.to("#terrain-frame", { rotationY: -3, rotationX: 1, duration: 22.3, ease: "none" }, 1.2);
       tl.fromTo("#terrain-card", { rotationY: 60, x: -120, opacity: 0 }, { rotationY: 12, x: 0, opacity: 1, duration: 1.0, ease: "expo.out" }, 0.45);
-      [["#terrain-q1", 10.6, 14.0], ["#terrain-q2", 16.6, 19.6], ["#terrain-q3", 21.4, 24.0]].forEach(([q, a, b]) => {
-        tl.fromTo(q, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.22, ease: "power2.out" }, a);
-        if (b < 24) tl.to(q, { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power2.in" }, b - 0.2);
-      });
       tl.to("#terrain-stage", { scale: 1.15, opacity: 0, transformOrigin: "1230px 450px", duration: 0.4, ease: "power3.in" }, 23.6);
       window.__timelines["terrain"] = tl;
     })();
