@@ -1,0 +1,96 @@
+{
+  "langue": "fr",
+  "note": "Un fichier audio par clip, nommé <id>.wav (ou .mp3). Chaque clip doit durer moins que max_s. Texte déjà écrit pour la prononciation (Saouti = Sawti, I.A. = IA).",
+  "clips": [
+    {
+      "id": "A",
+      "debut_s": 0.4,
+      "max_s": 5.5,
+      "texte": "Elle parle en derja. En face, un public francophone… qui ne comprend pas."
+    },
+    {
+      "id": "B",
+      "debut_s": 31.4,
+      "max_s": 9.5,
+      "texte": "Nous l'avons entendu sur le terrain. Le studio de doublage coûte trop cher. Et l'I.A. générique ne dit pas à qui appartient la voix."
+    },
+    {
+      "id": "C",
+      "debut_s": 42.3,
+      "max_s": 6.8,
+      "texte": "Et ce n'est pas que le cinéma : YouTube, Shorts, podcasts, vidéos générées par I.A."
+    },
+    {
+      "id": "D",
+      "debut_s": 50.4,
+      "max_s": 9.0,
+      "texte": "En derja, une vidéo reste en Tunisie. En français, elle rejoint tout l'espace francophone. Et demain… bien plus loin."
+    },
+    {
+      "id": "E1",
+      "debut_s": 60.3,
+      "max_s": 2.3,
+      "texte": "Voici Saouti trois-cent-soixante."
+    },
+    {
+      "id": "E2",
+      "debut_s": 63.0,
+      "max_s": 13.0,
+      "texte": "Suivons une réplique. L'I.A. transcrit… puis traduit. Elle repère une erreur : quinze heures, devenu cinquante. Le créateur corrige. Et la voix française est générée."
+    },
+    {
+      "id": "F1",
+      "debut_s": 77.4,
+      "max_s": 3.0,
+      "texte": "Chaque voix a son passeport."
+    },
+    {
+      "id": "F2",
+      "debut_s": 82.7,
+      "max_s": 2.2,
+      "texte": "Voix inconnue : refusée."
+    },
+    {
+      "id": "F3",
+      "debut_s": 86.2,
+      "max_s": 1.8,
+      "texte": "Voix consentie : accordée."
+    },
+    {
+      "id": "F4",
+      "debut_s": 88.1,
+      "max_s": 3.3,
+      "texte": "Puis le titulaire révoque sa licence : refusée."
+    },
+    {
+      "id": "F5",
+      "debut_s": 92.5,
+      "max_s": 3.0,
+      "texte": "Pas d'accord… pas de voix."
+    },
+    {
+      "id": "G",
+      "debut_s": 96.6,
+      "max_s": 7.0,
+      "texte": "À chaque export, un Passeport trois-cent-soixante signé… que chacun peut vérifier, sans avoir à nous croire."
+    },
+    {
+      "id": "H",
+      "debut_s": 104.4,
+      "max_s": 6.0,
+      "texte": "Six angles éthiques, tous mesurés. Et nos limites… écrites."
+    },
+    {
+      "id": "I1",
+      "debut_s": 111.4,
+      "max_s": 3.0,
+      "texte": "Avec son passeport… la voix voyage."
+    },
+    {
+      "id": "I2",
+      "debut_s": 115.3,
+      "max_s": 3.5,
+      "texte": "Saouti trois-cent-soixante : l'I.A. propose, l'humain décide."
+    }
+  ]
+}

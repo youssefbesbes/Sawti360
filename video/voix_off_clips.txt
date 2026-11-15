@@ -1,0 +1,15 @@
+A	Elle parle en derja. En face, un public francophone… qui ne comprend pas.
+B	Nous l'avons entendu sur le terrain. Le studio de doublage coûte trop cher. Et l'I.A. générique ne dit pas à qui appartient la voix.
+C	Et ce n'est pas que le cinéma : YouTube, Shorts, podcasts, vidéos générées par I.A.
+D	En derja, une vidéo reste en Tunisie. En français, elle rejoint tout l'espace francophone. Et demain… bien plus loin.
+E1	Voici Saouti trois-cent-soixante.
+E2	Suivons une réplique. L'I.A. transcrit… puis traduit. Elle repère une erreur : quinze heures, devenu cinquante. Le créateur corrige. Et la voix française est générée.
+F1	Chaque voix a son passeport.
+F2	Voix inconnue : refusée.
+F3	Voix consentie : accordée.
+F4	Puis le titulaire révoque sa licence : refusée.
+F5	Pas d'accord… pas de voix.
+G	À chaque export, un Passeport trois-cent-soixante signé… que chacun peut vérifier, sans avoir à nous croire.
+H	Six angles éthiques, tous mesurés. Et nos limites… écrites.
+I1	Avec son passeport… la voix voyage.
+I2	Saouti trois-cent-soixante : l'I.A. propose, l'humain décide.
