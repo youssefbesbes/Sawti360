@@ -89,50 +89,77 @@
       font-weight: 700;
       font-size: 30px;
     }
-    /* product world */
-    #pc-ui {
+    /* real console, in a window on the desk */
+    #pc-fid {
       position: absolute;
       inset: 0;
-      background: #0e1117;
-      color: #e6e8f2;
-      font-family: "Inter", sans-serif;
-      padding: 120px 200px;
+      background: #eee6d3;
     }
-    #pc-ui h2 {
+    #pc-fid-h {
+      position: absolute;
+      left: 286px;
+      top: 80px;
+      font-family: "Archivo Black", sans-serif;
       font-size: 64px;
+      letter-spacing: -0.02em;
+    }
+    #pc-fid-s {
+      position: absolute;
+      left: 286px;
+      top: 168px;
+      font-size: 36px;
       font-weight: 700;
     }
-    #pc-ui .sub {
-      font-size: 34px;
-      color: #9aa3b8;
-      margin-top: 14px;
+    #pc-fid-s .red {
+      color: #c8102e;
     }
-    #pc-ui .lab {
-      font-size: 34px;
-      margin-top: 44px;
-      color: #e6e8f2;
+    #pc-win {
+      position: absolute;
+      left: 286px;
+      top: 250px;
+      width: 1348px;
+      height: 752px;
+      background: #070b24;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(18, 48, 46, 0.35), 0 0 0 2px rgba(18, 48, 46, 0.25);
     }
-    #pc-ui .fld {
-      margin-top: 14px;
-      background: #1a1d2e;
-      border: 2px solid #2a2f45;
-      border-radius: 10px;
-      padding: 22px 28px;
-      font-size: 40px;
+    #pc-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1348px;
+      height: 52px;
+      background: #d9cdb2;
+      color: #12302e;
+      font-size: 22px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      padding-left: 24px;
     }
-    #pc-ui .num {
-      display: inline-block;
-      outline: 5px solid transparent;
-      outline-offset: 4px;
-      border-radius: 6px;
+    #pc-shot {
+      position: absolute;
+      left: 0;
+      top: 52px;
+      width: 1348px;
+      height: 700px;
     }
-    #pc-alert {
-      margin-top: 44px;
-      background: #3e2327;
-      border-radius: 10px;
-      padding: 26px 30px;
-      color: #ff6b81;
-      font-size: 42px;
+    #pc-cover {
+      position: absolute;
+      left: 0;
+      top: 640px;
+      width: 1348px;
+      height: 112px;
+      background: #070b24;
+    }
+    #pc-ink {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: visible;
     }
     #pc-out {
       position: absolute;
@@ -174,14 +201,18 @@
       </div>
     </div>
 
-    <div id="pc-ui" class="clip" data-start="9.6" data-duration="3.6">
-      <h2>Vérification de fidélité</h2>
-      <div class="sub">Porte « Robustesse » : erreurs signalées</div>
-      <div class="lab">Source</div>
-      <div class="fld">Nlaqawk fil café, rendez-vous à <span class="num" id="pc-n1">15</span> h.</div>
-      <div class="lab">Traduction</div>
-      <div class="fld">On se retrouve au café à <span class="num" id="pc-n2">50</span> h.</div>
-      <div id="pc-alert">Chiffres différents : source ['15'] → traduction ['50']</div>
+    <div id="pc-fid" class="clip" data-start="9.6" data-duration="3.6">
+      <div id="pc-fid-h">6 · Vérification de fidélité</div>
+      <div id="pc-fid-s">L’IA signale l’écart. <span class="red">L’humain tranche.</span></div>
+      <div id="pc-win">
+        <div id="pc-bar">Console Sawti 360 · Parcours de doublage</div>
+        <img id="pc-shot" src="assets/img/c_fidelite.png" alt="Console : vérification de fidélité" />
+        <div id="pc-cover"></div>
+      </div>
+      <svg id="pc-ink" viewBox="0 0 1920 1080">
+        <ellipse id="pc-c1" cx="713" cy="692" rx="46" ry="34" fill="none" stroke="#c8102e" stroke-width="6" transform="rotate(-6 713 692)" />
+        <ellipse id="pc-c2" cx="659" cy="839" rx="46" ry="34" fill="none" stroke="#c8102e" stroke-width="6" transform="rotate(5 659 839)" />
+      </svg>
     </div>
 
     <div id="pc-out" class="clip" data-start="13.1" data-duration="2.9"><div id="pc-outtxt"><span class="w">L’IA</span><span class="w">propose.</span><span class="w">L’humain</span><span class="w red">décide.</span></div></div>
@@ -210,14 +241,17 @@
       for (let i = 1; i < hops.length; i++) {
         tl.to("#pc-track", { x: hops[i], duration: 1.0, ease: "power2.inOut" }, at[i] - 1.0);
       }
-      // product world: fidelity alert
-      tl.fromTo("#pc-ui", { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" }, 9.6);
-      tl.fromTo("#pc-ui h2, #pc-ui .sub", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, stagger: 0.08 }, 9.7);
-      tl.fromTo("#pc-ui .lab, #pc-ui .fld", { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.35, stagger: 0.12, ease: "expo.out" }, 10.0);
-      tl.fromTo("#pc-alert", { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.3, ease: "expo.out" }, 11.0);
-      tl.fromTo(["#pc-n1", "#pc-n2"], { outlineColor: "rgba(255,107,129,0)" }, { outlineColor: "rgba(255,107,129,1)", duration: 0.25, stagger: 0.12 }, 11.2);
+      // real console: fidelity alert
+      tl.fromTo("#pc-fid", { clipPath: "inset(0 0 0 100%)" }, { clipPath: "inset(0 0 0 0%)", duration: 0.45, ease: "power2.inOut" }, 9.6);
+      tl.fromTo("#pc-win", { x: 300 }, { x: 0, duration: 0.6, ease: "expo.out" }, 9.6);
+      tl.fromTo(["#pc-fid-h", "#pc-fid-s"], { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, stagger: 0.25 }, 9.9);
+      tl.fromTo("#pc-cover", { clipPath: "inset(0% 0 0 0)" }, { clipPath: "inset(100% 0 0 0)", duration: 0.4, ease: "power2.inOut" }, 10.6);
+      ["#pc-c1", "#pc-c2"].forEach((c, i) => {
+        const L = 2 * Math.PI * 46;
+        tl.fromTo(c, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 0.35, ease: "power2.inOut" }, 11.1 + i * 0.35);
+      });
       tl.fromTo("#pc-out", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 0.5, ease: "power2.inOut" }, 13.1);
-      tl.fromTo("#pc-outtxt .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, stagger: 0.12, ease: "power2.out" }, 13.5);
+      tl.fromTo("#pc-outtxt .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, stagger: 0.12, ease: "power2.out" }, 13.2);
       window.__timelines["parcours"] = tl;
     })();
   </script>
