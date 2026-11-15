@@ -61,7 +61,7 @@ La vidéo de la première soumission (1 min 59, en français) est construite en 
 | 1:44 | Les six angles éthiques, 34/34 tests, 18/18 scénarios d'attaque |
 | 1:51 | La voix rejoint l'espace francophone ; L'IA propose · L'humain décide |
 
-Toutes les interfaces montrées sont des captures de la console. Le globe colore les pays où la langue est officielle ou d'usage courant ; il n'affiche aucun chiffre d'audience. La voix off se prépare avec [video/ELEVENLABS_A_COLLER.md](video/ELEVENLABS_A_COLLER.md) ; si elle est générée par IA, le générique le dira. Le témoignage n'est pas versionné tant que l'accord écrit n'est pas signé.
+Toutes les interfaces montrées sont des captures de la console. Le globe colore les pays où la langue est officielle ou d'usage courant ; il n'affiche aucun chiffre d'audience. La voix off est générée par IA en local (Kokoro, voix française `ff_siwis`) et le générique l'indique. Le témoignage n'est pas versionné tant que l'accord écrit n'est pas signé.
 
 ## Lancer la démo
 
@@ -228,7 +228,6 @@ La liste des modèles et des jeux de données, avec leur licence, est dans [docs
 - Les formulaires de consentement signés, dans `data/consents/`.
 - L'accord écrit de Mohamed Karim Dahmouni, et la vérification des prix et sélections cités dans la vidéo.
 - Les entretiens suivants, dont au moins un vidéaste ou podcasteur pour vérifier l'élargissement aux créateurs en ligne.
-- La voix off de la vidéo (texte et réglages : `video/ELEVENLABS_A_COLLER.md`).
 - Les prénoms dans le tableau de l'équipe, et la vraie liste de blocage.
 
 ## Propriété intellectuelle

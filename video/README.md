@@ -21,8 +21,11 @@ Vidéo de 1 min 59, 1920×1080, 30 i/s, en français, faite avec [HyperFrames](h
 
 ## Voix off
 
-- `ELEVENLABS_A_COLLER.md` : ce qu'on colle dans ElevenLabs (prompt de voix, réglages, 15 textes minutés).
-- `VOIX_OFF_ELEVENLABS.md` : le guide complet (choix de voix, prononciation, plan, éthique, envoi des fichiers).
+La voix off est générée en local avec **Kokoro-82M** (le moteur du projet `automated-vids`), voix française `ff_siwis`, sur CPU. Les 15 clips sont dans `assets/voix/` et placés par `index.html` (`vo-A` … `vo-I2`). Le texte, les temps de départ et les durées maximales sont dans `voix_off_clips.json` (la prononciation y est déjà corrigée : « Saouti », « IA » sans points). Chaque clip a été vérifié par transcription (Whisper) et ramené à −16 LUFS.
+
+Pour régénérer : `KPipeline(lang_code="f", repo_id="hexgrad/Kokoro-82M")`, voix `ff_siwis`, un fichier par clip, silences de début et de fin coupés.
+
+Autre option, plus expressive : ElevenLabs (`ELEVENLABS_A_COLLER.md`, `VOIX_OFF_ELEVENLABS.md`).
 
 ## Rendre la vidéo
 

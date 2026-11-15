@@ -38,6 +38,6 @@ Chaque angle du cahier des charges : **risque → notre réponse → limite rés
 ## La vidéo de présentation applique les mêmes règles
 
 - Le témoignage de Mohamed Karim Dahmouni n'est utilisé qu'avec son accord écrit d'image et de voix (`[à obtenir]` avant toute diffusion publique) ; le fichier n'est pas versionné dans le dépôt.
-- Si la voix off est générée par IA (ElevenLabs), elle utilise une voix sous licence ou la voix clonée d'un membre de l'équipe avec son accord écrit, et le générique l'indique.
+- La voix off est générée par IA en local (Kokoro, voix `ff_siwis` sous licence ouverte, aucune voix réelle clonée) et le générique l'indique : « Voix off générée par IA ».
 - Les écrans montrés sont des captures réelles de la console ; aucun chiffre d'audience n'est affiché sur le globe des langues.
 - Pour les vidéos générées par IA publiées par des créateurs en ligne, la règle est la même : une voix sans Passeport de voix n'est pas générée.

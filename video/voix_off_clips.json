@@ -1,6 +1,6 @@
 {
   "langue": "fr",
-  "note": "Un fichier audio par clip, nommé <id>.wav (ou .mp3). Chaque clip doit durer moins que max_s. Texte déjà écrit pour la prononciation (Saouti = Sawti, I.A. = IA).",
+  "note": "Un fichier audio par clip, nommé <id>.wav (ou .mp3). Chaque clip doit durer moins que max_s. Texte déjà écrit pour la prononciation (Saouti = Sawti, IA sans points = « i-a »).",
   "clips": [
     {
       "id": "A",
@@ -12,13 +12,13 @@
       "id": "B",
       "debut_s": 31.4,
       "max_s": 9.5,
-      "texte": "Nous l'avons entendu sur le terrain. Le studio de doublage coûte trop cher. Et l'I.A. générique ne dit pas à qui appartient la voix."
+      "texte": "Nous l'avons entendu sur le terrain. Le studio de doublage coûte trop cher. Et l'IA générique ne dit pas à qui appartient la voix."
     },
     {
       "id": "C",
       "debut_s": 42.3,
       "max_s": 6.8,
-      "texte": "Et ce n'est pas que le cinéma : YouTube, Shorts, podcasts, vidéos générées par I.A."
+      "texte": "Et ce n'est pas que le cinéma : YouTube, vidéos courtes, podcasts, vidéos générées par l'IA."
     },
     {
       "id": "D",
@@ -36,7 +36,7 @@
       "id": "E2",
       "debut_s": 63.0,
       "max_s": 13.0,
-      "texte": "Suivons une réplique. L'I.A. transcrit… puis traduit. Elle repère une erreur : quinze heures, devenu cinquante. Le créateur corrige. Et la voix française est générée."
+      "texte": "Suivons une réplique. L'IA transcrit… puis traduit. Elle repère une erreur : quinze heures, devenu cinquante. Le créateur corrige. Et la voix française est générée."
     },
     {
       "id": "F1",
@@ -66,7 +66,7 @@
       "id": "F5",
       "debut_s": 92.5,
       "max_s": 3.0,
-      "texte": "Pas d'accord… pas de voix."
+      "texte": "Pas d'accord. Pas de voix."
     },
     {
       "id": "G",
@@ -90,7 +90,7 @@
       "id": "I2",
       "debut_s": 115.3,
       "max_s": 3.5,
-      "texte": "Saouti trois-cent-soixante : l'I.A. propose, l'humain décide."
+      "texte": "Saouti trois-cent-soixante : l'IA propose, l'humain décide."
     }
   ]
 }

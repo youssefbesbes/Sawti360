@@ -44,6 +44,6 @@ Règle : la licence de chaque modèle et jeu de données est vérifiée **avant*
 | Effets sonores (whoosh, impacts, clics) | habillage sonore | licence Pixabay (sans attribution obligatoire) | `video/assets/audio/CREDITS.md` |
 | Captures de la console | preuves à l'écran | œuvre de l'équipe | `docs/captures/` |
 | Témoignage de M. K. Dahmouni | problème observé | **accord écrit d'image et de voix à obtenir** | non versionné ; release `media-v1` |
-| Voix off ElevenLabs (prévue) | narration | selon le plan ElevenLabs : la version gratuite est non commerciale et exige une attribution | voix de bibliothèque ou clone consenti d'un membre de l'équipe ; mention au générique |
+| Kokoro-82M (`hexgrad/Kokoro-82M`), voix française `ff_siwis` | voix off de la vidéo, générée en local (CPU) | modèle Apache-2.0 ; la voix `ff_siwis` vient du corpus SIWIS (CC BY 4.0, à vérifier) | moteur repris du projet `automated-vids` ; mention « voix off générée par IA » au générique ; fichiers dans `video/assets/voix/` |
 
 Aucun audio de personne réelle n’est versionné dans ce dépôt.
