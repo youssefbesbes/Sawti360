@@ -1,33 +1,32 @@
 # Voix off — Sawti 360 (vidéo de 1 min 58)
 
 Une voix humaine, la vôtre : c'est cohérent avec le projet (aucune voix générée sans consentement).
-Rythme calme, environ 2,3 mots par seconde. Rien pendant le témoignage (0:08 → 0:32).
+Rythme calme, environ 2,3 mots par seconde. Rien pendant le témoignage (0:07 → 0:31).
 
-| Bloc | Début → fin | Texte (à lire tel quel) |
-|---|---|---|
-| A | 0:00.3 → 0:07.6 | En Tunisie, nos créateurs racontent leurs histoires en derja. Mais hors de leur langue, leur voix s'arrête. |
-| — | 0:08 → 0:32 | *(témoignage de Mohamed Karim Dahmouni, ne rien dire)* |
-| B | 0:32.4 → 0:42.4 | Nous l'avons entendu sur le terrain. Le studio coûte trop cher, et l'IA générique ne dit pas à qui appartient la voix. |
-| C | 0:43.3 → 0:52.5 | Et ce n'est pas que le cinéma : vidéastes, Shorts, podcasts, vidéos générées par IA… Tous veulent être compris. |
-| D | 0:53.4 → 0:58.6 | Voici Sawti 360 : le doublage de confiance. |
-| E | 0:59.3 → 1:14.5 | Huit étapes, de l'import local à la voix. L'IA propose, le créateur valide. Ici, elle repère une erreur : quinze heures devenu cinquante. |
-| F | 1:15.3 → 1:33.5 | Chaque voix a son passeport, fixé par son titulaire. Voix inconnue : refus. Voix consentie : accord, avec un label visible. Licence révoquée : refus. Pas d'accord, pas de voix. |
-| G | 1:34.3 → 1:41.5 | À l'export, un Passeport 360° signé, que chacun peut vérifier. |
-| H | 1:42.3 → 1:49.5 | Six angles éthiques, mesurés. Et nos limites, écrites. |
-| I | 1:50.3 → 1:57.5 | Sawti 360 : votre voix, partout, avec son passeport. |
+| Bloc | Scène | Début → fin | Texte (à lire tel quel) |
+|---|---|---|---|
+| A | Ouverture | 0:00.5 → 0:06.5 | Une créatrice tunisienne parle en derja. De l'autre côté, un public francophone… qui ne comprend pas. |
+| — | Témoignage | 0:07 → 0:31 | *(Mohamed Karim Dahmouni, ne rien dire)* |
+| B | Trois portes | 0:31.5 → 0:41.5 | Pour faire voyager une œuvre, il y a le studio : trop cher. Les sous-titres : on lit, on ne ressent pas. Et l'IA générique : à qui appartient la voix ? |
+| C | Créateurs | 0:42.3 → 0:50.5 | Films, YouTube, Shorts, podcasts : c'est le même problème. Et la même solution : la même voix, dans une nouvelle langue. |
+| D | Globe | 0:51.3 → 1:00.5 | En derja, une vidéo reste en Tunisie. En français, elle rejoint tout l'espace francophone. Et demain, bien plus loin. |
+| E | Solution | 1:01.2 → 1:20.5 | Voici Sawti 360, le doublage de confiance. Suivons une réplique. L'IA transcrit, puis traduit. Elle repère une erreur : quinze heures, devenu cinquante. Le créateur corrige. Et la voix française est générée, avec son label. |
+| F | Guichet | 1:21.3 → 1:36.5 | Avant chaque génération, Sawti contrôle le passeport de la voix. Pas de passeport : rien. Passeport valide : la voix passe. Licence révoquée : refusé. |
+| G | Livret | 1:37.3 → 1:48.5 | Chaque export porte un Passeport 360° : créateurs, droits, données, langues, transparence, planète. Et chacun peut le vérifier. |
+| H | Fin | 1:49.3 → 1:57.5 | Avec son passeport, la voix passe. Sawti 360 : l'IA propose, l'humain décide. |
 
 ## Enregistrer (10 minutes)
 
 1. Pièce calme avec des tissus (chambre, placard à vêtements), pas de cuisine ni de salle de bain.
-2. Téléphone à 20–30 cm de la bouche, appli Dictaphone / Enregistreur, micro du bas vers vous.
+2. Téléphone à 20–30 cm de la bouche, appli Dictaphone / Enregistreur.
 3. Un fichier par bloc, nommé `A.m4a`, `B.m4a`… ou une seule prise avec 2 secondes de silence entre les blocs.
-4. Relisez chaque bloc chronomètre en main : s'il dépasse sa durée, coupez un mot plutôt que de parler plus vite.
+4. Chronométrez chaque bloc : s'il dépasse sa durée, coupez un mot plutôt que de parler plus vite.
 
 ## Intégrer
 
-- **Option 1 (on le fait pour vous)** : envoyez les fichiers dans la conversation, ou ajoutez-les à la release `media-v1` du dépôt (Modifier → déposer les fichiers). Chaque bloc est placé à son temps, le volume normalisé (−16 LUFS), les effets sonores baissés sous la voix.
-- **Option 2 (vous-même)** : CapCut ou Canva → importer `sawti360_final.mp4` → bouton micro « Voix off » → enregistrer chaque bloc à son temps → exporter en 1080p.
+- **Option 1 (on le fait pour vous)** : envoyez les fichiers dans la conversation, ou ajoutez-les à la release `media-v1` du dépôt. Chaque bloc est placé à son temps, le volume normalisé, les effets sonores baissés sous la voix.
+- **Option 2 (vous-même)** : CapCut ou Canva → importer la vidéo → « Voix off » → enregistrer chaque bloc à son temps → exporter en 1080p.
 
 ## Si vous utilisez une voix IA
 
-Seulement votre propre voix, clonée avec votre accord, et dites-le à l'écran (« voix off générée par IA à partir de la voix de … »). Sinon le jury pourra vous opposer votre propre règle.
+Seulement votre propre voix, clonée avec votre accord, et dites-le à l'écran. Sinon le jury pourra vous opposer votre propre règle.

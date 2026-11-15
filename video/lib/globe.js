@@ -25,7 +25,10 @@
   window.SawtiGlobe = function (canvas) {
     const ctx = canvas.getContext("2d");
     const W = canvas.width, H = canvas.height;
-    const dots = (window.__LAND_DOTS || []).map(([lo, la]) => toVec(lo, la));
+    const raw = window.__LAND_DOTS || [];
+    const dots = raw.map((d) => toVec(d[0], d[1]));
+    const masks = raw.map((d) => d[2] || 0);
+    const dist = raw.map((d) => (d[3] == null ? 1 : d[3]));
 
     function rotator(lon0, lat0) {
       const cl = Math.cos(-lon0 * D2R), sl = Math.sin(-lon0 * D2R);
@@ -93,13 +96,20 @@
         ctx.stroke();
       }
 
-      // land dots, sized and shaded by depth
+      // land dots, sized and shaded by depth; language layers light them up
+      const layers = s.layers || [];
       for (let i = 0; i < dots.length; i++) {
         const q = proj(dots[i]);
         if (q[2] < 1 / Dp + 0.01) continue;
         const z = q[2];
-        const sz = (1.4 + 2.3 * z) * (R / 480);
-        ctx.fillStyle = "rgba(" + INK + "," + (0.36 + 0.6 * z).toFixed(3) + ")";
+        let col = null, boost = 1;
+        for (let L = layers.length - 1; L >= 0; L--) {
+          const ly = layers[L];
+          if ((masks[i] & ly.mask) && dist[i] <= ly.t) { col = ly.color; boost = ly.size || 1.35; break; }
+        }
+        if (masks[i] & 1 && s.tunisiaBig) boost = Math.max(boost, 2.4);
+        const sz = (1.4 + 2.3 * z) * (R / 480) * boost;
+        ctx.fillStyle = col ? "rgba(" + col + "," + (0.55 + 0.45 * z).toFixed(3) + ")" : "rgba(" + INK + "," + ((0.36 + 0.6 * z) * (s.dim == null ? 1 : s.dim)).toFixed(3) + ")";
         ctx.fillRect(q[0] - sz / 2, q[1] - sz / 2, sz, sz);
       }
 

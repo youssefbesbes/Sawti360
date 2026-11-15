@@ -1,0 +1,258 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Noto Sans Arabic";
+      src: url("assets/fonts/NotoSansArabic-700.woff2") format("woff2");
+      font-weight: 700;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #eee6d3;
+      font-family: "Inter", sans-serif;
+      color: #12302e;
+    }
+    /* brand reveal */
+    #so-rv {
+      position: absolute;
+      inset: 0;
+    }
+    #so-stamp {
+      position: absolute;
+      left: 460px;
+      top: 280px;
+      width: 1000px;
+      height: 270px;
+      border: 14px double #12302e;
+      background: #eee6d3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 190px;
+      line-height: 1;
+    }
+    #so-stamp .red {
+      color: #c8102e;
+      margin-left: 0.25em;
+    }
+    #so-ar {
+      position: absolute;
+      left: 0;
+      width: 1920px;
+      top: 610px;
+      text-align: center;
+      font-size: 58px;
+      font-weight: 700;
+    }
+    #so-ar .ar {
+      font-family: "Noto Sans Arabic", sans-serif;
+      color: #c8102e;
+    }
+    #so-tag {
+      position: absolute;
+      left: 0;
+      width: 1920px;
+      top: 730px;
+      text-align: center;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 84px;
+      letter-spacing: -0.02em;
+    }
+    /* one line, end to end */
+    #so-flow {
+      position: absolute;
+      inset: 0;
+    }
+    #so-h {
+      position: absolute;
+      left: 120px;
+      top: 60px;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 64px;
+      letter-spacing: -0.02em;
+    }
+    .so-row {
+      position: absolute;
+      left: 120px;
+      width: 1680px;
+      height: 138px;
+      border-top: 3px solid rgba(18, 48, 46, 0.2);
+    }
+    .so-step {
+      position: absolute;
+      left: 0;
+      top: 18px;
+      width: 560px;
+    }
+    .so-step .n {
+      display: inline-block;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 40px;
+      color: #c8102e;
+      width: 50px;
+    }
+    .so-step .t {
+      display: inline-block;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 40px;
+    }
+    .so-role {
+      display: inline-block;
+      margin-top: 12px;
+      margin-left: 50px;
+      font-weight: 700;
+      font-size: 26px;
+    }
+    .so-ia {
+      background: #12302e;
+      color: #eee6d3;
+      padding: 6px 14px;
+    }
+    .so-hu {
+      border: 4px solid #c8102e;
+      color: #c8102e;
+      padding: 2px 12px;
+    }
+    .so-c {
+      position: absolute;
+      left: 600px;
+      top: 26px;
+      width: 1080px;
+      font-size: 44px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .so-type {
+      display: inline-block;
+    }
+    .so-num {
+      display: inline-block;
+      position: relative;
+    }
+    #so-alert {
+      display: inline-block;
+      background: #c8102e;
+      color: #eee6d3;
+      padding: 10px 22px;
+      font-size: 40px;
+    }
+    #so-ring {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: visible;
+    }
+    #so-ok {
+      color: #1e6b47;
+      margin-left: 22px;
+    }
+    #so-vw {
+      position: absolute;
+      left: 600px;
+      top: 6px;
+      width: 560px;
+      height: 120px;
+    }
+    #so-lab {
+      position: absolute;
+      left: 1190px;
+      top: 40px;
+      font-size: 28px;
+      font-weight: 700;
+      width: 520px;
+      white-space: normal;
+      line-height: 1.25;
+    }
+    #so-end {
+      position: absolute;
+      left: 0;
+      width: 1920px;
+      top: 950px;
+      text-align: center;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 64px;
+      letter-spacing: -0.02em;
+    }
+    #so-end .red {
+      color: #c8102e;
+    }
+  </style>
+  <div id="root" data-composition-id="solution" data-width="1920" data-height="1080">
+    <div id="so-rv" class="clip" data-start="0" data-duration="3.6">
+      <div id="so-stamp">SAWTI<span class="red">360</span></div>
+      <div id="so-ar"><span class="ar">صوتي</span> · « ma voix »</div>
+      <div id="so-tag">Le doublage de confiance</div>
+    </div>
+    <div id="so-flow" class="clip" data-start="3.6" data-duration="16.4">
+      <div id="so-h">Suivons une réplique.</div>
+      <div class="so-row" id="so-r1" style="top: 190px">
+        <div class="so-step"><span class="n">1</span><span class="t">Transcription</span><br /><span class="so-role so-ia">IA propose</span></div>
+        <div class="so-c"><span class="so-type" id="so-t1">« Nlaqawk fil café, rendez-vous à 15 h. »</span></div>
+      </div>
+      <div class="so-row" id="so-r2" style="top: 335px">
+        <div class="so-step"><span class="n">2</span><span class="t">Traduction</span><br /><span class="so-role so-ia">IA propose</span></div>
+        <div class="so-c"><span class="so-type" id="so-t2">« On se retrouve au café à <span class="so-num" id="so-50">50</span> h. »</span></div>
+      </div>
+      <div class="so-row" id="so-r3" style="top: 480px">
+        <div class="so-step"><span class="n">3</span><span class="t">Vérification</span><br /><span class="so-role so-ia">IA signale</span></div>
+        <div class="so-c"><span id="so-alert">Chiffres différents : 15 → 50</span></div>
+      </div>
+      <div class="so-row" id="so-r4" style="top: 625px">
+        <div class="so-step"><span class="n">4</span><span class="t">Validation</span><br /><span class="so-role so-hu">Le créateur décide</span></div>
+        <div class="so-c"><span class="so-type" id="so-t4">« On se retrouve au café à 15 h. »</span><span id="so-ok">✓ corrigé</span></div>
+      </div>
+      <div class="so-row" id="so-r5" style="top: 770px">
+        <div class="so-step"><span class="n">5</span><span class="t">Voix française</span><br /><span class="so-role so-ia">IA, si licence valide</span></div>
+        <svg id="so-vw" viewBox="0 0 560 120"><path id="so-vp" fill="none" stroke="#c8102e" stroke-width="6" stroke-linecap="round" /></svg>
+        <div class="so-c" id="so-lab">« Voix générée par IA · consentie · validée »</div>
+      </div>
+      <svg id="so-ring" viewBox="0 0 1920 1080"><ellipse id="so-e" cx="1314" cy="389" rx="52" ry="38" fill="none" stroke="#c8102e" stroke-width="6" transform="rotate(-5 1314 389)" /></svg>
+      <div id="so-end">L’IA propose. <span class="red">L’humain décide.</span></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const vp = document.getElementById("so-vp");
+      const st = { phase: 0, amp: 0 };
+      function draw() {
+        let p = "";
+        for (let x = 0; x <= 560; x += 4) {
+          const env = 0.55 + 0.45 * Math.sin(x * 0.02 + st.phase * 0.4);
+          const y = 60 + st.amp * env * (Math.sin(x * 0.09 + st.phase) * 0.62 + Math.sin(x * 0.03 - st.phase * 0.7) * 0.38);
+          p += (x ? "L" : "M") + x + " " + y.toFixed(1);
+        }
+        vp.setAttribute("d", p);
+      }
+      draw();
+      const tl = gsap.timeline({ paused: true });
+      // brand reveal
+      tl.fromTo("#so-stamp", { scale: 1.8, rotation: -12, opacity: 0 }, { scale: 1, rotation: -3, opacity: 1, duration: 0.2, ease: "power4.out" }, 0.3);
+      tl.fromTo("#so-ar", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3 }, 1.0);
+      tl.fromTo("#so-tag", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3 }, 1.6);
+      tl.to("#so-rv", { opacity: 0, y: -60, duration: 0.3, ease: "power3.in" }, 3.3);
+
+      // the flow
+      tl.fromTo("#so-h", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25 }, 3.7);
+      const rows = [["#so-r1", 4.2], ["#so-r2", 6.0], ["#so-r3", 7.9], ["#so-r4", 9.9], ["#so-r5", 12.4]];
+      rows.forEach(([r, a]) => tl.fromTo(r, { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.45, ease: "expo.out" }, a));
+      // typing: the text is revealed left to right
+      [["#so-t1", 4.5, 1.1], ["#so-t2", 6.3, 1.0], ["#so-t4", 10.6, 0.9]].forEach(([t, a, d]) => {
+        tl.fromTo(t, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: d, ease: "steps(30)" }, a);
+      });
+      tl.fromTo("#so-alert", { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2, ease: "power4.out" }, 8.3);
+      const L = Math.PI * 2 * 50;
+      tl.fromTo("#so-e", { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 0.4, ease: "power2.inOut" }, 8.6);
+      tl.fromTo("#so-ok", { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.3 }, 11.6);
+      tl.fromTo(st, { amp: 0 }, { amp: 42, duration: 0.5, ease: "expo.out", onUpdate: draw }, 12.8);
+      tl.fromTo(st, { phase: 0 }, { phase: 26, duration: 7, ease: "none", onUpdate: draw }, 12.8);
+      tl.fromTo("#so-lab", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 13.4);
+      tl.fromTo("#so-end", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3 }, 15.2);
+      tl.to("#so-flow", { x: -1920, duration: 0.45, ease: "power3.in" }, 19.55);
+      window.__timelines["solution"] = tl;
+    })();
+  </script>
+</template>

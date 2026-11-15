@@ -1,0 +1,195 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #eee6d3;
+      font-family: "Inter", sans-serif;
+      color: #12302e;
+    }
+    #lv-h {
+      position: absolute;
+      left: 120px;
+      top: 56px;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 68px;
+      letter-spacing: -0.02em;
+    }
+    #lv-h .red {
+      color: #c8102e;
+    }
+    #lv-view {
+      position: absolute;
+      inset: 0;
+      perspective: 2200px;
+      perspective-origin: 760px 500px;
+    }
+    #lv-book {
+      position: absolute;
+      left: 760px;
+      top: 210px;
+      width: 0;
+      height: 660px;
+      transform-style: preserve-3d;
+    }
+    .lv-page {
+      position: absolute;
+      top: 0;
+      width: 500px;
+      height: 660px;
+      background: #e4d9c1;
+      box-shadow: 0 30px 60px rgba(18, 48, 46, 0.25);
+    }
+    #lv-right {
+      left: 0;
+      border-left: 3px solid rgba(18, 48, 46, 0.3);
+    }
+    #lv-cover {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 500px;
+      height: 660px;
+      transform-origin: 0 50%;
+      transform-style: preserve-3d;
+    }
+    .lv-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+    }
+    #lv-front {
+      background: #12302e;
+      color: #e8c46a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 34px;
+      box-shadow: 0 30px 60px rgba(18, 48, 46, 0.35);
+    }
+    #lv-front .t1 {
+      font-family: "Archivo Black", sans-serif;
+      font-size: 54px;
+      letter-spacing: 0.04em;
+    }
+    #lv-front .em {
+      width: 210px;
+      height: 210px;
+      border: 7px double #e8c46a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 40px;
+      line-height: 1.05;
+    }
+    #lv-front .t2 {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    #lv-back {
+      background: #e4d9c1;
+      transform: rotateY(180deg);
+      border-right: 3px solid rgba(18, 48, 46, 0.3);
+    }
+    .lv-st {
+      position: absolute;
+      width: 300px;
+      height: 170px;
+      overflow: visible;
+    }
+    #lv-qr {
+      position: absolute;
+      left: 1360px;
+      top: 230px;
+      width: 440px;
+      padding: 30px;
+      background: #070b24;
+      border-radius: 16px;
+      box-shadow: 0 30px 60px rgba(18, 48, 46, 0.35);
+      color: #e6e8f2;
+      text-align: center;
+    }
+    #lv-qr img {
+      width: 300px;
+      height: 300px;
+      background: #fff;
+      border-radius: 10px;
+      image-rendering: pixelated;
+    }
+    #lv-qr .ok {
+      margin-top: 20px;
+      font-size: 44px;
+      font-weight: 700;
+      color: #3ddc97;
+    }
+    #lv-qr .ok2 {
+      margin-top: 8px;
+      font-size: 28px;
+    }
+    #lv-foot {
+      position: absolute;
+      left: 0;
+      width: 1920px;
+      top: 960px;
+      text-align: center;
+      font-size: 38px;
+      font-weight: 700;
+    }
+  </style>
+  <div id="root" data-composition-id="livret" data-width="1920" data-height="1080">
+    <svg width="0" height="0" style="position: absolute">
+      <filter id="lv-ink" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="21" result="n" />
+        <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.6 1.75" result="m" />
+        <feComposite in="SourceGraphic" in2="m" operator="in" result="speck" />
+        <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="1" seed="9" result="d" />
+        <feDisplacementMap in="speck" in2="d" scale="4" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
+    <div id="lv-h">Le Passeport 360° : <span class="red">l’éthique, tamponnée.</span></div>
+    <div id="lv-view">
+      <div id="lv-book">
+        <div class="lv-page" id="lv-right">
+          <svg class="lv-st" id="lv-s4" viewBox="0 0 300 170" style="left: 110px; top: 30px"><g filter="url(#lv-ink)" fill="#1e6b47"><ellipse cx="150" cy="85" rx="140" ry="76" fill="none" stroke="#1e6b47" stroke-width="7" /><text x="150" y="80" text-anchor="middle" font-family="Archivo Black" font-size="30">LANGUES</text><text x="150" y="114" text-anchor="middle" font-family="Inter" font-weight="700" font-size="21">score publié par langue</text></g></svg>
+          <svg class="lv-st" id="lv-s5" viewBox="0 0 300 170" style="left: 70px; top: 240px"><g filter="url(#lv-ink)" fill="#c8102e"><rect x="8" y="12" width="284" height="146" fill="none" stroke="#c8102e" stroke-width="7" /><rect x="20" y="24" width="260" height="122" fill="none" stroke="#c8102e" stroke-width="3" /><text x="150" y="82" text-anchor="middle" font-family="Archivo Black" font-size="28">TRANSPARENCE</text><text x="150" y="116" text-anchor="middle" font-family="Inter" font-weight="700" font-size="21">label IA visible</text></g></svg>
+          <svg class="lv-st" id="lv-s6" viewBox="0 0 300 170" style="left: 150px; top: 450px"><g filter="url(#lv-ink)" fill="#12302e"><circle cx="150" cy="85" r="80" fill="none" stroke="#12302e" stroke-width="7" /><text x="150" y="82" text-anchor="middle" font-family="Archivo Black" font-size="30">PLANÈTE</text><text x="150" y="112" text-anchor="middle" font-family="Inter" font-weight="700" font-size="20">énergie mesurée</text></g></svg>
+        </div>
+        <div id="lv-cover">
+          <div class="lv-face" id="lv-front"><div class="t1">PASSEPORT 360°</div><div class="em">SAWTI<br />360</div><div class="t2">FILM · VOIX · CONFIANCE</div></div>
+          <div class="lv-face" id="lv-back">
+            <svg class="lv-st" id="lv-s1" viewBox="0 0 300 170" style="left: 90px; top: 30px"><g filter="url(#lv-ink)" fill="#c8102e"><circle cx="150" cy="85" r="80" fill="none" stroke="#c8102e" stroke-width="7" /><text x="150" y="82" text-anchor="middle" font-family="Archivo Black" font-size="27">CRÉATEURS</text><text x="150" y="112" text-anchor="middle" font-family="Inter" font-weight="700" font-size="19">le créateur valide</text></g></svg>
+            <svg class="lv-st" id="lv-s2" viewBox="0 0 300 170" style="left: 130px; top: 240px"><g filter="url(#lv-ink)" fill="#12302e"><rect x="8" y="12" width="284" height="146" fill="none" stroke="#12302e" stroke-width="7" /><text x="150" y="82" text-anchor="middle" font-family="Archivo Black" font-size="32">DROITS</text><text x="150" y="116" text-anchor="middle" font-family="Inter" font-weight="700" font-size="20">consentement, révocation</text></g></svg>
+            <svg class="lv-st" id="lv-s3" viewBox="0 0 300 170" style="left: 60px; top: 450px"><g filter="url(#lv-ink)" fill="#1e6b47"><ellipse cx="150" cy="85" rx="140" ry="76" fill="none" stroke="#1e6b47" stroke-width="7" /><text x="150" y="80" text-anchor="middle" font-family="Archivo Black" font-size="30">DONNÉES</text><text x="150" y="114" text-anchor="middle" font-family="Inter" font-weight="700" font-size="21">tout reste en local</text></g></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="lv-qr"><img src="assets/img/qr.png" alt="QR de vérification" /><div class="ok">✓ Vérifié</div><div class="ok2">Signature et chaîne d’audit vérifiées</div></div>
+    <div id="lv-foot">Chacun peut le vérifier · 34/34 tests · 18/18 scénarios d’attaque conformes</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#lv-h", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25 }, 0.1);
+      tl.fromTo("#lv-book", { rotationX: 30, rotationZ: -8, y: 120, opacity: 0 }, { rotationX: 12, rotationZ: -3, y: 0, opacity: 1, duration: 0.9, ease: "expo.out" }, 0.1);
+      // the cover opens to the left, revealing the stamped pages
+      tl.fromTo("#lv-cover", { rotationY: 0 }, { rotationY: -180, duration: 1.0, ease: "power2.inOut" }, 1.0);
+      tl.to("#lv-book", { rotationX: 6, rotationZ: 0, duration: 1.0, ease: "power2.inOut" }, 1.0);
+      ["#lv-s1", "#lv-s2", "#lv-s3", "#lv-s4", "#lv-s5", "#lv-s6"].forEach((s, i) => {
+        const rot = [-8, 5, -4, 6, -7, 3][i];
+        tl.fromTo(s, { scale: 1.7, rotation: rot - 10, opacity: 0 }, { scale: 1, rotation: rot, opacity: 1, duration: 0.17, ease: "power4.out" }, 2.3 + i * 0.62);
+      });
+      tl.fromTo("#lv-qr", { x: 500, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, ease: "expo.out" }, 6.6);
+      tl.fromTo("#lv-qr .ok", { scale: 1.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2, ease: "power4.out" }, 7.4);
+      tl.fromTo("#lv-foot", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 7.8);
+      tl.to(["#lv-view", "#lv-qr", "#lv-h", "#lv-foot"], { opacity: 0, duration: 0.3, ease: "power2.in" }, 11.7);
+      window.__timelines["livret"] = tl;
+    })();
+  </script>
+</template>
