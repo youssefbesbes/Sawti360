@@ -35,6 +35,7 @@
     "lucide-react": "^1.75.0",
     "mediabunny": "^1.66.1",
     "nodemailer": "^10.6.0",
+    "pdfjs-dist": "^4.10.38",
     "postgres": "^4.1.1",
     "qrcode": "^1.5.4",
     "react": "^19.3.1",

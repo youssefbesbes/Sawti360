@@ -136,9 +136,15 @@ Des voix prêtées sous licence : échantillon, langues, tarif par projet et sta
 
 ### 9. Vérification publique
 
-N'importe qui peut vérifier un Passeport 360°, sans compte.
+N'importe qui peut vérifier un Passeport 360°, sans compte : il suffit de déposer le PDF exporté depuis Sawti 360. Le PDF contient le passeport signé ; sa signature est recalculée dans le navigateur, sans rien envoyer.
 
 ![Vérification publique](docs/prototype/08-verifier.png)
+
+### 10. Business Model Canvas
+
+La confiance au centre du modèle : l'offre, les parties prenantes, l'argent et la confiance, case par case.
+
+![Business Model Canvas](docs/prototype/09-business-model-canvas.png)
 
 ## État d'avancement
 

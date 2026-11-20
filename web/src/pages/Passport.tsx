@@ -16,6 +16,7 @@ import { Callout, CopyField, Empty, frDate, Hash, KV, PageHead, Prov, Status, to
 import { useCrumbs } from "../ui/Shell";
 import { ScrambleText, shortHex, useReducedMotion } from "../ui/motion";
 import { passportUrl, slug } from "./project/Result";
+import { passportPdfCode, readPassportPdf } from "../core/passportPdf";
 
 /* ------------------------------------------------------------------ the document */
 
@@ -63,6 +64,7 @@ const VERIFY_STEP = 640;
 export function PassportDocument({ p, journal, publicView = false }: { p: Passport360; journal?: AuditEntry[]; publicView?: boolean }) {
   const result = useMemo(() => verifyPassport(p, journal), [p, journal]);
   const url = useMemo(() => passportUrl(p), [p]);
+  const pdfCode = useMemo(() => passportPdfCode(p), [p]);
   const [qr, setQr] = useState("");
   useEffect(() => {
     void QRCode.toString(url, { type: "svg", errorCorrectionLevel: "L", margin: 0, color: { dark: "#0b0b0c", light: "#ffffff" } }).then(setQr);
@@ -335,6 +337,10 @@ export function PassportDocument({ p, journal, publicView = false }: { p: Passpo
           </div>
         </div>
       </aside>
+      <p className="pp-print-code">
+        <span>Code de vérification · déposez ce PDF sur la page /verifier de Sawti 360 pour contrôler la signature</span>
+        {pdfCode}
+      </p>
     </div>
   );
 }
@@ -509,7 +515,22 @@ export function Verify() {
     }
   }, [hash]);
 
+  const navigate = useNavigate();
   const readFile = async (f: File) => {
+    if (f.type === "application/pdf" || /\.pdf$/i.test(f.name)) {
+      try {
+        const r = await readPassportPdf(f);
+        if (r && "passport" in r) {
+          setP(r.passport);
+          setJournal(undefined);
+          setError("");
+        } else if (r) navigate(`/verifier?id=${encodeURIComponent(r.id)}`);
+        else setError("Ce PDF ne contient pas de Passeport 360° lisible. Utilisez le PDF exporté depuis Sawti 360.");
+      } catch {
+        setError("Le PDF est illisible ou son code de vérification a été altéré.");
+      }
+      return;
+    }
     try {
       const data = JSON.parse(await f.text()) as PassportFile | Passport360;
       if ("passeport" in data) {
@@ -547,7 +568,7 @@ export function Verify() {
             <div className="stack-sm">
               <Seal size={88} state="pending" word="À VÉRIFIER" label="PASSEPORT 360° · VÉRIFICATION PUBLIQUE · " />
               <h1 style={{ fontSize: 30 }}>Vérifier un Passeport 360°</h1>
-              <p className="lead muted">Ouvrez le lien d’un passeport, scannez son QR code, ou déposez son fichier. La vérification de la signature se fait entièrement dans votre navigateur.</p>
+              <p className="lead muted">Déposez le PDF du passeport exporté depuis Sawti 360, ou scannez son QR code. La vérification de la signature se fait entièrement dans votre navigateur.</p>
             </div>
             {error && (
               <Callout tone="bad" role="alert">
@@ -569,9 +590,9 @@ export function Verify() {
               <span className="dz-icon" aria-hidden>
                 <FileUp />
               </span>
-              <span className="dz-title">Déposez le fichier .json du passeport</span>
-              <span className="dz-text">Le fichier complet contient aussi le journal d’audit, dont la chaîne sera vérifiée.</span>
-              <input type="file" accept="application/json,.json" className="sr-only" onChange={(e) => e.target.files?.[0] && readFile(e.target.files[0])} />
+              <span className="dz-title">Déposez le PDF du Passeport 360°</span>
+              <span className="dz-text">Le PDF exporté contient le passeport signé : sa signature est recalculée ici, sans rien envoyer.</span>
+              <input type="file" accept="application/pdf,.pdf,application/json,.json" className="sr-only" onChange={(e) => e.target.files?.[0] && readFile(e.target.files[0])} />
             </label>
             <p className="hint">
               Clé publique de la plateforme{platformPublicKey() === DEMO_PUBLIC_KEY ? " (démonstration)" : ""} : <span className="mono" style={{ wordBreak: "break-all" }}>{platformPublicKey()}</span>
