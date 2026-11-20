@@ -146,23 +146,6 @@ La confiance au centre du modèle : l'offre, les parties prenantes, l'argent et 
 
 ![Business Model Canvas](docs/prototype/09-business-model-canvas.png)
 
-## État d'avancement
-
-L'avancement est suivi sur ce dépôt GitHub (état au 20 novembre 2026).
-
-| Indicateur          | État                                                                 |
-| ------------------- | -------------------------------------------------------------------- |
-| Commits             | 72, du 15 au 20 novembre 2026                                        |
-| Contributeurs       | 5 membres de l'équipe                                                |
-| Prototype en ligne  | [sawti360.vercel.app](https://sawti360.vercel.app/), déployé sur Vercel |
-| Lots livrés         | A1–A10 back-end · B1–B5 analyse IA · C1–C4 génération · D1, D4 consentement |
-
-Commits par jour :
-
-| 15 nov. | 16 nov. | 17 nov. | 18 nov. | 19 nov. | 20 nov. |
-| :-----: | :-----: | :-----: | :-----: | :-----: | :-----: |
-| 15      | 0       | 0       | 2       | 21      | 34      |
-
 **Réel aujourd'hui :** extraction audio dans le navigateur, découpage des répliques (Whisper via Groq), transcription derja, intervenants et traduction (Gemini), relecture par un second LLM et vérificateur de fidélité, voix françaises (ElevenLabs) après le moteur de règles, consentement par e-mail, Passeport 360° signé et vérification publique, journal d'audit chaîné, export MP4 avec label IA et QR.
 
 **Encore simulé :** synchronisation labiale et mixage, paiements, mesure d'énergie par génération, vérification de la voix par lecture d'un paragraphe (en développement).
@@ -203,7 +186,7 @@ Chaque principe du programme devient une fonction concrète, testable et visible
 
 | Principe                | Cas et textes cités                                                                                                   | Module Sawti 360                       |
 | ----------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| Consentement            | Doubleur recréé par IA (2025) ; 25 doubleurs obtiennent le retrait de 47 modèles (2026) ; RGPD art. 9 ; loi 2004-63 | Passeport de voix et moteur de règles |
+| Consentement            | Doubleur recréé par IA                                                                                                | Passeport de voix et moteur de règles |
 | Diversité              | Common Voice et le kabyle ; Convention UNESCO 2005 ; AI Act art. 10                                                    | Sawti-Bench                            |
 | Transparence            | Voix synthétique d'un documentaire sans mention (2021) ; AI Act art. 50(4) et 50(2)                                   | Label et générique des voix          |
 | Responsabilité         | Doublages d'anime retirés (2025) ; AI Act art. 26 ; ISO/IEC 42001                                                     | Journal d'audit et référent éthique |
