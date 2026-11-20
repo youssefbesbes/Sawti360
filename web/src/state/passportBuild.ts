@@ -15,8 +15,14 @@ export function requestFor(s: Pick<Data, "requests">, pid: string, key: string, 
 
 type PassportData = Pick<Data, "validator" | "usage" | "licenses" | "journal" | "requests">;
 
+/**
+ * The passport signed in the browser (simulated mode). Without the server its link carries the whole
+ * passport, too long for a readable QR: the MP4 gets the AI label but no QR, and the passport says so.
+ */
 export function buildPassport(s: PassportData, project: Project, when = new Date()): Passport360 {
-  return signPassport(draftPassport(s, project, when));
+  const draft = draftPassport(s, project, when);
+  if (draft.doublage_ia && transparencyPolicy(project.format).qrInVideo) draft.doublage_ia.qr = "Non incrusté : sans serveur, le lien du passeport est partagé depuis le Passeport 360°";
+  return signPassport(draft);
 }
 
 /** The passport before signature. */

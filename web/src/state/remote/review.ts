@@ -27,7 +27,7 @@ export async function applySuggestion(set: Set, get: Get, pid: string, segId: st
   if (!sug) return;
   patchLocal(set, pid, (p) => ({
     segments: p.segments.map((x) => (x.id === segId ? { ...x, translation: sug, validated: false } : x)),
-    reviews: { ...p.reviews, [segId]: { ...p.reviews[segId], verdict: "ok", note: "Correction du LLM 2 appliquée. À approuver.", suggestion: undefined } },
+    reviews: { ...p.reviews, [segId]: { ...p.reviews[segId], verdict: "ok", note: "Correction du LLM 2 appliquée : relisez-la avant d’approuver.", suggestion: undefined } },
   }));
   try {
     await flushEdits(set);

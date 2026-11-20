@@ -10,6 +10,7 @@ import { PLANS } from "../../core/credits";
 import type { Decision } from "../../core/types";
 import { BACKEND } from "../../lib/backend";
 import { audioKey, audioUrls } from "../audio";
+import { restoreLineAudio } from "../../media/local";
 import type { GenState } from "../store";
 import { bootstrap } from "./bootstrap";
 import { flushEdits, patchLocal, refreshProject, whenSent } from "./projects";
@@ -36,7 +37,15 @@ export async function loadLineAudio(pid: string): Promise<LineAudio> {
 export function useLineAudio(pid: string): void {
   const [, bump] = useState(0);
   useEffect(() => {
-    if (!BACKEND || !pid) return;
+    if (!pid) return;
+    // Simulated mode: the lines kept in this browser (already-public video) come back after a reload.
+    if (!BACKEND) {
+      let alive = true;
+      void restoreLineAudio(pid).then((n) => alive && n > 0 && bump((x) => x + 1));
+      return () => {
+        alive = false;
+      };
+    }
     let alive = true;
     const load = () =>
       void loadLineAudio(pid).then(

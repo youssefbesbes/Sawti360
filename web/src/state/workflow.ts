@@ -240,3 +240,59 @@ export function keywords(text: string): string[] {
     .split(/[^a-z0-9]+/)
     .filter((w) => w.length > 2 && !stop.has(w));
 }
+
+/* ------------------------------------------------------------------ generation outcome */
+
+/** What a generation run produced, line by line (the same counts on the server and in the browser). */
+export interface GenTally {
+  ok: number;
+  refused: number;
+  error: number;
+  /** Lines kept in the authorised original voice: their French rendering needs voice cloning, not wired yet. */
+  skipped: number;
+  /** Reason codes of the refused lines, without duplicates (e.g. SIGNATURE_INVALIDE). */
+  codes: string[];
+}
+
+type LineOutcome = { status: "pending" | "ok" | "refused" | "error" | "skipped"; decision?: { reason_code?: string } };
+
+export function tallyOf(lines: (LineOutcome | undefined)[]): GenTally {
+  const t: GenTally = { ok: 0, refused: 0, error: 0, skipped: 0, codes: [] };
+  for (const g of lines) {
+    if (!g) continue;
+    const k = g.status === "pending" ? "error" : g.status;
+    t[k]++;
+    const code = g.decision?.reason_code;
+    if (g.status === "refused" && code && !t.codes.includes(code)) t.codes.push(code);
+  }
+  return t;
+}
+
+const plural = (n: number, one: string, many: string) => `${n} ${n > 1 ? many : one}`;
+
+/** The lines that were not dubbed, in words: « 2 refusées par le moteur de règles (USAGE_INTERDIT), 1 en voix originale… ». */
+function notDubbed(t: GenTally): string {
+  const parts: string[] = [];
+  if (t.refused) parts.push(`${plural(t.refused, "refusée", "refusées")} par le moteur de règles${t.codes.length ? ` (${t.codes.join(", ")})` : ""}`);
+  if (t.error) parts.push(plural(t.error, "en erreur", "en erreur"));
+  if (t.skipped) parts.push(`${plural(t.skipped, "gardée", "gardées")} en voix originale (clonage vocal non branché dans ce prototype)`);
+  return parts.join(", ");
+}
+
+/**
+ * A run where no line was dubbed is not a result: nothing is signed and the generation can be started again.
+ * Returns the message to show, or null when at least one line was synthesised.
+ */
+export function nothingGenerated(t: GenTally): string | null {
+  if (t.ok > 0) return null;
+  const total = t.refused + t.error + t.skipped;
+  if (total === 0) return "Aucune réplique n’a été doublée. Rien n’a été signé : relancez la génération.";
+  return `Aucune réplique n’a été doublée : ${notDubbed(t)}. Rien n’a été signé : corrigez la cause puis relancez la génération.`;
+}
+
+/** For a finished run where some lines were not dubbed: the sentence to show; null when every line was dubbed. */
+export function partialNote(t: GenTally): string | null {
+  const missing = t.refused + t.error + t.skipped;
+  if (missing === 0 || t.ok === 0) return null;
+  return `${plural(t.ok, "réplique doublée", "répliques doublées")} sur ${t.ok + missing}. Non doublées en français : ${notDubbed(t)}.`;
+}

@@ -17,6 +17,13 @@ export function publicUrl(code: string) {
   return `${window.location.origin}/verifier#p=${code}`;
 }
 
+/**
+ * A QR code a phone can read: the back-end's short link is about 60 characters. The simulated mode's
+ * self-contained link carries the whole passport (about 2 000 characters): no QR then, the link is shown instead.
+ */
+export const QR_MAX_CHARS = 300;
+export const qrReady = (url: string) => url.length > 0 && url.length <= QR_MAX_CHARS;
+
 /** Back-end: the short link (identifier, read on the server, small QR). Simulated: the self-contained #p= link. */
 export function passportUrl(p: Passport360): string {
   return BACKEND && p.identifiant ? `${window.location.origin}/verifier?id=${p.identifiant}` : publicUrl(encodePassport(p));
@@ -148,7 +155,7 @@ function DubPlayer({ p, qr }: { p: Project; qr: string }) {
           {timecode(now)} / {timecode(duration)}
         </span>
         <span className="grow" />
-        <span className="hint">Label IA : {policy.label.toLowerCase()} · QR : {policy.qr.toLowerCase()}</span>
+        <span className="hint">Label IA : {policy.label.toLowerCase()} · QR : {!BACKEND && policy.qrInVideo ? "non incrusté sans serveur (lien partagé depuis le passeport)" : policy.qr.toLowerCase()}</span>
       </div>
     </div>
   );
@@ -205,12 +212,12 @@ function ResultHero({ p, mp4Reason }: { p: Project; mp4Reason: string }) {
         <Seal size={76} word="SIGNÉ" date={p.generation.finishedAt} label="Passeport 360° signé" />
       </span>
       <div className="result-hero-body">
-        <h2 id="result-hero-title">Votre version française est prête</h2>
+        <h2 id="result-hero-title">{refused + failed + original === 0 ? "Votre version française est prête" : ok > 0 ? "Votre version française est prête, en partie" : "Aucune réplique doublée en français"}</h2>
         <p className="result-hero-lead">
           {ok} réplique{ok > 1 ? "s" : ""} doublée{ok > 1 ? "s" : ""}
           {refused > 0 && ` · ${refused} refusée${refused > 1 ? "s" : ""} par le moteur de règles`}
           {failed > 0 && ` · ${failed} non synthétisée${failed > 1 ? "s" : ""}`}
-          {original > 0 && ` · ${original} en voix originale`}
+          {original > 0 && ` · ${original} gardée${original > 1 ? "s" : ""} en voix originale (clonage vocal non branché)`}
           {finished && ` · terminé le ${finished}`}
         </p>
         <ul className="result-gets" aria-label="Ce que vous obtenez">
@@ -235,7 +242,8 @@ export default function Result({ p }: { p: Project }) {
   const [qr, setQr] = useState("");
   const url = useMemo(() => (passport ? passportUrl(passport) : ""), [passport]);
   useEffect(() => {
-    if (url) void QRCode.toString(url, { type: "svg", errorCorrectionLevel: "L", margin: 0 }).then(setQr);
+    if (qrReady(url)) void QRCode.toString(url, { type: "svg", errorCorrectionLevel: "L", margin: 0 }).then(setQr);
+    else setQr("");
   }, [url]);
   const chars = Object.values(p.characters);
 
@@ -285,7 +293,7 @@ export default function Result({ p }: { p: Project }) {
           </div>
           <div className="card-body-tight">
             <ul className="dl-list">
-              <Mp4Item p={p} fileName={`${slug(p.title)}.vf.mp4`} overlay={transparencyPolicy(p.format).qrInVideo && passport && url ? { label: passport.transparence.label, qrUrl: url } : undefined} />
+              <Mp4Item p={p} fileName={`${slug(p.title)}.vf.mp4`} overlay={transparencyPolicy(p.format).qrInVideo && passport && url ? { label: passport.transparence.label, qrUrl: qrReady(url) ? url : undefined } : undefined} />
               <li>
                 <Captions aria-hidden />
                 <span>

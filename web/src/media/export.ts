@@ -106,8 +106,8 @@ export const QR_SECONDS = 5;
 export interface Overlay {
   /** « Doublé avec l’IA · 2 voix · validé par … » (the passport's transparency label). */
   label: string;
-  /** The passport's public link, encoded in the QR code. */
-  qrUrl: string;
+  /** The passport's public link, encoded in the QR code. Absent when the link is too long to scan: only the label is drawn. */
+  qrUrl?: string;
 }
 
 function drawLabel(ctx: OffscreenCanvasRenderingContext2D, text: string, w: number, h: number): void {
@@ -147,13 +147,16 @@ function drawQr(ctx: OffscreenCanvasRenderingContext2D, qr: HTMLCanvasElement, w
 
 /** Draws the label and the QR on the frames that need them; every other frame passes as it is. */
 export async function overlayFrames(overlay: Overlay, duration: number): Promise<(sample: VideoSample) => VideoSample | OffscreenCanvas> {
-  const qr = document.createElement("canvas");
-  await QRCode.toCanvas(qr, overlay.qrUrl, { errorCorrectionLevel: "M", margin: 1, width: 512, color: { dark: "#000000", light: "#ffffff" } });
+  let qr: HTMLCanvasElement | null = null;
+  if (overlay.qrUrl) {
+    qr = document.createElement("canvas");
+    await QRCode.toCanvas(qr, overlay.qrUrl, { errorCorrectionLevel: "M", margin: 1, width: 512, color: { dark: "#000000", light: "#ffffff" } });
+  }
   let canvas: OffscreenCanvas | null = null;
   let ctx: OffscreenCanvasRenderingContext2D | null = null;
   return (sample) => {
     const label = sample.timestamp < LABEL_SECONDS;
-    const code = sample.timestamp >= duration - QR_SECONDS;
+    const code = qr !== null && sample.timestamp >= duration - QR_SECONDS;
     if (!label && !code) return sample;
     const w = sample.displayWidth;
     const h = sample.displayHeight;
@@ -163,7 +166,7 @@ export async function overlayFrames(overlay: Overlay, duration: number): Promise
     }
     sample.draw(ctx!, 0, 0, w, h);
     if (label) drawLabel(ctx!, overlay.label, w, h);
-    if (code) drawQr(ctx!, qr, w, h);
+    if (code) drawQr(ctx!, qr!, w, h);
     return canvas;
   };
 }

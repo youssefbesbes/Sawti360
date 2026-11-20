@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { simulateFamilyCheck } from "../mock/simulate";
-import { EXPIRY_MS, licenseUsable, originalVoiceState, requestStatus, transparencyPolicy, voiceSlot, type Character, type LicenseRequest } from "./workflow";
+import { EXPIRY_MS, licenseUsable, nothingGenerated, originalVoiceState, partialNote, requestStatus, tallyOf, transparencyPolicy, voiceSlot, type Character, type LicenseRequest } from "./workflow";
 
 const NOW = new Date("2026-11-19T12:00:00Z");
 const char = (over: Partial<Character> = {}): Character => ({
@@ -84,4 +84,26 @@ describe("contrôle de cohérence simulé : trois résultats seulement", () => {
   it("correspondance quand le rôle décrit le personnage", () => expect(simulateFamilyCheck(d("le grand-père qui raconte le souk"), jeddi, [narr], 2, "00:05").outcome).toBe("correspondance"));
   it("incohérence quand le rôle décrit un autre intervenant", () => expect(simulateFamilyCheck(d("la petite-fille qui présente"), jeddi, [narr], 2, "00:05").outcome).toBe("incoherence"));
   it("vérification nécessaire quand le rôle est trop général", () => expect(simulateFamilyCheck(d("un intervenant"), jeddi, [narr], 2, "00:05").outcome).toBe("verification"));
+});
+
+describe("Résultat d'une génération", () => {
+  const ok = { status: "ok" as const };
+  const refused = (code: string) => ({ status: "refused" as const, decision: { reason_code: code } });
+  const skipped = { status: "skipped" as const };
+
+  it("toutes les répliques refusées : pas de résultat, cause et codes dans le message", () => {
+    const t = tallyOf([refused("SIGNATURE_INVALIDE"), refused("SIGNATURE_INVALIDE"), undefined]);
+    expect(t).toEqual({ ok: 0, refused: 2, error: 0, skipped: 0, codes: ["SIGNATURE_INVALIDE"] });
+    expect(nothingGenerated(t)).toBe("Aucune réplique n’a été doublée : 2 refusées par le moteur de règles (SIGNATURE_INVALIDE). Rien n’a été signé : corrigez la cause puis relancez la génération.");
+    expect(partialNote(t)).toBeNull();
+  });
+  it("seulement des voix originales (clonage non branché) : pas de résultat non plus", () => {
+    expect(nothingGenerated(tallyOf([skipped]))).toMatch(/1 gardée en voix originale/);
+  });
+  it("au moins une réplique doublée : un résultat, partiel s'il en manque", () => {
+    const t = tallyOf([ok, ok, skipped, { status: "pending" }]);
+    expect(nothingGenerated(t)).toBeNull();
+    expect(partialNote(t)).toBe("2 répliques doublées sur 4. Non doublées en français : 1 en erreur, 1 gardée en voix originale (clonage vocal non branché dans ce prototype).");
+    expect(partialNote(tallyOf([ok, ok]))).toBeNull();
+  });
 });

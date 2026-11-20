@@ -4,7 +4,7 @@
 
 Sawti 360 double une œuvre de la derja vers le français : un film, mais aussi une vidéo YouTube, un Short ou un podcast. L'IA propose, le créateur décide. Chaque voix a un Passeport de voix : sans consentement, rien n'est généré. À l'export, l'œuvre part avec un Passeport 360° que chacun peut vérifier.
 
-« L'IA propose · L'humain décide · La confiance agitccompagne chaque export. »
+« L'IA propose · L'humain décide · La confiance accompagne chaque export. »
 
 Hackathon IA Éthique 360, 5e édition (Junior Entreprise INSAT et OIF) .
 
@@ -18,6 +18,7 @@ Hackathon IA Éthique 360, 5e édition (Junior Entreprise INSAT et OIF) .
 
 - [Le problème](#le-problème)
 - [La solution](#la-solution)
+- [Le prototype : l'essayer](#le-prototype--lessayer)
 - [Aperçu du prototype](#aperçu-du-prototype)
 - [Le Passeport 360° du film](#le-passeport-360-du-film)
 - [Place de l&#39;IA : construit ou réutilisé](#place-de-lia--construit-ou-réutilisé)
@@ -32,7 +33,7 @@ Hackathon IA Éthique 360, 5e édition (Junior Entreprise INSAT et OIF) .
 
 Un cinéaste tunisien indépendant rencontre une barrière de langue qui empêche ses films en derja d'être compris quand ils sont présentés à des festivals ou à des publics étrangers, ce qui entraîne des films primés mais invisibles. Les outils d'IA qui pourraient les doubler lui font courir un autre risque : voix clonées sans accord, contenus non étiquetés, aucune trace de qui a décidé quoi.
 
-**Face 1 : le film ne voyage pas.** . Le cinéaste amateur tunisien Mohamed Karim Dahmouni a expliqué que les sous-titres aident, mais que le doublage permet à un film de voyager. Toute utilisation de son image ou de sa voix dans le projet est conditionnée à un accord écrit.
+**Face 1 : le film ne voyage pas.** Le cinéaste amateur tunisien Mohamed Karim Dahmouni a expliqué que les sous-titres aident, mais que le doublage permet à un film de voyager. Toute utilisation de son image ou de sa voix dans le projet est conditionnée à un accord écrit.
 
 > « Un film que le public ne comprend pas reste invisible, même s'il est extraordinaire. Les miens sont en dialecte tunisien, ils s'arrêtent à la barrière de la langue. Les sous-titres aident un peu, mais seul le doublage permet à un film de voyager. »
 > Mohamed Karim Dahmouni, cinéaste amateur tunisien.
@@ -84,6 +85,17 @@ Sawti 360 est un doublage supervisé entouré d'une couche de confiance. Les out
 | Elle propose une traduction et signale les écarts de chiffres, de noms, de négations | L'utilisateur accepte, réécrit ou rejette chaque réplique               |
 | Elle génère une voix si le moteur de règles l'autorise                              | L'utilisateur fixe les usages, les projets et la durée, et peut révoquer |
 | Elle mesure sa consommation                                                            | L'utilisateur éthique valide le passeport avant l'export                 |
+
+## Le prototype : l'essayer
+
+Le prototype est une application web, dans le dossier [`web/`](web/) : <https://sawti360.vercel.app>. Deux comptes de démonstration s'ouvrent sans mot de passe depuis la page de connexion : *Nour Films* (créatrice) et *Lina M.* (comédienne, propriétaire de sa voix).
+
+Il fonctionne de deux façons :
+
+- **Avec le serveur** (le site en ligne) : comptes, projets, licences et journal en base ; analyse par IA de la vidéo importée ; Passeport 360° signé par le serveur, avec un lien court et un QR code lisible.
+- **Sans serveur** (`npm run dev:demo`) : tout est simulé dans le navigateur, avec les mêmes écrans et les mêmes règles. Le lien du passeport y contient tout le passeport : il est partagé comme lien, sans QR code.
+
+Pour le lancer sur un ordinateur, les variables à configurer et les tests : [`web/README.md`](web/README.md) et [`docs/backend/SETUP.md`](docs/backend/SETUP.md). La première version (console Streamlit en Python, dossiers `sawti/`, `app/`, `scripts/`) reste dans le dépôt : elle contient le moteur de règles d'origine et ses tests.
 
 ## Aperçu du prototype
 
