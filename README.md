@@ -8,10 +8,6 @@ Sawti 360 double une œuvre de la derja vers le français : un film, mais aussi 
 
 Hackathon IA Éthique 360, 5e édition (Junior Entreprise INSAT et OIF).
 
-![Passeport 360°](docs/prototype/05-passeport-360.png)
-
-*Capture du prototype en ligne ([sawti360.vercel.app](https://sawti360.vercel.app/)), mode démonstration, données fictives.*
-
 **Ce qui est nouveau :** les outils de doublage par IA produisent une voix. Sawti 360 produit une voix et la preuve qu'elle est légitime, mesurée et traçable.
 
 ## Sommaire
