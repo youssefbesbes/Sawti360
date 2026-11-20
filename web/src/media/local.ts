@@ -1,7 +1,10 @@
 /**
  * Everything here runs in the browser: the video file never leaves the creator's computer.
  * Files are kept in memory, and in IndexedDB for already-public videos so a reload keeps them.
+ * Simulated mode only: the synthesized lines of an already-public video are kept there too, so the
+ * MP4 export still works after a reload (inédites keep nothing after the session).
  */
+import { audioKey, audioUrls } from "../state/audio";
 
 const files = new Map<string, File>();
 const urls = new Map<string, string>();
@@ -26,8 +29,10 @@ export function setFrames(projectId: string, segId: string, list: string[]) {
 const DB = "sawti360-media";
 function db(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB, 1);
-    req.onupgradeneeded = () => req.result.createObjectStore("videos");
+    const req = indexedDB.open(DB, 2);
+    req.onupgradeneeded = () => {
+      for (const store of ["videos", "lines"]) if (!req.result.objectStoreNames.contains(store)) req.result.createObjectStore(store);
+    };
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);
   });
@@ -81,7 +86,64 @@ export async function forgetVideo(projectId: string) {
   } catch {
     /* nothing stored */
   }
+  await forgetLineAudio(projectId);
   emit();
+}
+
+/* ------------------------------------------------------------------ synthesized lines (simulated mode) */
+
+/** Keeps one synthesized line (key: audioKey(project, segment)) so a reload does not lose it. */
+export async function keepLineAudio(key: string, blob: Blob): Promise<void> {
+  try {
+    const d = await db();
+    await new Promise<void>((resolve, reject) => {
+      const tx = d.transaction("lines", "readwrite");
+      tx.objectStore("lines").put(blob, key);
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+  } catch {
+    /* storage refused (private mode, quota): the session copy still works */
+  }
+}
+
+/** Puts back in audioUrls the stored lines of a project that this session no longer has. Returns how many. */
+export async function restoreLineAudio(projectId: string): Promise<number> {
+  try {
+    const d = await db();
+    const range = IDBKeyRange.bound(`${projectId}/`, `${projectId}/\uffff`);
+    const rows = await new Promise<{ key: string; blob: Blob }[]>((resolve, reject) => {
+      const out: { key: string; blob: Blob }[] = [];
+      const req = d.transaction("lines").objectStore("lines").openCursor(range);
+      req.onsuccess = () => {
+        const c = req.result;
+        if (!c) return resolve(out);
+        out.push({ key: String(c.key), blob: c.value as Blob });
+        c.continue();
+      };
+      req.onerror = () => reject(req.error);
+    });
+    let n = 0;
+    for (const { key, blob } of rows) {
+      if (audioUrls.has(key)) continue;
+      audioUrls.set(key, URL.createObjectURL(blob));
+      n++;
+    }
+    return n;
+  } catch {
+    return 0;
+  }
+}
+
+/** Removes a line (refused on a new run) or every line of a project. */
+export async function forgetLineAudio(projectId: string, segId?: string): Promise<void> {
+  try {
+    const d = await db();
+    const store = d.transaction("lines", "readwrite").objectStore("lines");
+    store.delete(segId ? audioKey(projectId, segId) : IDBKeyRange.bound(`${projectId}/`, `${projectId}/\uffff`));
+  } catch {
+    /* nothing stored */
+  }
 }
 
 /** Remote videos imported by link (direct media URL). Not persisted: the link itself is. */

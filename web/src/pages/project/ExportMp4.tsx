@@ -8,7 +8,7 @@ import { useState } from "react";
 import { api, messageOf } from "../../api/client";
 import { BACKEND } from "../../lib/backend";
 import { exportMp4, type ExportLine, type ExportPhase, type Overlay } from "../../media/export";
-import { formatSize, loadVideo } from "../../media/local";
+import { formatSize, loadVideo, restoreLineAudio } from "../../media/local";
 import { loadLineAudio } from "../../state/remote/generation";
 import { audioKey, audioUrls, useStore, type Project } from "../../state/store";
 import { transparencyPolicy } from "../../state/workflow";
@@ -25,6 +25,7 @@ async function sourceOf(p: Project): Promise<Blob | string> {
 
 async function linesOf(p: Project): Promise<ExportLine[]> {
   if (BACKEND) return Object.values(await loadLineAudio(p.id)).sort((a, b) => a.start - b.start);
+  await restoreLineAudio(p.id);
   return p.segments.flatMap((s) => {
     const url = audioUrls.get(audioKey(p.id, s.id));
     return url ? [{ start: s.start, end: s.end, url }] : [];
@@ -46,7 +47,9 @@ export function Mp4Item({ p, fileName, overlay }: { p: Project; fileName: string
   const reason = mp4Reason(p);
   const policy = transparencyPolicy(p.format);
   const describe = overlay
-    ? "Assemblée dans votre navigateur : label IA 4 s au début, QR du Passeport 360° 5 s à la fin (vidéo réencodée, plus long), voix françaises à leur place, original atténué."
+    ? overlay.qrUrl
+      ? "Assemblée dans votre navigateur : label IA 4 s au début, QR du Passeport 360° 5 s à la fin (vidéo réencodée, plus long), voix françaises à leur place, original atténué."
+      : "Assemblée dans votre navigateur : label IA 4 s au début (vidéo réencodée, plus long), voix françaises à leur place, original atténué. Sans serveur, le lien du passeport est trop long pour un QR lisible : partagez-le depuis le Passeport 360°."
     : policy.pending
       ? "Format court : label et QR selon une règle à confirmer, rien n’est ajouté. Vidéo copiée sans réencodage, voix françaises à leur place, original atténué."
       : "Assemblée dans votre navigateur : vidéo copiée sans réencodage, voix françaises à leur place, original atténué.";
@@ -56,7 +59,11 @@ export function Mp4Item({ p, fileName, overlay }: { p: Project; fileName: string
     setWork({ phase: "voix", fraction: 0 });
     try {
       const [source, lines] = await Promise.all([sourceOf(p), linesOf(p)]);
-      if (!lines.length) throw new Error("Audio des répliques indisponible : rechargez la page, ou relancez la génération.");
+      if (!lines.length) throw new Error(
+          p.video?.privacy === "inedite"
+            ? "Audio des répliques indisponible : pour une vidéo inédite, rien n’est conservé après la session. Relancez la génération (étape Génération) pour exporter le MP4."
+            : "Audio des répliques indisponible dans ce navigateur. Relancez la génération (étape Génération) pour exporter le MP4.",
+        );
       const r = await exportMp4(source, lines, (fraction, phase) => setWork({ phase, fraction }), overlay);
       const a = document.createElement("a");
       a.href = URL.createObjectURL(r.blob);
@@ -64,7 +71,7 @@ export function Mp4Item({ p, fileName, overlay }: { p: Project; fileName: string
       a.click();
       setTimeout(() => URL.revokeObjectURL(a.href), 60_000);
       logExport("VIDEO_MP4", { projet: p.id, repliques: r.lines, duree_s: Math.round(r.duration), octets: r.blob.size, codec_audio: r.audioCodec, video_copiee: r.videoCopied, label_et_qr: r.overlay, ms: r.ms });
-      toast(`MP4 prêt en ${(r.ms / 1000).toFixed(1).replace(".", ",")} s · ${formatSize(r.blob.size)}${r.overlay ? " · label et QR incrustés" : ""}`, "ok");
+      toast(`MP4 prêt en ${(r.ms / 1000).toFixed(1).replace(".", ",")} s · ${formatSize(r.blob.size)}${r.overlay ? (overlay?.qrUrl ? " · label et QR incrustés" : " · label incrusté") : ""}`, "ok");
     } catch (err) {
       setError(messageOf(err));
     } finally {

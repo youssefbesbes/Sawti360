@@ -14,7 +14,7 @@ import { costOf, fmt } from "../../src/core/credits.js";
 import type { Use } from "../../src/core/types.js";
 import { GEN_STAGES } from "../../src/mock/simulate.js";
 import type { GenState, Generation, Project } from "../../src/state/store.js";
-import type { LicenseRequest } from "../../src/state/workflow.js";
+import { nothingGenerated, tallyOf, type LicenseRequest } from "../../src/state/workflow.js";
 import { requireAccount, type AccountOut } from "../accounts.js";
 import { appendAudit } from "../audit.js";
 import type { AppEnv } from "../auth.js";
@@ -100,6 +100,7 @@ export const generation = new Hono<AppEnv>()
 
     const jobId = await startJob(sql, { kind: "generation", accountId: me.id, projectId: row.id }, async (ctx) => {
       const tally = { ok: 0, refused: 0, error: 0, skipped: 0 };
+      const outcomes: GenState[] = [];
       try {
         const t0 = Date.now();
         for (const [i, seg] of lines.entries()) {
@@ -113,9 +114,19 @@ export const generation = new Hono<AppEnv>()
             gen = { status: "error", chars: costOf(seg.translation), by: "server", message: err instanceof Error ? err.message : String(err) };
           }
           tally[gen.status === "pending" ? "error" : gen.status]++;
+          outcomes.push(gen);
           await setGen(sql, row.id, seg.id, gen);
           const done = i + 1;
           await setGeneration(sql, row.id, { synthDone: done, etaMs: Math.round(((Date.now() - t0) / done) * (lines.length - done)) + 500 });
+        }
+        // No line dubbed (all refused, failed or kept in the original voice): not a result. Nothing is
+        // signed, the project is not marked finished, and the creator sees why and can start again.
+        const failed = nothingGenerated(tallyOf(outcomes));
+        if (failed) {
+          await setGeneration(sql, row.id, { status: "idle", etaMs: 0, error: failed });
+          await appendAudit(sql, me.name, "GENERATION_SANS_RESULTAT", { projet: row.id, ...tally }, "AUCUNE_REPLIQUE", { projectId: row.id, accountId: me.id });
+          await notify(sql, { accountId: me.id, space: "creator", tone: "warn", title: "Aucune réplique doublée", body: `${project.title} · ${failed}`, link: `/projet/${row.id}/generation` });
+          return tally;
         }
         for (let i = 1; i < GEN_STAGES.length; i++) {
           await ctx.step(i, GEN_STAGES[i].server.detail);

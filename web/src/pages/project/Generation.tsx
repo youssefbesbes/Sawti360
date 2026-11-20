@@ -1,10 +1,10 @@
-import { ArrowRight, CircleCheck, CircleX, Play } from "lucide-react";
+import { ArrowRight, CircleCheck, CircleX, Play, RotateCcw } from "lucide-react";
 import { Link } from "react-router-dom";
 import { costOf, fmt } from "../../core/credits";
 import { BACKEND } from "../../lib/backend";
 import { GEN_STAGES } from "../../mock/simulate";
 import { balanceOf, slotsOf, useStore, type Project } from "../../state/store";
-import { transparencyPolicy } from "../../state/workflow";
+import { partialNote, tallyOf, transparencyPolicy } from "../../state/workflow";
 import { ENGINE_TEXT, useEngineStatus } from "../../ui/engine";
 import { AnimatedNumber, Callout, DrawCheck, KV, ProcessList, Progress, Prov, timecode, type StepState } from "../../ui/kit";
 import { StepFoot } from "./Workspace";
@@ -85,7 +85,7 @@ export default function Generation({ p }: { p: Project }) {
                 <KV
                   rows={[
                     ["Label IA", policy.label],
-                    ["QR code dans la vidéo", policy.qr],
+                    ["QR code dans la vidéo", !BACKEND && policy.qrInVideo ? "Non incrusté sans serveur : lien partagé depuis le passeport" : policy.qr],
                     ["Passeport 360°", "Créé et signé à la fin"],
                   ]}
                 />
@@ -110,6 +110,7 @@ export default function Generation({ p }: { p: Project }) {
 
   const stageState = (i: number): StepState => (g.status === "done" || i < g.stage ? "done" : i === g.stage ? "active" : "todo");
   const lines = p.segments.filter((s) => s.validated);
+  const partial = g.status === "done" ? partialNote(tallyOf(lines.map((s) => p.gens[s.id]))) : null;
 
   return (
     <>
@@ -119,7 +120,7 @@ export default function Generation({ p }: { p: Project }) {
             <div className="row-between">
               <span className="row">
                 {g.status === "done" ? <DrawCheck size={22} /> : <span className="spinner" />}
-                <h2 style={{ fontSize: 17 }} aria-live="polite">{g.status === "done" ? "Rendu prêt" : GEN_STAGES[g.stage]?.label}</h2>
+                <h2 style={{ fontSize: 17 }} aria-live="polite">{g.status === "done" ? (partial ? "Rendu partiel" : "Rendu prêt") : GEN_STAGES[g.stage]?.label}</h2>
               </span>
               <span className="gen-pct">
                 <AnimatedNumber value={Math.round(pct * 100)} /> %
@@ -172,13 +173,23 @@ export default function Generation({ p }: { p: Project }) {
         <aside className="sticky-aside">
           {g.status === "done" ? (
             <>
-              <Callout tone="ok" title="Génération terminée">
-                Le Passeport 360° a été créé et signé. Consultez le résultat pour télécharger les fichiers.
-              </Callout>
+              {partial ? (
+                <Callout tone="warn" title="Génération terminée, avec des répliques non doublées">
+                  {partial} Le Passeport 360° signé le mentionne.
+                </Callout>
+              ) : (
+                <Callout tone="ok" title="Génération terminée">
+                  Le Passeport 360° a été créé et signé. Consultez le résultat pour télécharger les fichiers.
+                </Callout>
+              )}
               <Link to={`/projet/${p.id}/resultat`} className="btn btn-primary btn-lg btn-block">
                 Voir le résultat
                 <ArrowRight />
               </Link>
+              <button className="btn btn-secondary btn-block" disabled={!ready} onClick={() => void start(p.id)}>
+                <RotateCcw />
+                Relancer la génération
+              </button>
             </>
           ) : (
             <Callout tone="plain" title="Vous pouvez quitter cette page">

@@ -54,7 +54,7 @@ export const review = new Hono<AppEnv>()
       if (!seg) throw notFound("Réplique introuvable.");
       const current = row.reviews[segId];
       if (!current?.suggestion) throw conflict("CONFLIT", "Aucune correction à appliquer sur cette réplique.");
-      const applied: Review = { verdict: "ok", note: "Correction du LLM 2 appliquée. À approuver.", simulated: current.simulated, provider: current.provider };
+      const applied: Review = { verdict: "ok", note: "Correction du LLM 2 appliquée : relisez-la avant d’approuver.", simulated: current.simulated, provider: current.provider };
       await updateProject(tx, row.id, {
         segments: row.segments.map((s) => (s.id === segId ? { ...s, translation: current.suggestion!, validated: false } : s)),
         reviews: { ...row.reviews, [segId]: applied },

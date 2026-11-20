@@ -195,6 +195,28 @@ describe.skipIf(!hasTestDb)("C1 · C5 · génération côté serveur et aperçus
     await t.sql`delete from public.token_ledger where account_id = ${nour} and ref = 'test'`;
   });
 
+  it("aucune réplique doublée → pas « Rendu prêt » : génération à relancer, aucun passeport signé, cause expliquée", async () => {
+    const passportsBefore = (await t.sql<{ n: number }[]>`select count(*)::int as n from public.passports where project_id = ${PID}`)[0].n;
+    const keep = engine;
+    engine = async () => {
+      throw new ApiError(502, "MOTEUR_VOIX_INDISPONIBLE", "Le moteur de voix a répondu 429 : quota ou crédits épuisés.");
+    };
+    const { jobId } = await (await call(nour, "POST", `/projects/${PID}/generation`)).json();
+    await Promise.all(running.splice(0));
+    engine = keep;
+    expect((await (await call(nour, "GET", `/jobs/${jobId}`)).json()).status).toBe("done");
+    const p = await project();
+    expect(p.generation.status).toBe("idle");
+    expect(p.generation.error).toMatch(/^Aucune réplique n’a été doublée : 6 en erreur\. Rien n’a été signé/);
+    expect((await t.sql<{ n: number }[]>`select count(*)::int as n from public.passports where project_id = ${PID}`)[0].n).toBe(passportsBefore);
+    expect((await notices(nour))[0]).toBe("creator:Aucune réplique doublée");
+    expect(await lastAction()).toMatchObject({ action: "GENERATION_SANS_RESULTAT", decision: "AUCUNE_REPLIQUE" });
+    // The cause fixed, the same project can be generated again.
+    expect((await call(nour, "POST", `/projects/${PID}/generation`)).status).toBe(202);
+    await Promise.all(running.splice(0));
+    expect((await project()).generation).toMatchObject({ status: "done" });
+  });
+
   it("vidéo d'origine : URL signée seulement si le créateur l'a envoyée", async () => {
     expect((await call(nour, "GET", `/projects/${PID}/original`)).status).toBe(404);
     await t.sql`update public.projects set video = ${t.sql.json({ name: "film.mp4", size: 1, type: "video/mp4", duration: 20, width: 640, height: 360, privacy: "inedite", originalPath: `${nour}/${PID}/original.mp4` })} where id = ${PID}`;

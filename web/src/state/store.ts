@@ -16,14 +16,17 @@ import { BACKEND } from "../lib/backend";
 import * as remote from "./remote";
 import { emptyData, type RemoteState } from "./remote/state";
 import { audioKey, audioUrls } from "./audio";
+import { forgetLineAudio, keepLineAudio } from "../media/local";
 import { buildPassport, requestFor } from "./passportBuild";
 import { DEMO_ID, emptyGen, seed } from "./seed";
 import {
   dossierReference,
   EXPIRY_MS,
   FORMAT_LABEL,
+  nothingGenerated,
   OUTCOME_LABEL,
   originalVoiceState,
+  tallyOf,
   requestStatus,
   voiceSlot,
   type Character,
@@ -413,6 +416,9 @@ export const useStore = create<Store>()(
         if (old) URL.revokeObjectURL(old);
         if (url) audioUrls.set(key, url);
         else audioUrls.delete(key);
+        // An already-public video keeps its synthesized lines across a reload (MP4 export); an inédite keeps nothing.
+        if (url && project.video?.privacy === "publique") void fetch(url).then((r) => r.blob()).then((b) => keepLineAudio(key, b), () => undefined);
+        else void forgetLineAudio(pid, sid);
         setGen(result);
       };
 
@@ -710,7 +716,7 @@ export const useStore = create<Store>()(
           if (!sug) return;
           patch(pid, (pp) => ({
             segments: pp.segments.map((x) => (x.id === segId ? { ...x, translation: sug, validated: false } : x)),
-            reviews: { ...pp.reviews, [segId]: { verdict: "ok", note: "Correction du LLM 2 appliquée. À approuver.", simulated: true } },
+            reviews: { ...pp.reviews, [segId]: { verdict: "ok", note: "Correction du LLM 2 appliquée : relisez-la avant d’approuver.", simulated: true } },
           }));
         },
         reviewAll: (pid) => (BACKEND ? void remote.review.reviewAll(set, pid) : patch(pid, (p) => ({ reviews: Object.fromEntries(p.segments.map((x) => [x.id, reviewSegment(x)])) }))),
@@ -731,6 +737,16 @@ export const useStore = create<Store>()(
               await generateIn(pid, seg.id);
             }
             patch(pid, (p) => ({ generation: { ...p.generation, synthDone: p.generation.synthDone + 1, etaMs: Math.max(0, (p.generation.etaMs ?? 0) - 900) } }));
+          }
+          // No line dubbed: not a result. Nothing is signed and the generation can be started again.
+          const tally = tallyOf(lines.map((s) => get().projects[pid]?.gens[s.id]));
+          const failed = nothingGenerated(tally);
+          if (failed) {
+            patch(pid, (p) => ({ generation: { ...p.generation, status: "idle", etaMs: 0, error: failed } }));
+            log(me(), "GENERATION_SANS_RESULTAT", { projet: pid, ok: tally.ok, refusees: tally.refused, erreurs: tally.error, voix_originale: tally.skipped }, "AUCUNE_REPLIQUE");
+            const p = get().projects[pid];
+            notify({ to: p.accountId, space: "creator", tone: "warn", title: "Aucune réplique doublée", body: `${p.title} · ${failed}`, link: `/projet/${pid}/generation` });
+            return;
           }
           for (let i = 1; i < GEN_STAGES.length; i++) {
             patch(pid, (p) => ({ generation: { ...p.generation, stage: i } }));

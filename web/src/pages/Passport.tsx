@@ -15,7 +15,7 @@ import { Brand, Seal } from "../ui/brand";
 import { Callout, CopyField, Empty, frDate, Hash, KV, PageHead, Prov, Status, toast, Toasts, VoiceMark } from "../ui/kit";
 import { useCrumbs } from "../ui/Shell";
 import { ScrambleText, shortHex, useReducedMotion } from "../ui/motion";
-import { passportUrl, slug } from "./project/Result";
+import { passportUrl, qrReady, slug } from "./project/Result";
 
 /* ------------------------------------------------------------------ the document */
 
@@ -65,7 +65,8 @@ export function PassportDocument({ p, journal, publicView = false }: { p: Passpo
   const url = useMemo(() => passportUrl(p), [p]);
   const [qr, setQr] = useState("");
   useEffect(() => {
-    void QRCode.toString(url, { type: "svg", errorCorrectionLevel: "L", margin: 0, color: { dark: "#0b0b0c", light: "#ffffff" } }).then(setQr);
+    if (qrReady(url)) void QRCode.toString(url, { type: "svg", errorCorrectionLevel: "L", margin: 0, color: { dark: "#0b0b0c", light: "#ffffff" } }).then(setQr);
+    else setQr("");
   }, [url]);
   const fmt = formatOf(p);
   const policy = fmt ? transparencyPolicy(fmt) : null;
@@ -310,9 +311,15 @@ export function PassportDocument({ p, journal, publicView = false }: { p: Passpo
               <b style={{ fontSize: 14 }}>Accès public</b>
               {sigOk && done && <Status tone="ok">Signé</Status>}
             </div>
-            <div className="pp-qr" role="img" aria-label="QR code menant à cette page publique" dangerouslySetInnerHTML={{ __html: qr }} />
+            {qr ? (
+              <div className="pp-qr" role="img" aria-label="QR code menant à cette page publique" dangerouslySetInnerHTML={{ __html: qr }} />
+            ) : (
+              <p className="hint">
+                Pas de QR code ici : sans serveur, le lien contient tout le passeport et serait trop dense pour être lu par un téléphone. Partagez le lien ci-dessous ; avec le serveur, le lien est court et le QR code s’affiche.
+              </p>
+            )}
             <p className="hint">
-              Le QR code n’est qu’un moyen d’accès : le passeport est public à cette URL, sans compte.{" "}
+              {qr ? "Le QR code n’est qu’un moyen d’accès : le" : "Le"} passeport est public à cette URL, sans compte.{" "}
               {BACKEND && p.identifiant ? "Le lien porte son identifiant : passeport et journal sont lus sur le serveur, la signature est vérifiée dans votre navigateur." : "Son contenu voyage dans le lien lui-même."}
             </p>
             <CopyField value={url} label="URL publique du passeport" />
@@ -569,7 +576,7 @@ export function Verify() {
               <span className="dz-icon" aria-hidden>
                 <FileUp />
               </span>
-              <span className="dz-title">Déposez le fichier .json du passeport</span>
+              <span className="dz-title">Vous avez le fichier .json d’un passeport ? Déposez-le ici</span>
               <span className="dz-text">Le fichier complet contient aussi le journal d’audit, dont la chaîne sera vérifiée.</span>
               <input type="file" accept="application/json,.json" className="sr-only" onChange={(e) => e.target.files?.[0] && readFile(e.target.files[0])} />
             </label>

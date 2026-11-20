@@ -49,7 +49,25 @@ function LivingPath({ p, c }: { p: Project; c: Character }) {
   const navigate = useNavigate();
   const living = c.living ?? { status: "a_obtenir" as const, email: "", registered: false };
   const [email, setEmail] = useState(living.email);
-  const [registered, setRegistered] = useState<boolean | null>(living.token ? living.registered : null);
+  // The answer to « déjà un Passeport de voix ? » is kept in this browser until the request is sent.
+  const regKey = `sawti-reg-${p.id}-${c.key}`;
+  const [registered, setRegisteredState] = useState<boolean | null>(() => {
+    if (living.token) return living.registered;
+    try {
+      const v = localStorage.getItem(regKey);
+      return v === "1" ? true : v === "0" ? false : null;
+    } catch {
+      return null;
+    }
+  });
+  const setRegistered = (v: boolean) => {
+    setRegisteredState(v);
+    try {
+      localStorage.setItem(regKey, v ? "1" : "0");
+    } catch {
+      /* storage refused: the answer lasts for this page only */
+    }
+  };
   const emailId = useId();
   const valid = /^\S+@\S+\.\S+$/.test(email.trim());
   // Back-end mode: the server gives the link once (kept in this browser); the person may answer on any device.
@@ -73,7 +91,7 @@ function LivingPath({ p, c }: { p: Project; c: Character }) {
           <>
             <div className="auth-q">
               <span className="label">
-                <span className="q-no">03</span> {c.name} a-t-elle déjà un Passeport de voix ?
+                <span className="q-no">03</span> Cette personne ({c.name}) a-t-elle déjà un Passeport de voix ?
               </span>
               <div className="choices choices-2">
                 <label className="choice">
@@ -92,7 +110,7 @@ function LivingPath({ p, c }: { p: Project; c: Character }) {
             </div>
             {registered === false && (
               <Callout tone="warn" title="Vous ne pouvez pas créer ce passeport à sa place.">
-                La personne crée elle-même son Passeport de voix, à distance ou en votre présence, puis accepte ou refuse. Le mécanisme d’invitation des personnes non inscrites reste à définir (spécification V2, point ouvert).
+                La personne crée elle-même son Passeport de voix depuis le lien reçu, à distance ou en votre présence, puis accepte ou refuse.
               </Callout>
             )}
             {registered !== null && (

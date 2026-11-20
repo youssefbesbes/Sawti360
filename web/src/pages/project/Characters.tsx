@@ -173,7 +173,11 @@ function CharacterCard({ p, c, excerpt }: { p: Project; c: Character; excerpt: R
             Écouter la première intervention
           </button>
         ) : (
-          <p className="hint">Projet d’exemple sans fichier vidéo : l’extrait n’est pas disponible. Les répliques transcrites sont listées ci-dessous.</p>
+          <p className="hint">
+            {p.example
+              ? "Projet d’exemple sans fichier vidéo : l’extrait n’est pas disponible. Les répliques transcrites sont listées ci-dessous."
+              : "Vidéo non disponible dans ce navigateur : ré-importez le fichier pour écouter l’extrait. Les répliques transcrites sont listées ci-dessous."}
+          </p>
         )}
         <span className="label-sm">Positions des interventions</span>
         <div className="char-lines">
